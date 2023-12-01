@@ -74,6 +74,7 @@ export class FormRegisterComponent {
           Validators.email,
         ]),
         photo: new FormControl('jkkl', [Validators.required]),
+        role_id: new FormControl(1),
       },
       []
     );
@@ -84,11 +85,10 @@ export class FormRegisterComponent {
   // insertamos los datos del formulario
   async getDataForm(): Promise<void> {
     try {
-      console.log(this.teacherForm.value);
+      console.log(this.userForm.value);
 
       this.userForm.value.date_of_birth = '1990-04-17';
       this.userForm.value.status = 2;
-      this.userForm.value.role_id = 1;
 
       let user: UserRegister = {
         userForm: this.userForm.value,

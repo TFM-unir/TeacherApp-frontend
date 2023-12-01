@@ -1,8 +1,14 @@
-<p>form-register works!</p>
 <h2 class="ms-5">{{ titulo }}</h2>
 <hr />
 <section class="container mt-3">
   <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
+    <div class="my-2">
+      <select name="role_id" id="role_id" formControlName="role_id">
+        <option value="1">Estudiante</option>
+        <option value="2">Profesor</option>
+      </select>
+    </div>
+
     <div class="my-2">
       <label for="name" class="form-label">Nombre</label>
       <input
@@ -95,7 +101,12 @@
 
     <form [formGroup]="locationForm" (ngSubmit)="getDataForm()"></form>
 
-    <form [formGroup]="teacherForm" (ngSubmit)="getDataForm()">
+    <form
+      [formGroup]="teacherForm"
+      (ngSubmit)="getDataForm()"
+      [ngClass]="{ visible: this.userForm.value.role_id === '2' }"
+      class="form"
+    >
       <label for="class_mode" class="form-label">Modo de clase</label>
       <input
         class="form-control"
