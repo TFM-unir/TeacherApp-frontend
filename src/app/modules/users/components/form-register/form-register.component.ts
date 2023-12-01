@@ -1,4 +1,7 @@
 import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserRegister } from 'src/app/interfaces/user-register.interface';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -7,42 +10,117 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./form-register.component.css'],
 })
 export class FormRegisterComponent {
-  private usersService = inject(UsersService);
-  //private router =
+  // variable para manejar el formulario del usuario
+  userForm: FormGroup;
+  // variable para manejar el formulario del teacher
+  teacherForm: FormGroup;
+  // variable para manejar el formulario del location
+  locationForm: FormGroup;
 
-  async ngOnInit() {
+  private usersService = inject(UsersService);
+
+  //Router, redireccion de ruta
+  router = inject(Router);
+
+  //variale de la ruta
+  activeRoute = inject(ActivatedRoute);
+
+  // Titulo de la pagina
+  titulo = 'New User';
+
+  constructor() {
+    //inicializar el teacher form
+    this.teacherForm = new FormGroup(
+      {
+        class_mode: new FormControl('tkkkgg', [
+          Validators.required,
+          Validators.minLength(4),
+        ]),
+        experience: new FormControl(5, [
+          Validators.required,
+          Validators.maxLength(1),
+        ]),
+        price_hour: new FormControl(10.5, [
+          Validators.required,
+          Validators.minLength(1),
+        ]),
+        about_me: new FormControl('tkkkgg', [
+          Validators.required,
+          Validators.maxLength(1000),
+        ]),
+      },
+      []
+    );
+    //inicializar location form
+    this.locationForm = new FormGroup({});
+    // inicializamos el user form
+    this.userForm = new FormGroup(
+      {
+        id: new FormControl(0, []),
+        _id: new FormControl(0, []),
+        name: new FormControl('tgg', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
+
+        nickname: new FormControl('user?.username', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
+        password: new FormControl('u', [Validators.required]),
+        phone: new FormControl('8', []),
+        email: new FormControl('ma@jasf.com', [
+          Validators.required,
+          Validators.email,
+        ]),
+        photo: new FormControl('jkkl', [Validators.required]),
+      },
+      []
+    );
+  }
+
+  async ngOnInit() {}
+
+  // insertamos los datos del formulario
+  async getDataForm(): Promise<void> {
     try {
-      const user = `{
-        userForm: {
-          name: 'Juana Alvarez',
-          nickname: 'juasdn123',
-          email: 'pedesdasd@gmail.com',
-          phone: '643434548',
-          password: '12345',
-          date_of_birth: '1993-02-15',
-          status: 2,
-          role_id: 2,
-          photo: 'url',
-        },
-        teacherForm: {
-          experience: 5,
-          class_mode: 'Mañana',
-          price_hour: 10.5,
-          about_me: 'Soy un soñador brutal con todos los hierros',
-        },
+      console.log(this.teacherForm.value);
+
+      this.userForm.value.date_of_birth = '1990-04-17';
+      this.userForm.value.status = 2;
+      this.userForm.value.role_id = 1;
+
+      let user: UserRegister = {
+        userForm: this.userForm.value,
+        teacherForm: this.teacherForm.value,
         locationForm: {
+          id: 0,
           latitude: 41.385063,
           longitude: 2.987456,
           address: 'calle de quintal 25',
           city: 'Santiago',
           province: 'A Coruña',
         },
-      };`;
+      };
 
       const response = await this.usersService.Register(user);
       console.log(response);
+      // si el id existe, se inserto correctamente
+      if (response.userForm.id) {
+        this.router.navigate(['']);
+      } else {
+        alert('Usario no se ha podido registrar');
+      }
     } catch (error: any) {
       console.log(error.message);
     }
+  }
+
+  // funcion para validar los elementos del formulario
+  checkControl(formcontrolName: string, valiador: string): boolean | undefined {
+    return (
+      this.userForm.get(formcontrolName)?.hasError(valiador) &&
+      this.userForm.get(formcontrolName)?.touched
+    );
   }
 }

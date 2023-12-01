@@ -1,1 +1,163 @@
 <p>form-register works!</p>
+<h2 class="ms-5">{{ titulo }}</h2>
+<hr />
+<section class="container mt-3">
+  <form [formGroup]="userForm" (ngSubmit)="getDataForm()">
+    <div class="my-2">
+      <label for="name" class="form-label">Nombre</label>
+      <input
+        class="form-control"
+        type="text"
+        id="name"
+        placeholder="ingresa tu nombre y apellido"
+        formControlName="name"
+      />
+      <p class="error" *ngIf="checkControl('name', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('name', 'minlength')">
+        La longitud minima es de 3 caracteres
+      </p>
+    </div>
+    <div class="my-2">
+      <label for="nickname" class="form-label">Nombre de usario</label>
+      <input
+        class="form-control"
+        type="text"
+        id="nickname"
+        placeholder="ingresa tu nombre de usario"
+        formControlName="nickname"
+      />
+      <p class="error" *ngIf="checkControl('nickname', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('nickname', 'minlength')">
+        La longitud minima es de 3 caracteres
+      </p>
+    </div>
+    <div class="my-2">
+      <label for="email" class="form-label">Correo electrònico</label>
+      <input
+        class="form-control"
+        type="text"
+        id="email"
+        placeholder="ingresa tu email"
+        formControlName="email"
+      />
+      <p class="error" *ngIf="checkControl('email', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('email', 'email')">
+        Email incorrecto
+      </p>
+    </div>
+    <div class="my-2">
+      <label for="phone" class="form-label">Telèfono</label>
+      <input
+        class="form-control"
+        type="text"
+        id="phone"
+        placeholder="ingresa tu numero de telèfono"
+        formControlName="phone"
+      />
+      <p class="error" *ngIf="checkControl('phone', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('phone', 'minlength')">
+        La longitud minima es de 3 caracteres
+      </p>
+    </div>
+    <div class="my-2">
+      <label for="password" class="form-label">Contraseña</label>
+      <input
+        class="form-control"
+        type="password"
+        id="password"
+        formControlName="password"
+      />
+      <p class="error" *ngIf="checkControl('password', 'required')">
+        Campo es requerido
+      </p>
+    </div>
+    <div class="my-2">
+      <label for="photo" class="form-label">Imàgen de perfil</label>
+      <input
+        class="form-control"
+        type="text"
+        id="photo"
+        placeholder="ingresa tu url"
+        formControlName="photo"
+      />
+      <p class="error" *ngIf="checkControl('photo', 'required')">
+        Campo es requerido
+      </p>
+    </div>
+
+    <form [formGroup]="locationForm" (ngSubmit)="getDataForm()"></form>
+
+    <form [formGroup]="teacherForm" (ngSubmit)="getDataForm()">
+      <label for="class_mode" class="form-label">Modo de clase</label>
+      <input
+        class="form-control"
+        type="text"
+        id="class_mode"
+        placeholder=""
+        formControlName="class_mode"
+      />
+      <p class="error" *ngIf="checkControl('class_mode', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('class_mode', 'minlength')">
+        La longitud minima es de 3 caracteres
+      </p>
+      <label for="experience" class="form-label">Experiencia</label>
+      <input
+        class="form-control"
+        type="text"
+        id="experience"
+        placeholder="Escribe tu experiencia"
+        formControlName="experience"
+      />
+      <p class="error" *ngIf="checkControl('experience', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('experience', 'maxlength')">
+        La longitud maxima es de 500 caracteres
+      </p>
+      <label for="price_hour" class="form-label">Precio</label>
+      <input
+        class="form-control"
+        type="text"
+        id="price_hour"
+        placeholder="10.50"
+        formControlName="price_hour"
+      />
+      <p class="error" *ngIf="checkControl('price_hour', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('price_hour', 'maxlength')">
+        La longitud maxima es de 500 caracteres
+      </p>
+      <label for="about_me" class="form-label">Sobre mi</label>
+      <input
+        class="form-control"
+        type="text"
+        id="about_me"
+        placeholder=""
+        formControlName="about_me"
+      />
+      <p class="error" *ngIf="checkControl('about_me', 'required')">
+        Campo es requerido
+      </p>
+      <p class="error" *ngIf="checkControl('about_me', 'maxlength')">
+        La longitud maxima es de 1000 caracteres
+      </p>
+    </form>
+    <input
+      type="submit"
+      value="Enviar"
+      class="btn btn-danger mt-3"
+      [disabled]="!userForm.valid"
+    />
+  </form>
+</section>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { UserRegister } from 'src/app/interfaces/user-register.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,10 @@ export class UsersService {
   private baseUrlStudents: string = 'http://localhost:3000/api/departments';
   private httpClient = inject(HttpClient);
 
-  Register(user: string) {
-    return lastValueFrom(this.httpClient.post(this.baseUrlRegister, user));
+  Register(user: UserRegister) {
+    return lastValueFrom(
+      this.httpClient.post<UserRegister>(this.baseUrlRegister, user)
+    );
   }
 
   getAllStudents() {
