@@ -9,9 +9,10 @@ import { FormRegisterUserComponent } from './components/form-register-user/form-
 import { FormRegisterTeacherComponent } from './components/form-register-teacher/form-register-teacher.component';
 import { FormRegisterLocationComponent } from './components/form-register-location/form-register-location.component';
 import { FormRegisterSubjectsComponent } from './components/form-register-subjects/form-register-subjects.component';
+import { FormLoginComponent } from './components/form-login/form-login.component';
 
 @NgModule({
-  declarations: [FormRegisterComponent, FormRegisterUserComponent, FormRegisterTeacherComponent, FormRegisterLocationComponent, FormRegisterSubjectsComponent],
+  declarations: [FormRegisterComponent, FormRegisterUserComponent, FormRegisterTeacherComponent, FormRegisterLocationComponent, FormRegisterSubjectsComponent, FormLoginComponent],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, UsersRoutingModule],
 })
 export class UsersModule {}
