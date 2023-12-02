@@ -12,12 +12,8 @@ import { UsersService } from '../../services/users.service';
 export class FormRegisterComponent {
   // variable para manejar el formulario del usuario
   userForm: FormGroup;
-  // variable para manejar el formulario del teacher
-  teacherForm: FormGroup;
-  // variable para manejar el formulario del location
-  locationForm: FormGroup;
 
-  private usersService = inject(UsersService);
+  usersService = inject(UsersService);
 
   //Router, redireccion de ruta
   router = inject(Router);
@@ -29,30 +25,6 @@ export class FormRegisterComponent {
   titulo = 'New User';
 
   constructor() {
-    //inicializar el teacher form
-    this.teacherForm = new FormGroup(
-      {
-        class_mode: new FormControl('tkkkgg', [
-          Validators.required,
-          Validators.minLength(4),
-        ]),
-        experience: new FormControl(5, [
-          Validators.required,
-          Validators.maxLength(1),
-        ]),
-        price_hour: new FormControl(10.5, [
-          Validators.required,
-          Validators.minLength(1),
-        ]),
-        about_me: new FormControl('tkkkgg', [
-          Validators.required,
-          Validators.maxLength(1000),
-        ]),
-      },
-      []
-    );
-    //inicializar location form
-    this.locationForm = new FormGroup({});
     // inicializamos el user form
     this.userForm = new FormGroup(
       {
@@ -83,7 +55,7 @@ export class FormRegisterComponent {
   async ngOnInit() {}
 
   // insertamos los datos del formulario
-  async getDataForm(): Promise<void> {
+  async onSubmit(): Promise<void> {
     try {
       console.log(this.userForm.value);
 
@@ -92,7 +64,13 @@ export class FormRegisterComponent {
 
       let user: UserRegister = {
         userForm: this.userForm.value,
-        teacherForm: this.teacherForm.value,
+        teacherForm: {
+          id: 0,
+          experience: 0,
+          class_mode: '',
+          price_hour: 0,
+          about_me: '',
+        },
         locationForm: {
           id: 0,
           latitude: 41.385063,
@@ -101,6 +79,7 @@ export class FormRegisterComponent {
           city: 'Santiago',
           province: 'A Coruña',
         },
+        subjectsForm: [],
       };
 
       const response = await this.usersService.Register(user);
