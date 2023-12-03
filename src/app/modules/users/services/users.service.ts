@@ -9,13 +9,11 @@ import { UserRegister } from 'src/app/core/models/user-register.interface';
 })
 export class UsersService {
   private baseUrl: string = 'http://localhost:3000/api/users/';
-  private baseUrlRegister: string = 'http://localhost:3000/api/users/register';
-  private baseUrlStudents: string = 'http://localhost:3000/api/departments';
   private httpClient = inject(HttpClient);
 
-  Register(user: UserRegister) {
+  register(user: UserRegister) {
     return lastValueFrom(
-      this.httpClient.post<UserRegister>(this.baseUrlRegister, user)
+      this.httpClient.post<UserRegister>(`${this.baseUrl}/register`, user)
     );
   }
 
@@ -23,9 +21,5 @@ export class UsersService {
     return lastValueFrom(
       this.httpClient.post<UserLogin>(`${this.baseUrl}/login`, values)
     );
-  }
-
-  getAllStudents() {
-    return firstValueFrom(this.httpClient.get(this.baseUrlStudents));
   }
 }

@@ -124,7 +124,7 @@ export class FormRegisterComponent {
         subjectsForm: this.subjectForm.value,
       };
 
-      const response = await this.usersService.Register(user);
+      const response = await this.usersService.register(user);
       console.log(response);
       // si el id existe, se inserto correctamente
       if (response.userForm.id) {
