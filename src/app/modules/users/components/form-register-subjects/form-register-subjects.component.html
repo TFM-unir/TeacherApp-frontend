@@ -1,1 +1,38 @@
-<form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">funcsiona</form>
+<form [formGroup]="subjectForm">
+  <input
+    class="form-control"
+    type="text"
+    id="teacher_id"
+    formControlName="teacher_id"
+  />
+  <div class="my-2">
+    <label for="department_id" class="form-label">Materias</label>
+    <select
+      name="department_id"
+      id="department_id"
+      formControlName="department_id"
+    >
+      <option value="1">Matematica</option>
+      <option value="2">Linguistica</option>
+    </select>
+  </div>
+  <div class="my-2">
+    <label for="subject" class="form-label">Asignatura</label>
+    <input
+      class="form-control"
+      type="text"
+      id="subject"
+      placeholder="Ingresa el nombre de la asignatura"
+      formControlName="subject"
+    />
+    <p class="error" *ngIf="checkControl('subject', 'required')">
+      Campo es requerido
+    </p>
+    <p class="error" *ngIf="checkControl('subject', 'minlength')">
+      La longitud minima es de 3 caracteres
+    </p>
+  </div>
+  <input value="Agregar Materia" class="btn btn-danger mt-3" />
+
+  Agregar materia en un array
+</form>

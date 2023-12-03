@@ -13,6 +13,12 @@ export class FormRegisterComponent {
   // variable para manejar el formulario del usuario
   userForm: FormGroup;
 
+  // variable para manejar el formulario del teacher
+  teacherForm: FormGroup;
+
+  // variable para manejar el formulario del subject
+  subjectForm: FormGroup;
+
   usersService = inject(UsersService);
 
   //Router, redireccion de ruta
@@ -50,6 +56,48 @@ export class FormRegisterComponent {
       },
       []
     );
+
+    //inicializar el teacher form
+    this.teacherForm = new FormGroup(
+      {
+        class_mode: new FormControl('tkkkgg', [
+          Validators.required,
+          Validators.minLength(4),
+        ]),
+        experience: new FormControl(5, [
+          Validators.required,
+          Validators.maxLength(1),
+        ]),
+        price_hour: new FormControl(10.5, [
+          Validators.required,
+          Validators.minLength(1),
+        ]),
+        about_me: new FormControl('tkkkgg', [
+          Validators.required,
+          Validators.maxLength(1000),
+        ]),
+      },
+      []
+    );
+
+    //inicializar el subject form
+    this.subjectForm = new FormGroup(
+      {
+        subject: new FormControl('tkkkgg', [
+          Validators.required,
+          Validators.minLength(3),
+        ]),
+        teacher_id: new FormControl(2, [
+          Validators.required,
+          Validators.maxLength(1),
+        ]),
+        department_id: new FormControl(0, [
+          Validators.required,
+          Validators.minLength(1),
+        ]),
+      },
+      []
+    );
   }
 
   async ngOnInit() {}
@@ -64,13 +112,6 @@ export class FormRegisterComponent {
 
       let user: UserRegister = {
         userForm: this.userForm.value,
-        teacherForm: {
-          id: 0,
-          experience: 0,
-          class_mode: '',
-          price_hour: 0,
-          about_me: '',
-        },
         locationForm: {
           id: 0,
           latitude: 41.385063,
@@ -79,7 +120,8 @@ export class FormRegisterComponent {
           city: 'Santiago',
           province: 'A Coruña',
         },
-        subjectsForm: [],
+        teacherForm: this.teacherForm.value,
+        subjectsForm: this.subjectForm.value,
       };
 
       const response = await this.usersService.Register(user);

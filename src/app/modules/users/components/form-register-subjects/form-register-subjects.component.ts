@@ -25,5 +25,11 @@ export class FormRegisterSubjectsComponent {
     this.subjectForm = new FormGroup({});
   }
 
-  async onSubmit(): Promise<void> {}
+  // funcion para validar los elementos del formulario
+  checkControl(formcontrolName: string, valiador: string): boolean | undefined {
+    return (
+      this.subjectForm.get(formcontrolName)?.hasError(valiador) &&
+      this.subjectForm.get(formcontrolName)?.touched
+    );
+  }
 }
