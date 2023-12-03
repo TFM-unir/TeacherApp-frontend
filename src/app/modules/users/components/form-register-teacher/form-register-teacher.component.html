@@ -1,4 +1,4 @@
-<form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+<div [formGroup]="teacherForm">
   <label for="class_mode" class="form-label">Modo de clase</label>
   <input
     class="form-control"
@@ -6,13 +6,9 @@
     id="class_mode"
     placeholder=""
     formControlName="class_mode"
+    required
   />
-  <p class="error" *ngIf="checkControl('class_mode', 'required')">
-    Campo es requerido
-  </p>
-  <p class="error" *ngIf="checkControl('class_mode', 'minlength')">
-    La longitud minima es de 3 caracteres
-  </p>
+
   <label for="experience" class="form-label">Experiencia</label>
   <input
     class="form-control"
@@ -20,13 +16,9 @@
     id="experience"
     placeholder="Escribe tu experiencia"
     formControlName="experience"
+    required
   />
-  <p class="error" *ngIf="checkControl('experience', 'required')">
-    Campo es requerido
-  </p>
-  <p class="error" *ngIf="checkControl('experience', 'maxlength')">
-    La longitud maxima es de 500 caracteres
-  </p>
+
   <label for="price_hour" class="form-label">Precio</label>
   <input
     class="form-control"
@@ -34,13 +26,9 @@
     id="price_hour"
     placeholder="10.50"
     formControlName="price_hour"
+    required
   />
-  <p class="error" *ngIf="checkControl('price_hour', 'required')">
-    Campo es requerido
-  </p>
-  <p class="error" *ngIf="checkControl('price_hour', 'maxlength')">
-    La longitud maxima es de 500 caracteres
-  </p>
+
   <label for="about_me" class="form-label">Sobre mi</label>
   <input
     class="form-control"
@@ -48,12 +36,8 @@
     id="about_me"
     placeholder=""
     formControlName="about_me"
+    required
   />
-  <p class="error" *ngIf="checkControl('about_me', 'required')">
-    Campo es requerido
-  </p>
-  <p class="error" *ngIf="checkControl('about_me', 'maxlength')">
-    La longitud maxima es de 1000 caracteres
-  </p>
-  <app-form-register-subjects></app-form-register-subjects>
-</form>
+
+  <!--<app-form-register-subjects></app-form-register-subjects>-->
+</div>

@@ -24,12 +24,4 @@ export class FormRegisterSubjectsComponent {
     //inicializar subject form
     this.subjectForm = new FormGroup({});
   }
-
-  // funcion para validar los elementos del formulario
-  checkControl(formcontrolName: string, valiador: string): boolean | undefined {
-    return (
-      this.subjectForm.get(formcontrolName)?.hasError(valiador) &&
-      this.subjectForm.get(formcontrolName)?.touched
-    );
-  }
 }

@@ -1,1 +1,68 @@
-<p>form-register-user works!</p>
+<fieldset [formGroupName]="groupName">
+  <div class="my-2">
+    <label for="name" class="form-label">Nombre</label>
+    <input
+      class="form-control"
+      type="text"
+      id="name"
+      placeholder="ingresa tu nombre y apellido"
+      formControlName="name"
+      required
+    />
+    <p *ngIf="nameControl?.invalid">Tu mensaje de error</p>
+  </div>
+  <div class="my-2">
+    <label for="nickname" class="form-label">Nombre de usario</label>
+    <input
+      class="form-control"
+      type="text"
+      id="nickname"
+      placeholder="ingresa tu nombre de usario"
+      formControlName="nickname"
+      required
+    />
+  </div>
+  <div class="my-2">
+    <label for="email" class="form-label">Correo electrònico</label>
+    <input
+      class="form-control"
+      type="text"
+      id="email"
+      placeholder="ingresa tu email"
+      formControlName="email"
+      required
+    />
+  </div>
+  <div class="my-2">
+    <label for="phone" class="form-label">Telèfono</label>
+    <input
+      class="form-control"
+      type="text"
+      id="phone"
+      placeholder="ingresa tu numero de telèfono"
+      formControlName="phone"
+      required
+    />
+  </div>
+  <div class="my-2">
+    <label for="password" class="form-label">Contraseña</label>
+    <input
+      class="form-control"
+      type="password"
+      id="password"
+      formControlName="password"
+      required
+    />
+  </div>
+  <div class="my-2">
+    <label for="photo" class="form-label">Imàgen de perfil</label>
+    <input
+      class="form-control"
+      type="text"
+      id="photo"
+      placeholder="ingresa tu url"
+      formControlName="photo"
+      required
+    />
+  </div>
+</fieldset>

@@ -25,12 +25,6 @@
       placeholder="Ingresa el nombre de la asignatura"
       formControlName="subject"
     />
-    <p class="error" *ngIf="checkControl('subject', 'required')">
-      Campo es requerido
-    </p>
-    <p class="error" *ngIf="checkControl('subject', 'minlength')">
-      La longitud minima es de 3 caracteres
-    </p>
   </div>
   <input value="Agregar Materia" class="btn btn-danger mt-3" />
 

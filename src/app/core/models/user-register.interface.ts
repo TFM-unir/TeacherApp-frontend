@@ -7,5 +7,5 @@ export interface UserRegister {
   userForm: User;
   teacherForm: Teacher;
   locationForm: Location;
-  subjectsForm: Subject[];
+  // subjectsForm: Subject[];
 }

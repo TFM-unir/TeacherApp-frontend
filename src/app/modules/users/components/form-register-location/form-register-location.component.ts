@@ -1,29 +1,27 @@
-import { Component, inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { UsersService } from '../../services/users.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  inject,
+} from '@angular/core';
+import { ControlContainer } from '@angular/forms';
 
 @Component({
   selector: 'app-form-register-location',
   templateUrl: './form-register-location.component.html',
   styleUrls: ['./form-register-location.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  // para poder comunicarse con el padre
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useFactory: () =>
+        inject(ControlContainer, { skipSelf: true, host: true }),
+    },
+  ],
 })
 export class FormRegisterLocationComponent {
-  // variable para manejar el formulario del location
-  locationForm: FormGroup;
+  // @Input() groupName = '';
 
-  usersService = inject(UsersService);
-
-  //Router, redireccion de ruta
-  router = inject(Router);
-
-  //variale de la ruta
-  activeRoute = inject(ActivatedRoute);
-
-  constructor() {
-    //inicializar location form
-    this.locationForm = new FormGroup({});
-  }
-
-  async onSubmit(): Promise<void> {}
+  constructor() {}
 }
