@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './modules/home/components/home/home.component';
 
 const routes: Routes = [
   {
@@ -12,6 +11,11 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () =>
       import('./modules/users/users.module').then((m) => m.UsersModule),
+  },  
+  {
+    path: 'student',
+    loadChildren: () =>
+      import('./modules/student/student.module').then((m) => m.StudentModule),
   },
   // Hacer 404 en algun momento o redirigir a home?
   // { path: '**', component: C404Component },

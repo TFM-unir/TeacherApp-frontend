@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -11,6 +13,8 @@ export class FormLoginComponent {
 
   formLogin: FormGroup;
   usersService = inject(UsersService);
+  router = inject(Router);
+  errorMessage: string = '';
 
   constructor() {
     this.formLogin = new FormGroup({
@@ -19,9 +23,25 @@ export class FormLoginComponent {
     });
   };
 
-  async onSubmit() {
+async onSubmit() {
+  try {
     const response = await this.usersService.login(this.formLogin.value);
-    console.log(response);
+
+    if (response.fatal) {
+      this.errorMessage = response.fatal;
+    } else {
+      // Almacenamiento del token en el localStorage
+      localStorage.setItem('auth_token', response.token);
+
+      // this.router.navigate(['/']);
+    }
+  } catch (error) {
+    console.error('Login error:', error);
+  }
 }
+
+// TODO?
+// checkUserRole() {}
+
 
 }
