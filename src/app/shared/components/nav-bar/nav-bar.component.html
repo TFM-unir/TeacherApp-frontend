@@ -8,7 +8,7 @@
     </ul>
 </nav> -->
 
-<nav class="navbar navbar-expand-md navbar-custom mt-4 mb-4">
+<nav class="navbar navbar-expand-md mt-4 mb-4">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="../../../../assets/logo_TeacherAdmin.svg" alt="" width="170" height="35">
@@ -19,11 +19,12 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
           <a class="nav-link" [routerLink]="['']">Inicio</a>
-          <a class="nav-link" href="#">Chat</a>
-          <a class="nav-link" href="#">Cerrar Sesión</a>
+          <a class="nav-link">Chat</a>
+          <a class="nav-link pointer" (click)="onClickLogout()">Cerrar Sesión</a>
           <a class="nav-link" [routerLink]="['/users', 'login']">Iniciar Sesión</a>
           <a class="nav-link" [routerLink]="['/users', 'register']">Registrar</a>
-          <a class="nav-link" href="#">UserName</a>
+          <!-- TODO ojo esto es solo mientras no hay guards *ngIf="this.authService.getUserName() !== null -->
+          <a class="nav-link" [routerLink]="['/'+ this.authService.getUserRoleName(), this.authService.getUserName()] " *ngIf="this.authService.getUserName() !== null">{{this.authService.getUserName()}}</a>
         </div>
       </div>
     </div>

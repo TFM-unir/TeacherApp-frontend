@@ -1,12 +1,20 @@
-<form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="mt-5">
+<form [formGroup]="formLogin" (ngSubmit)="onSubmit()" class="mt-5" *ngIf="!errorAlert">
     <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="text" class="form-control" formControlName="email">
+        <input type="text" class="form-control w-50" formControlName="email">
+        <p class="error mt-1" *ngIf="checkControl('email', 'required')">Campo requerido</p>
+        <p class="error mt-1" *ngIf="checkControl('email', 'pattern')">El email introducido no es válido</p>
     </div>
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="text" class="form-control" formControlName="password">
+        <input type="password" class="form-control w-50" formControlName="password">
+        <p class="error mt-1" *ngIf="checkControl('password', 'required')">Campo requerido</p>
+        <p class="error mt-1" *ngIf="checkControl('password', 'minlength')">La longitud mínima es de 4 carácteres</p>
     </div>
-    <input type="submit" value="Enviar" class="btn">
-    <p class="error">{{errorMessage}}</p>
+    <input type="submit" value="Enviar" class="btn btn-dark" [disabled]="!formLogin.valid">
 </form>
+
+<div *ngIf="errorAlert">
+    <p class="error">{{errorMessage}}</p>
+    <button (click)="returnToLogIn()" class="btn btn-dark">Volver</button>
+</div>

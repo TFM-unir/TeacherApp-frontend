@@ -17,6 +17,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/student/student.module').then((m) => m.StudentModule),
   },
+  {
+    path: 'teacher',
+    loadChildren: () =>
+      import('./modules/teacher/teacher.module').then((m) => m.TeacherModule),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
   // Hacer 404 en algun momento o redirigir a home?
   // { path: '**', component: C404Component },
 ];
