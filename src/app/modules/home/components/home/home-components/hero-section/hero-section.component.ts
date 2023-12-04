@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hero-section',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./hero-section.component.css']
 })
 export class HeroSectionComponent {
+
+  router = inject(Router)
+
+  searchFromHero() {
+    this.router.navigate(['/search']);
+  }
 
 }

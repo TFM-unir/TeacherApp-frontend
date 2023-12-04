@@ -11,8 +11,5 @@ export class HomeComponent {
   authService = inject(AuthService);
   
   constructor() {
-    console.log(this.authService.getUserRoleName());
-    console.log(this.authService.getUserId());
-    console.log(this.authService.getUserName());
   }
 }
