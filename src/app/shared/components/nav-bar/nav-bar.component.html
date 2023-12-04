@@ -23,8 +23,8 @@
           <a class="nav-link pointer" (click)="onClickLogout()">Cerrar Sesión</a>
           <a class="nav-link" [routerLink]="['/users', 'login']">Iniciar Sesión</a>
           <a class="nav-link" [routerLink]="['/users', 'register']">Registrar</a>
-          <!-- TODO ojo esto es solo mientras no hay guards *ngIf="this.authService.getUserName() !== null -->
-          <a class="nav-link" [routerLink]="['/'+ this.authService.getUserRoleName(), this.authService.getUserName()] " *ngIf="this.authService.getUserName() !== null">{{this.authService.getUserName()}}</a>
+          <!-- TODO ojo esto es solo mientras no hay guards: *ngIf="this.authService.getUserName() !== null -->
+          <a class="nav-link" [routerLink]="['/'+ this.authService.getUserRoleName(), this.authService.getUserId()] " *ngIf="this.authService.getUserName() !== null">{{this.authService.getUserName()}}</a>
         </div>
       </div>
     </div>
