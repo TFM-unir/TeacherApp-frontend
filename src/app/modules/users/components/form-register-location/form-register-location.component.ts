@@ -21,7 +21,7 @@ import { ControlContainer } from '@angular/forms';
   ],
 })
 export class FormRegisterLocationComponent {
-  // @Input() groupName = '';
+  @Input() groupName = '';
 
   constructor() {}
 }

@@ -1,23 +1,34 @@
-<div [formGroup]="teacherForm">
-  <label for="class_mode" class="form-label">Modo de clase</label>
-  <input
-    class="form-control"
-    type="text"
-    id="class_mode"
-    placeholder=""
-    formControlName="class_mode"
-    required
-  />
-
-  <label for="experience" class="form-label">Experiencia</label>
-  <input
-    class="form-control"
-    type="text"
-    id="experience"
-    placeholder="Escribe tu experiencia"
-    formControlName="experience"
-    required
-  />
+<fieldset [formGroupName]="groupName">
+  <label for="" class="form-label">Modalidad:</label>
+  <div class="checkbox-container">
+    <label for="class_mode_online" class="form-label">Online</label>
+    <input
+      class="checkbox-container"
+      type="checkbox"
+      id="class_mode_online"
+      formControlName="class_mode_online"
+      value="online"
+    />
+    <label for="class_mode_in_person" class="form-label">Presencial</label>
+    <input
+      class="checkbox-container"
+      type="checkbox"
+      id="class_mode_in_person"
+      formControlName="class_mode_in_person"
+      value="presencial"
+    />
+  </div>
+  <div>
+    <label for="experience" class="form-label">Experiencia</label>
+    <input
+      class="form-control"
+      type="text"
+      id="experience"
+      placeholder="Los años de experiencia"
+      formControlName="experience"
+      required
+    />
+  </div>
 
   <label for="price_hour" class="form-label">Precio</label>
   <input
@@ -30,14 +41,14 @@
   />
 
   <label for="about_me" class="form-label">Sobre mi</label>
-  <input
+  <textarea
     class="form-control"
-    type="text"
     id="about_me"
-    placeholder=""
+    placeholder="Una breve descripció"
     formControlName="about_me"
     required
-  />
+  >
+  </textarea>
 
   <!--<app-form-register-subjects></app-form-register-subjects>-->
-</div>
+</fieldset>

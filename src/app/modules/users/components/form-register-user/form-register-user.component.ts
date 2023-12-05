@@ -27,6 +27,7 @@ import {
 })
 export class FormRegisterUserComponent {
   @Input() groupName = '';
+  dateOfBirth: string | undefined;
 
   constructor(private cc: ControlContainer) {}
 
@@ -46,22 +47,23 @@ export function generateUserFormGroup(): FormGroup {
   return new FormGroup({
     id: new FormControl(0, []),
     _id: new FormControl(0, []),
-    name: new FormControl('tgg', [
+    name: new FormControl('marilia tikk', [
       Validators.required,
       Validators.minLength(3),
     ]),
 
-    nickname: new FormControl('user?.username', [
+    nickname: new FormControl('marilia', [
       Validators.required,
       Validators.minLength(3),
     ]),
-    password: new FormControl('u', [Validators.required]),
-    phone: new FormControl('8', []),
-    email: new FormControl('ma@jasf.com', [
+    password: new FormControl('1234', [Validators.required]),
+    phone: new FormControl('765432', []),
+    email: new FormControl('ytr@jasf.com', [
       Validators.required,
       Validators.email,
     ]),
-    photo: new FormControl('jkkl', [Validators.required]),
+    photo: new FormControl('url', [Validators.required]),
     role_id: new FormControl(1),
+    date_of_birth: new FormControl(Date),
   });
 }

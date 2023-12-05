@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserRegister } from 'src/app/core/models/user-register.interface';
 import { UsersService } from '../../services/users.service';
 import { generateUserFormGroup } from '../form-register-user/form-register-user.component';
+import { generateTeacherFormGroup } from '../form-register-teacher/form-register-teacher.component';
 
 @Component({
   selector: 'app-form-register',
@@ -21,9 +22,6 @@ export class FormRegisterComponent {
 
   // variable para manejar los formularios
   mainForm: FormGroup;
-
-  // variable para manejar el formulario del teacher
-  teacherForm!: FormGroup;
 
   // variable para manejar el formulario del subject
   subjectForm!: FormGroup;
@@ -46,13 +44,7 @@ export class FormRegisterComponent {
       //inicializar el user form
       userForm: generateUserFormGroup(),
       //inicializar el teacher form
-      teacherForm: this.formBuilder.group({
-        class_mode: ['', [Validators.required, Validators.minLength(4)]],
-        experience: ['', [Validators.required, Validators.minLength(4)]],
-        price_hour: ['', [Validators.required, Validators.minLength(1)]],
-
-        about_me: ['', [Validators.required, Validators.maxLength(1000)]],
-      }),
+      teacherForm: generateTeacherFormGroup(),
     });
 
     // this.userForm = this.mainForm.value.userForm;
@@ -86,8 +78,9 @@ export class FormRegisterComponent {
       let userForm = this.mainForm.value.userForm;
       let teacherForm = this.mainForm.value.teacherForm;
 
-      userForm.date_of_birth = '1990-04-17';
+      //userForm.date_of_birth = '1990-04-17';
       userForm.status = 2;
+      userForm.role_id = this.mainForm.value.role_id;
 
       console.log(userForm);
       let user: UserRegister = {
@@ -103,10 +96,9 @@ export class FormRegisterComponent {
         teacherForm: teacherForm,
         // subjectsForm: this.subjectForm.value,
       };
-
-      console.log(userForm);
+      console.log(teacherForm);
       const response = await this.usersService.register(user);
-      console.log(response);
+      // console.log(response);
       // si el id existe, se inserto correctamente
       if (response.userForm.id) {
         this.router.navigate(['']);

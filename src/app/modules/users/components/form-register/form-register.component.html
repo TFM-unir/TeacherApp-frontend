@@ -46,11 +46,11 @@
 
       <app-form-register-location></app-form-register-location>
 
-      <!--<div *ngIf="this.mainForm.value.role_id === '2'">
+      <div *ngIf="this.mainForm.value.role_id === '2'">
         <app-form-register-teacher
-          [teacherForm]="teacherForm"
+          groupName="teacherForm"
         ></app-form-register-teacher>
-      </div>-->
+      </div>
 
       <!--[disabled]="!mainForm.valid"-->
       <input type="submit" value="Enviar" class="btn btn-danger mt-3" />
