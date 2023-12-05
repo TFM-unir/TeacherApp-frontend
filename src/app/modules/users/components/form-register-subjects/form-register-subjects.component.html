@@ -1,10 +1,4 @@
-<form [formGroup]="subjectForm">
-  <input
-    class="form-control"
-    type="text"
-    id="teacher_id"
-    formControlName="teacher_id"
-  />
+<fieldset [formGroupName]="groupName">
   <div class="my-2">
     <label for="department_id" class="form-label">Materias</label>
     <select
@@ -26,7 +20,4 @@
       formControlName="subject"
     />
   </div>
-  <input value="Agregar Materia" class="btn btn-danger mt-3" />
-
-  Agregar materia en un array
-</form>
+</fieldset>

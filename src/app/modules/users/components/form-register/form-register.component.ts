@@ -11,6 +11,7 @@ import { UserRegister } from 'src/app/core/models/user-register.interface';
 import { UsersService } from '../../services/users.service';
 import { generateUserFormGroup } from '../form-register-user/form-register-user.component';
 import { generateTeacherFormGroup } from '../form-register-teacher/form-register-teacher.component';
+import { generateSubjectFormGroup } from '../form-register-subjects/form-register-subjects.component';
 
 @Component({
   selector: 'app-form-register',
@@ -22,9 +23,6 @@ export class FormRegisterComponent {
 
   // variable para manejar los formularios
   mainForm: FormGroup;
-
-  // variable para manejar el formulario del subject
-  subjectForm!: FormGroup;
 
   usersService = inject(UsersService);
 
@@ -45,29 +43,12 @@ export class FormRegisterComponent {
       userForm: generateUserFormGroup(),
       //inicializar el teacher form
       teacherForm: generateTeacherFormGroup(),
+
+      subjectForm: generateSubjectFormGroup(),
     });
 
     // this.userForm = this.mainForm.value.userForm;
     // this.teacherForm = this.mainForm.value.teacherForm;
-
-    /*//inicializar el subject form
-    this.subjectForm = new FormGroup(
-      {
-        subject: new FormControl('tkkkgg', [
-          [Validators.required,
-          Validators.minLength(3),
-        ]),
-        teacher_id: new FormControl(2, [
-          [Validators.required,
-          Validators.maxLength(1),
-        ]),
-        department_id: new FormControl(0, [
-          [Validators.required,
-          Validators.minLength(1),
-        ]),
-      },
-      []
-    );*/
 
     console.log(this.mainForm.value);
   }
@@ -77,6 +58,7 @@ export class FormRegisterComponent {
     try {
       let userForm = this.mainForm.value.userForm;
       let teacherForm = this.mainForm.value.teacherForm;
+      let subjectForm = this.mainForm.value.subjectForm;
 
       //userForm.date_of_birth = '1990-04-17';
       userForm.status = 2;
@@ -94,9 +76,9 @@ export class FormRegisterComponent {
           province: 'A Coruña',
         },
         teacherForm: teacherForm,
-        // subjectsForm: this.subjectForm.value,
+        subjectForm: subjectForm,
       };
-      console.log(teacherForm);
+      console.log(subjectForm);
       const response = await this.usersService.register(user);
       // console.log(response);
       // si el id existe, se inserto correctamente
