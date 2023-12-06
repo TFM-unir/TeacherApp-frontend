@@ -7,6 +7,10 @@
 - Javier
 - [Mairi Tikk](https://github.com/mairitikk)
 
+## install
+
+npm i @angular/google-maps@16.2.12
+
 ## Mockups
 
 Los mockups fueron desarrolldos en Excalidraw y se pueden encontrar en el siguiente enlace:

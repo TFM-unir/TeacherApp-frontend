@@ -1,0 +1,12 @@
+<google-map height="80vh" width="70vw" [center]="center" [zoom]="zoom">
+  <map-marker
+    #miMarker="mapMarker"
+    [position]="myposition"
+    [options]="markerOptions"
+    (mapClick)="openInfoWindow(miMarker)"
+  >
+    <map-info-window>
+      <h2>{{ myposition }}</h2>
+    </map-info-window>
+  </map-marker>
+</google-map>

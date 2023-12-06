@@ -12,7 +12,14 @@ import { FormRegisterSubjectsComponent } from './components/form-register-subjec
 import { FormLoginComponent } from './components/form-login/form-login.component';
 
 @NgModule({
-  declarations: [FormRegisterComponent, FormRegisterUserComponent, FormRegisterTeacherComponent, FormRegisterLocationComponent, FormRegisterSubjectsComponent, FormLoginComponent],
+  declarations: [
+    FormRegisterComponent,
+    FormRegisterUserComponent,
+    FormRegisterTeacherComponent,
+    FormRegisterLocationComponent,
+    FormRegisterSubjectsComponent,
+    FormLoginComponent,
+  ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, UsersRoutingModule],
 })
 export class UsersModule {}
