@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnInit,
   inject,
 } from '@angular/core';
 import {
@@ -10,8 +11,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UsersService } from '../../services/users.service';
+import { DepartmentsService } from '../../services/departments.service';
+import { Department } from 'src/app/core/models/department.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-form-register-subjects',
@@ -27,11 +29,30 @@ import { UsersService } from '../../services/users.service';
     },
   ],
 })
-export class FormRegisterSubjectsComponent {
+export class FormRegisterSubjectsComponent implements OnInit {
   @Input() groupName = '';
 
-  constructor() {}
+  // lista de departments
+  departments: Department[] | undefined;
+
+  // asincrono, peticiones a una API
+  httpClient = inject(HttpClient);
+
+  constructor(private departmentsServices: DepartmentsService) {}
+
+  ngOnInit(): void {
+    this.getAllDepartments();
+  }
+
+  async getAllDepartments(): Promise<void> {
+    try {
+      this.departments = await this.departmentsServices.getAll().toPromise();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
+
 export function generateSubjectFormGroup(): FormGroup {
   return new FormGroup(
     {

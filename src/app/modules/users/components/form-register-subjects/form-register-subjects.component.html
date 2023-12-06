@@ -6,8 +6,9 @@
       id="department_id"
       formControlName="department_id"
     >
-      <option value="1">Matematica</option>
-      <option value="2">Linguistica</option>
+      <option *ngFor="let department of departments" [value]="department.id">
+        {{ department.department_name }}
+      </option>
     </select>
   </div>
   <div class="my-2">
