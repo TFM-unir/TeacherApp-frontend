@@ -7,6 +7,7 @@ import { TeacherProfileComponent } from './components/teacher-profile/teacher-pr
 import { TeacherContactComponent } from './components/teacher-contact/teacher-contact.component';
 import { TeacherChatComponent } from './components/teacher-chat/teacher-chat.component';
 import { TeacherRateComponent } from './components/teacher-rate/teacher-rate.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TeacherRateComponent } from './components/teacher-rate/teacher-rate.com
   ],
   imports: [
     CommonModule,
-    TeacherRoutingModule
+    TeacherRoutingModule,
+    SharedModule
   ]
 })
 export class TeacherModule { }
