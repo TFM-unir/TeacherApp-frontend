@@ -31,6 +31,7 @@ export class TeacherProfileComponent {
       let id = params.teacherId;
       try {
         this.teacher = await this.teacherService.getTeacherById(id);
+        console.log(this.teacher);
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar al profesor. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
@@ -46,8 +47,13 @@ export class TeacherProfileComponent {
       }
 
     });
-
   };
+
+  contactTeacher() {
+    if (!localStorage.getItem('auth_token')) {
+      this.router.navigate(["/users", "register"]);
+    }
+  }
 
 
 

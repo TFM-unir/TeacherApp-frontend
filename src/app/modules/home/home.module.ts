@@ -8,7 +8,8 @@ import { MapSectionComponent } from './components/home/home-components/map-secti
 
 
 @NgModule({
-  declarations: [ HomeComponent, HeroSectionComponent, MapSectionComponent],
-  imports: [CommonModule, HomeRoutingModule]
+  declarations: [HomeComponent, HeroSectionComponent, MapSectionComponent],
+  imports: [CommonModule, HomeRoutingModule],
+  exports: [HomeComponent, HeroSectionComponent, MapSectionComponent]
 })
-export class HomeModule {}
+export class HomeModule { }
