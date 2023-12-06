@@ -11,7 +11,7 @@ import { SearchEngineComponent } from './components/search-engine/search-engine.
   ],
   imports: [
     CommonModule,
-    TeachersRoutingModule
+    TeachersRoutingModule,
   ]
 })
 export class TeachersModule { }
