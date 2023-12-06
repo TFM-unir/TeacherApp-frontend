@@ -21,7 +21,11 @@ export class TeacherProfileComponent {
   teacher: TeacherProfile | any;
   //Creamos la variable rating
   rating: any = 0;
-
+  // Esta variable debe ser seteada dependiendo si el usuario está autenticado o no
+  isLoggedIn: boolean = false;
+  // Esta variable debe ser seteada dependiendo si el usuario tiene clases con el profesor o no
+  hasClasses: boolean = false;
+  // respuesta de clases
 
 
 
@@ -47,13 +51,33 @@ export class TeacherProfileComponent {
       }
 
     });
+
+    if (localStorage.getItem('auth_token')) {
+      this.isLoggedIn = true;
+    };
+
+    try {
+
+    } catch (error) {
+
+    }
   };
+
+
 
   contactTeacher() {
     if (!localStorage.getItem('auth_token')) {
-      this.router.navigate(["/users", "register"]);
+      this.router.navigate(["/users", "reg"]);
     }
-  }
+  };
+
+  startChat() {
+
+  };
+
+  rateTeacher() {
+
+  };
 
 
 
