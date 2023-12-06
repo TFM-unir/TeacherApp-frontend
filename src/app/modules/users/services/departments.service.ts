@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 import { Department } from 'src/app/core/models/department.interface';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class DepartmentsService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<Department[]> {
-    return this.httpClient.get<Department[]>(this.baseUrl);
+  getAll(): Promise<Department[]> {
+    return lastValueFrom(this.httpClient.get<Department[]>(this.baseUrl));
   }
 }

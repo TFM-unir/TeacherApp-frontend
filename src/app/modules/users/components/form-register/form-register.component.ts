@@ -78,10 +78,10 @@ export class FormRegisterComponent {
         teacherForm: teacherForm,
         subjectForm: subjectForm,
       };
-      console.log(subjectForm);
       const response = await this.usersService.register(user);
       // console.log(response);
       // si el id existe, se inserto correctamente
+      console.log(response);
       if (response.userForm.id) {
         this.router.navigate(['']);
       } else {

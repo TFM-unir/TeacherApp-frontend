@@ -46,7 +46,7 @@ export class FormRegisterSubjectsComponent implements OnInit {
 
   async getAllDepartments(): Promise<void> {
     try {
-      this.departments = await this.departmentsServices.getAll().toPromise();
+      this.departments = await this.departmentsServices.getAll();
     } catch (error) {
       console.log(error);
     }
