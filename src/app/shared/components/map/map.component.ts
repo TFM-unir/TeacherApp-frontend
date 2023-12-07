@@ -4,11 +4,12 @@ import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 import { TeachersService } from 'src/app/modules/teachers/services/teachers.service';
 
 @Component({
-  selector: 'app-map-section',
-  templateUrl: './map-section.component.html',
-  styleUrls: ['./map-section.component.css']
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.css']
 })
-export class MapSectionComponent {
+
+export class MapComponent {
 
   teachers: TeacherProfile[] | undefined;
 
@@ -17,17 +18,10 @@ export class MapSectionComponent {
   zoom: number = 12;
   center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
   myposition: google.maps.LatLng | any = new google.maps.LatLng(40.41831, -3.70275);
-  markerOptionsUser = {
+  markerOptions = {
     animation: google.maps.Animation.BOUNCE,
     icon: {
       url: '../../../../assets/userPosition.svg',
-      scaledSize: new google.maps.Size(40, 40),
-    },
-  };
-  markerOptionsTeachers = {
-    animation: google.maps.Animation.BOUNCE,
-    icon: {
-      url: '../../../../assets/teacherPosition.svg',
       scaledSize: new google.maps.Size(40, 40),
     },
   };
@@ -40,7 +34,7 @@ export class MapSectionComponent {
   constructor(private teachersService: TeachersService) {}
 
   ngOnInit() {
-    this.getAllTeachers();
+
     this.initiateGeolocation();
   }
 
@@ -55,14 +49,6 @@ export class MapSectionComponent {
 
   openInfoWindow(miMarker: MapMarker) {
     this.miInfoWindow.open(miMarker);
-  }
-
-  async getAllTeachers(): Promise<void> {
-    try {
-      this.teachers = await this.teachersService.getAllTeachers();
-    } catch (error) {
-      console.error('Error fetching teachers:', error);
-    }
   }
 
 }

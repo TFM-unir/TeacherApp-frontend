@@ -51,11 +51,16 @@ export class FormRegisterLocationComponent {
     console.log('Latitud: ', lat);
     console.log('Longitud: ', lng);
     
-    // // Opción 2. Dirección junta en una única variable y latitud y longitud separadas
-    // const completeAddress = place.formatted_address;
-
-    // console.log('Dirección Completa: ' + completeAddress);
-    // console.log('Latitud: ', lat);
-    // console.log('Longitud: ', lng);
   }
 }
+
+// Pruebas...
+// export function generateLocationFormGroup(): FormGroup {
+//   return new FormGroup({
+//     // latitude: new FormControl('', []),
+//     // longitude: new FormControl('', []),
+//     // address: new FormControl('', []),
+//     // city: new FormControl('', []),
+//     // province: new FormControl('', []),
+//   });
+// }
