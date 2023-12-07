@@ -57,7 +57,7 @@ export function generateUserFormGroup(): FormGroup {
     ]),
     password: new FormControl('1234', [Validators.required]),
     phone: new FormControl('765432', []),
-    email: new FormControl('ytr@jasf.com', [
+    email: new FormControl('https://i.pravatar.cc/', [
       Validators.required,
       Validators.email,
     ]),
