@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRegister } from 'src/app/core/models/user-register.interface';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../../../core/services/users.service';
 import { generateUserFormGroup } from '../form-register-user/form-register-user.component';
 import { generateTeacherFormGroup } from '../form-register-teacher/form-register-teacher.component';
 import { generateSubjectFormGroup } from '../form-register-subjects/form-register-subjects.component';
@@ -78,10 +78,10 @@ export class FormRegisterComponent {
         teacherForm: teacherForm,
         subjectForm: subjectForm,
       };
-      console.log(subjectForm);
       const response = await this.usersService.register(user);
       // console.log(response);
       // si el id existe, se inserto correctamente
+      console.log(response);
       if (response.userForm.id) {
         this.router.navigate(['']);
       } else {

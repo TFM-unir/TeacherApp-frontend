@@ -1,19 +1,18 @@
 import { Component, inject } from '@angular/core';
-import { TeacherService } from '../../services/teacher.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 import { ClassHour } from 'src/app/core/models/class.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.interface';
 import { Ratings } from 'src/app/core/models/ratings.interface';
+import { TeacherService } from 'src/app/core/services/teacher.service';
 
 @Component({
   selector: 'app-teacher-profile',
   templateUrl: './teacher-profile.component.html',
-  styleUrls: ['./teacher-profile.component.css']
+  styleUrls: ['./teacher-profile.component.css'],
 })
 export class TeacherProfileComponent {
-
   //Inyectamos el servicio
   private teacherService = inject(TeacherService);
   //Inyectamos el servicio del core
@@ -40,7 +39,6 @@ export class TeacherProfileComponent {
 
 
   ngOnInit(): void {
-
     this.activatedRout.params.subscribe(async (params: any) => {
       let id = params.teacherId;
       try {
@@ -101,8 +99,6 @@ export class TeacherProfileComponent {
     });
   };
 
-
-
   contactTeacher() {
     if (!localStorage.getItem('auth_token')) {
       this.router.navigate(["/users", "register"]);
@@ -124,9 +120,6 @@ export class TeacherProfileComponent {
       this.router.navigate(["teacher", "rate", `${id}`])
     });
   };
-
-
-
 
 
   //   try {

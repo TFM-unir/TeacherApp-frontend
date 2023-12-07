@@ -27,7 +27,6 @@ import {
 })
 export class FormRegisterUserComponent {
   @Input() groupName = '';
-  dateOfBirth: string | undefined;
 
   constructor(private cc: ControlContainer) {}
 

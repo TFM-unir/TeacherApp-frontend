@@ -1,11 +1,11 @@
-import { Teacher } from './teacher.interface';
+import { TeacherInput } from './teacher.interface';
 import { User } from './user.interface';
 import { Location } from './location.interface';
 import { Subject } from './subject.interface';
 
 export interface UserRegister {
   userForm: User;
-  teacherForm: Teacher;
+  teacherForm: TeacherInput;
   locationForm: Location;
   subjectForm: Subject;
 }

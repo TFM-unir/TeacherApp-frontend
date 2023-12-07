@@ -1,6 +1,6 @@
 .bg-color_basic {
     /* Establece el degradado lineal como fondo de la página */
-    background: linear-gradient(90deg, #27187e, #6477d6);
+    background: linear-gradient(180deg, #27187e, #6477d6);
     /* Ajusta otros estilos del cuerpo de la página según sea necesario */
     margin: 0;
     padding: 0;

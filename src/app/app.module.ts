@@ -1,23 +1,33 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { GoogleMapsModule } from '@angular/google-maps';
+import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { MapaComponent } from './modules/users/components/mapa/mapa.component';
+import { Loader } from '@googlemaps/js-api-loader';
+import { TeacherModule } from './modules/teacher/teacher.module';
 
 @NgModule({
-  declarations: [AppComponent, MapaComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GoogleMapsModule,
     HttpClientModule,
     SharedModule,
+    TeacherModule,
+    NgxGpAutocompleteModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: Loader,
+      useValue: new Loader({
+        apiKey: 'AIzaSyDOLYKn6-l2m_NrFC_WgxG5JT-MALF2IYw',
+        libraries: ['places'],
+      }),
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

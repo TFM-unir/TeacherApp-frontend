@@ -1,0 +1,50 @@
+<div
+  class="card-size_tp col-lg-6 col-sm-4 bg-white m-3 d-flex flex-column align-items-center"
+>
+  <!-- Imagen del profesor -->
+  <div class="row">
+    <div class="col-12">
+      <img
+        class="img-fluid rounded-5 mx-auto p-3"
+        src="{{ teacher?.photo }}/500?u={{ teacher.id }}"
+        alt="TeacherImg"
+      />
+    </div>
+  </div>
+  <!-- Estrella y Rating -->
+  <div class="row mt-3">
+    <div class="text-black">
+      <h2>{{ teacher.name }}</h2>
+    </div>
+    <div class="col-6" *ngIf="teacher.rating">
+      <img
+        class="img-fluid"
+        src="https://t3.ftcdn.net/jpg/01/09/84/42/240_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg"
+        alt="RatingStar"
+        style="max-width: 55px"
+      />
+      <h3 class="text-black">{{ teacher.rating }}</h3>
+    </div>
+  </div>
+  <!-- Información -->
+  <div class="col-lg-6 col-sm-4 mb-3">
+    <div class="col-12 mt-3">
+      <h4 class="text-secondary small mt-3">
+        Experiencia: {{ teacher.experience }} años.
+      </h4>
+      <h4 class="text-secondary small mt-3">Ubicación: {{ teacher.city }}.</h4>
+      <h4 class="text-secondary small mt-3">
+        Asignatura: {{ teacher.subject }}
+      </h4>
+      <h4 class="text-secondary small mt-3">
+        Precio: {{ teacher.price_hour }} €/hora
+      </h4>
+    </div>
+  </div>
+  <div *ngIf="showButtonProfile">
+    <!--Boton ver usuario-->
+    <button class="mx-2" [routerLink]="['/teacher/profile/', teacher.id]">
+      Ver perfil
+    </button>
+  </div>
+</div>
