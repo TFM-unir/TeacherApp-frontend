@@ -10,7 +10,7 @@ import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 })
 export class TeacherService {
   // Tenemos que hacer peticiones sobre nuestra api
-  private baseUrl: string = 'http://localhost:3000/api/teachers/'; //ojo falta teacher ID
+  private baseUrl: string = 'http://localhost:3000/api/teachers/';
   private httpClient = inject(HttpClient);
   private ratingBaseUrl: string =
     'http://localhost:3000/api/ratings/prom/teacher/';
