@@ -3,4 +3,7 @@
     height: auto;
 }
 
-;
+.fondo-gris {
+    background-color: rgba(211, 211, 211, 0.2);
+    /* Gris claro con opacidad del 20% */
+}

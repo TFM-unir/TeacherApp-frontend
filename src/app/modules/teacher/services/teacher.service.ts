@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { ClassHour } from 'src/app/core/models/class.interface';
 import { Ratings } from 'src/app/core/models/ratings.interface';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 
@@ -13,7 +14,9 @@ export class TeacherService {
   // Tenemos que hacer peticiones sobre nuestra api
   private baseUrl: string = "http://localhost:3000/api/teachers/"; //ojo falta teacher ID
   private httpClient = inject(HttpClient);
-  private ratingBaseUrl: string = "http://localhost:3000/api/ratings/prom/teacher/"
+  private ratingPromBaseUrl: string = "http://localhost:3000/api/ratings/prom/teacher/";
+  private classBaseUrl: string = "http://localhost:3000/api/class/teacher/";
+  private ratingBaseUrl: string = "http://localhost:3000/api/ratings/teacher/"
 
   getAll() {
     return firstValueFrom(
@@ -29,10 +32,29 @@ export class TeacherService {
 
   getAverageRatingByTeacherId(id: number) {
     return firstValueFrom(
-      this.httpClient.get<number>(`${this.ratingBaseUrl}${id}`)
+      this.httpClient.get<number>(`${this.ratingPromBaseUrl}${id}`)
     )
   };
 
+  getAllClassByTeacherId(id: number) {
+    //metemos la cabecera
+    const httpOptions = {
+      headers: new HttpHeaders({
+        authorization: localStorage.getItem('auth_token')!
+      })
+    };
+    //Ahora como segundo parametro del get le pasamos ese objeto
+    return firstValueFrom(
+      this.httpClient.get<ClassHour>(`${this.classBaseUrl}${id}`, httpOptions)
+    )
+  };
+
+  //Hacemos lo de recuperar los rating por id de teacher
+  getRatingsByTeacherId(id: number) {
+    return lastValueFrom(
+      this.httpClient.get<Ratings[]>(`${this.ratingBaseUrl}${id}`)
+    )
+  }
 
 
 
