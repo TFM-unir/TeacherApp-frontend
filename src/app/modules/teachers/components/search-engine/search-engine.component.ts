@@ -12,23 +12,34 @@ export class SearchEngineComponent {
   //inyectamos el servicio
   teacherService = inject(TeacherService);
 
-  pagination: Pagination = { page: 0, per_page: 0, total: 0, total_pages: 0 };
+  pagination: Pagination = {
+    page: 0,
+    per_page: 10,
+    currentPage: 1,
+    total_pages: 0,
+    arrPag: [],
+  };
 
   // lista de usuarios
   myTeachers: TeacherProfile[] = [];
 
   ngOnInit(): void {
     // Obtenemos la lista de usuarios
-    this.getAllTeachers();
-
-    //this.pagination = this.teacherService.getPagination();
+    this.getPage(this.pagination.currentPage);
   }
 
-  async getAllTeachers(): Promise<void> {
+  async getPage(page: number) {
     try {
-      this.myTeachers = await this.teacherService.getAllTeachers();
-    } catch (error) {
-      console.log(error);
+      const response = await this.teacherService.getAllTeachersPagination(
+        page,
+        this.pagination.per_page
+      );
+      this.pagination.currentPage = page;
+      this.pagination.total_pages = response.total_pages;
+      this.pagination.arrPag = new Array(this.pagination.total_pages).fill(0);
+      this.myTeachers = response.results;
+    } catch (err) {
+      console.log(err);
     }
   }
 }
