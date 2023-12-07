@@ -11,7 +11,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DepartmentsService } from '../../services/departments.service';
+import { DepartmentsService } from '../../../../core/services/departments.service';
 import { Department } from 'src/app/core/models/department.interface';
 import { HttpClient } from '@angular/common/http';
 

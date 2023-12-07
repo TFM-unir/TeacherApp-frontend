@@ -9,7 +9,7 @@ import { TeacherChatComponent } from './components/teacher-chat/teacher-chat.com
 import { TeacherRateComponent } from './components/teacher-rate/teacher-rate.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeModule } from '../home/home.module';
-
+import { TeacherCardComponent } from './components/teacher-card/teacher-card.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +17,10 @@ import { HomeModule } from '../home/home.module';
     TeacherProfileComponent,
     TeacherContactComponent,
     TeacherChatComponent,
-    TeacherRateComponent
+    TeacherRateComponent,
+    TeacherCardComponent,
   ],
-  imports: [
-    CommonModule,
-    TeacherRoutingModule,
-    SharedModule,
-    HomeModule
-  ]
+  imports: [CommonModule, TeacherRoutingModule, SharedModule, HomeModule],
+  exports: [TeacherCardComponent],
 })
-export class TeacherModule { }
+export class TeacherModule {}
