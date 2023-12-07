@@ -18,17 +18,10 @@ export class MapComponent {
   zoom: number = 12;
   center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
   myposition: google.maps.LatLng | any = new google.maps.LatLng(40.41831, -3.70275);
-  markerOptionsUser = {
+  markerOptions = {
     animation: google.maps.Animation.BOUNCE,
     icon: {
       url: '../../../../assets/userPosition.svg',
-      scaledSize: new google.maps.Size(40, 40),
-    },
-  };
-  markerOptionsTeachers = {
-    animation: google.maps.Animation.BOUNCE,
-    icon: {
-      url: '../../../../assets/teacherPosition.svg',
       scaledSize: new google.maps.Size(40, 40),
     },
   };
@@ -41,7 +34,7 @@ export class MapComponent {
   constructor(private teachersService: TeachersService) {}
 
   ngOnInit() {
-    this.getAllTeachers();
+
     this.initiateGeolocation();
   }
 
@@ -56,15 +49,6 @@ export class MapComponent {
 
   openInfoWindow(miMarker: MapMarker) {
     this.miInfoWindow.open(miMarker);
-  }
-
-  async getAllTeachers(): Promise<void> {
-    try {
-      this.teachers = await this.teachersService.getAllTeachers();
-    } catch (error) {
-      console.error('Error fetching teachers:', error);
-    }
-    console.log(this.teachers)
   }
 
 }

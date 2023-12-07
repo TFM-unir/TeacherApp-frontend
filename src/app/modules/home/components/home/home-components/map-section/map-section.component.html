@@ -1,6 +1,30 @@
 <div class="row">
     <div class="col-md-7">
-        <app-map></app-map>
+        <google-map *ngIf="teachers && teachers.length" height="30rem" width="auto" [center]="center" [zoom]="zoom">
+            <map-marker
+            #miMarker="mapMarker"
+            [position]="myposition"
+            [options]="markerOptionsUser"
+            (mapClick)="openInfoWindow(miMarker)"
+          >
+            <map-info-window>
+              <h2>{{ myposition }}</h2>
+            </map-info-window>
+          </map-marker>
+            <!-- Display markers for all teachers -->
+            <ng-container *ngFor="let teacher of teachers">
+              <map-marker
+                [position]="{ lat: teacher.latitude, lng: teacher.longitude }"
+                [options]="markerOptionsTeachers"
+                (mapClick)="openInfoWindow(miMarker)"
+              >
+                <map-info-window>
+                  <h2>{{ teacher.name }}</h2>
+                </map-info-window>
+              </map-marker>
+            </ng-container>
+          </google-map>
+        
     </div>
     <div class="col-md-5">
         <div>
