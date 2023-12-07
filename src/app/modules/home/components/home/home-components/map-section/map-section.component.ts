@@ -1,22 +1,24 @@
 import { Component, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
-import { TeachersService } from 'src/app/modules/teachers/services/teachers.service';
+import { TeacherService } from 'src/app/core/services/teacher.service';
 
 @Component({
   selector: 'app-map-section',
   templateUrl: './map-section.component.html',
-  styleUrls: ['./map-section.component.css']
+  styleUrls: ['./map-section.component.css'],
 })
 export class MapSectionComponent {
-
   teachers: TeacherProfile[] | undefined;
 
   @ViewChild(MapInfoWindow) miInfoWindow: MapInfoWindow | any;
 
   zoom: number = 12;
   center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
-  myposition: google.maps.LatLng | any = new google.maps.LatLng(40.41831, -3.70275);
+  myposition: google.maps.LatLng | any = new google.maps.LatLng(
+    40.41831,
+    -3.70275
+  );
   markerOptionsUser = {
     animation: google.maps.Animation.BOUNCE,
     icon: {
@@ -37,7 +39,7 @@ export class MapSectionComponent {
     streetViewControl: false, // Deshabilitar control de street view
   };
 
-  constructor(private teachersService: TeachersService) {}
+  constructor(private teachersService: TeacherService) {}
 
   ngOnInit() {
     this.getAllTeachers();
@@ -64,5 +66,4 @@ export class MapSectionComponent {
       console.error('Error fetching teachers:', error);
     }
   }
-
 }

@@ -26,7 +26,7 @@ export class SearchEngineComponent {
 
   async getAllTeachers(): Promise<void> {
     try {
-      this.myTeachers = await this.teacherService.getAll();
+      this.myTeachers = await this.teacherService.getAllTeachers();
     } catch (error) {
       console.log(error);
     }

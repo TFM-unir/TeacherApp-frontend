@@ -15,7 +15,7 @@ export class TeacherService {
   private ratingBaseUrl: string =
     'http://localhost:3000/api/ratings/prom/teacher/';
 
-  getAll() {
+  getAllTeachers() {
     return lastValueFrom(this.httpClient.get<TeacherProfile[]>(this.baseUrl));
   }
 

@@ -1,23 +1,24 @@
 import { Component, ViewChild } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
-import { TeachersService } from 'src/app/modules/teachers/services/teachers.service';
+import { TeacherService } from 'src/app/core/services/teacher.service';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css'],
 })
-
 export class MapComponent {
-
   teachers: TeacherProfile[] | undefined;
 
   @ViewChild(MapInfoWindow) miInfoWindow: MapInfoWindow | any;
 
   zoom: number = 12;
   center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
-  myposition: google.maps.LatLng | any = new google.maps.LatLng(40.41831, -3.70275);
+  myposition: google.maps.LatLng | any = new google.maps.LatLng(
+    40.41831,
+    -3.70275
+  );
   markerOptions = {
     animation: google.maps.Animation.BOUNCE,
     icon: {
@@ -31,10 +32,9 @@ export class MapComponent {
     streetViewControl: false, // Deshabilitar control de street view
   };
 
-  constructor(private teachersService: TeachersService) {}
+  constructor(private teachersService: TeacherService) {}
 
   ngOnInit() {
-
     this.initiateGeolocation();
   }
 
@@ -50,5 +50,4 @@ export class MapComponent {
   openInfoWindow(miMarker: MapMarker) {
     this.miInfoWindow.open(miMarker);
   }
-
 }
