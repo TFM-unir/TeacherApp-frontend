@@ -1,3 +1,9 @@
 <fieldset [formGroupName]="groupName">
-  <app-mapa></app-mapa>
+  <div class="my-2">
+    <label for="location" class="form-label">Dirección</label>
+    <input class="form-control" id="location" #placesRef="ngx-places" ngx-gp-autocomplete (onAddressChange)="handleAddressChange($event)" placeholder="Busca tu dirección completa" formControlName="location" required/>
+    <!-- <p *ngIf="nameControl?.invalid">Tu mensaje de error</p> -->
+  </div>
 </fieldset>
+
+<!-- TODO los required que hay en el input, van aquí o ya en el formFroup del ts? -->
