@@ -145,39 +145,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<!-- <div class="container mt-3 mb-3">
-    <div class="row justify-content-center">
-        <div class="col-sm-8 bg-white rounded-4">
-            <table class="table table-striped text-black text-center">
-                <tr>
-                    <th>Día de la semana</th>
-                    <th>Hora de inicio</th>
-                    <th>Hora de fin</th>
-                    <th>Bloque</th>
-                    <th>Acción</th>
-                </tr>
-                <tr class="border-1 border-black bg-color_table mt-2" *ngFor="let slot of studentClass; let i = index">
-                    <td>{{ slot.day_of_week }}</td>
-                    <td>{{ slot.start_time }}</td>
-                    <td>{{ slot.end_time }}</td>
-                    <td>{{ slot.slot }}</td>
-                    <td>
-                        <ng-container *ngIf="enrolStudent[i]">
-                            <button class="m-1 btn btn-info btn-sm" disabled>Inscrito</button>
-                        </ng-container>
-                        <ng-container *ngIf="!enrolStudent[i] && isSlotNotFull[i]">
-                            <button class="m-1 btn btn-success btn-sm" (click)="enrollClass(slot)">Inscribirse</button>
-                        </ng-container>
-                        <ng-container *ngIf="!enrolStudent[i] && !isSlotNotFull[i]">
-                            <button class="m-1 btn btn-danger btn-sm" disabled>Completo</button>
-                        </ng-container>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div> -->

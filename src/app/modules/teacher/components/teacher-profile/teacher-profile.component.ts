@@ -51,6 +51,8 @@ export class TeacherProfileComponent {
   hoverable: boolean[] = [];
   //Declaramos el boolean de rating
   ratingBool: boolean = false;
+  //delcaramos el unenrollreturn
+  unenrollReturn: any;
 
   ngOnInit(): void {
     this.activatedRout.params.subscribe(async (params: any) => {
@@ -65,13 +67,10 @@ export class TeacherProfileComponent {
       try {
         this.rating = await this.teacherService.getAverageRatingByTeacherId(id);
         this.rating = parseFloat(this.rating.media_ratings).toFixed(1);
-        console.log(this.rating)
         if (isNaN(this.rating) || !this.rating) {
           this.ratingBool = false
-          console.log(this.ratingBool)
         } else {
           this.ratingBool = true
-          console.log(this.ratingBool);
         }
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar el rating del teacher. Por favor intentelo nuevamente.");
@@ -80,7 +79,6 @@ export class TeacherProfileComponent {
 
       try {
         this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
-        console.log(this.studentClass)
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
@@ -103,6 +101,7 @@ export class TeacherProfileComponent {
           item.id_user5 === this.user.user_id
         );
       });
+
       // Con esto vemos si aún hay clases disponibles
       this.isSlotNotFull = this.studentClass.map((item: ClassHour) => {
         return (
@@ -166,7 +165,6 @@ export class TeacherProfileComponent {
 
   async enrollClass(slot: ClassHour) {
     try {
-      console.log(slot)
       const slotValue = (slot: any): string | null => {
         for (const key in slot) {
           if (slot.hasOwnProperty(key) && slot[key] === null) {
@@ -175,12 +173,14 @@ export class TeacherProfileComponent {
         }
         return null;
       };
-      this.emptySlot = slotValue(slot); // Llamar a la función para obtener la clave
-      this.updateReturn = await this.teacherService.UpdateClassByStudentIdAndClassId(this.user.user_id, slot, this.emptySlot);
-      alert("Se ha inscrito correctamente en la asignatira");
-      this.reloadCurrentRoute()
+      this.emptySlot = slotValue(slot);// Llamar a la función para obtener la clave
+      const confirmation = window.confirm("¿Está seguro de inscribirse en la asignatura seleccionada?");
+      if (confirmation) {
+        this.updateReturn = await this.teacherService.UpdateClassByStudentIdAndClassId(this.user.user_id, slot, this.emptySlot);
+        window.alert("Se ha inscrito correctamente en la asignatura");
+        this.reloadCurrentRoute();
+      }
     } catch (error) {
-      console.log(error)
     };
   };
 
@@ -195,8 +195,18 @@ export class TeacherProfileComponent {
     this.hoverable[index] = !this.hoverable[index];
   };
 
-  unenrollClass(slot: ClassHour) {
-
+  async unenrollClass(slot: ClassHour) {
+    try {
+      const confirmation = window.confirm("¿Está seguro de darse de baja en el bloque horario seleccionado?");
+      if (confirmation) {
+        this.unenrollReturn = await this.teacherService.unenrollClass(this.user.user_id, slot);
+        window.alert("Se ha eliminado del bloque horario seleccionado");
+        this.reloadCurrentRoute();
+      }
+    } catch (error) {
+      alert({ Error: error })
+    }
   }
 
 };
+console

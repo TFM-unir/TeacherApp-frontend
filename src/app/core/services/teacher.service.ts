@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { find, firstValueFrom, lastValueFrom } from 'rxjs';
 import { ClassHour } from 'src/app/core/models/class.interface';
 import { Ratings } from 'src/app/core/models/ratings.interface';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
@@ -21,6 +21,7 @@ export class TeacherService {
   private ratingBaseUrl: string = 'http://localhost:3000/api/ratings/teacher/';
   private putClassBaseUrl: string =
     'http://localhost:3000/api/class/updateByStudentIdAndClassId/';
+  private deleteClassBaseUrl: string = 'http://localhost:3000/api/class/withdrawClassSlot/';
 
   getAllTeachers() {
     return lastValueFrom(this.httpClient.get<TeacherProfile[]>(this.baseUrl));
@@ -67,28 +68,28 @@ export class TeacherService {
     throw new Error('Method not implemented.');
   }
 
-  UpdateClassByStudentIdAndClassId(
-    id: number,
-    slot: ClassHour,
-    emptySlot: string
-  ) {
+  UpdateClassByStudentIdAndClassId(id: number, slot: ClassHour, emptySlot: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         authorization: localStorage.getItem('auth_token')!,
-      }),
+      })
     };
     if (emptySlot) {
       slot.empty_slot = emptySlot;
-      console.log(slot);
     }
     return lastValueFrom(
-      this.httpClient.put<ClassHour>(
-        `${this.putClassBaseUrl}${id}`,
-        slot,
-        httpOptions
-      )
+      this.httpClient.put<ClassHour>(`${this.putClassBaseUrl}${id}`, slot, httpOptions)
+    );
+  };
+
+  unenrollClass(id: number, slot: ClassHour) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        authorization: localStorage.getItem('auth_token')!,
+      })
+    };
+    return lastValueFrom(
+      this.httpClient.put<any>(`${this.deleteClassBaseUrl}${id}/${slot.id}`, slot, httpOptions)
     );
   }
-
-  constructor() {}
-}
+};
