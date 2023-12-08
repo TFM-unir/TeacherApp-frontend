@@ -57,11 +57,8 @@ export function generateUserFormGroup(): FormGroup {
     ]),
     password: new FormControl('1234', [Validators.required]),
     phone: new FormControl('765432', []),
-    email: new FormControl('https://i.pravatar.cc/', [
-      Validators.required,
-      Validators.email,
-    ]),
-    photo: new FormControl('url', [Validators.required]),
+    email: new FormControl('email', [Validators.required, Validators.email]),
+    photo: new FormControl('https://i.pravatar.cc/', [Validators.required]),
     role_id: new FormControl(1),
     date_of_birth: new FormControl(Date),
   });
