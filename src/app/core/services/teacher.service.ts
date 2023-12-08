@@ -21,6 +21,11 @@ export class TeacherService {
   getAllTeachers() {
     return lastValueFrom(this.httpClient.get<TeacherProfile[]>(this.baseUrl));
   }
+  getAllTeachersPagination(page: number, per_page: number) {
+    return lastValueFrom(
+      this.httpClient.get<any>(`${this.baseUrl}${page}/${per_page}`)
+    );
+  }
 
   getTeacherById(id: number) {
     return firstValueFrom(
