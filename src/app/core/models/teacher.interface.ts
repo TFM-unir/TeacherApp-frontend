@@ -16,6 +16,7 @@ export interface TeacherProfile {
   date_of_birth: Date;
   status: number;
   photo: string;
+  distance: number;
   latitude: number;
   longitude: number;
   address: string;

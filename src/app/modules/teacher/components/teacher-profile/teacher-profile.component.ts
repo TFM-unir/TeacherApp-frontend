@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 import { ClassHour } from 'src/app/core/models/class.interface';
@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { User } from 'src/app/core/models/user.interface';
 import { Ratings } from 'src/app/core/models/ratings.interface';
 import { TeacherService } from 'src/app/core/services/teacher.service';
+import { MapInfoWindow } from '@angular/google-maps';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -208,5 +209,19 @@ export class TeacherProfileComponent {
     }
   }
 
+    //Config para mapa
+    @ViewChild(MapInfoWindow) miInfoWindow: MapInfoWindow | any;
+
+    zoom: number = 12;
+    center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
+    myposition: google.maps.LatLng | any = new google.maps.LatLng(
+      this.teacher.latitude,
+      this.teacher.longitude);
+    markerOptions = {
+      animation: google.maps.Animation.BOUNCE,
+      icon: {
+        url: '../../../../assets/userPosition.svg',
+        scaledSize: new google.maps.Size(40, 40),
+      },
+    };
 };
-console

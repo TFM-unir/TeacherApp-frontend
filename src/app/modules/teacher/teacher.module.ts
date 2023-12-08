@@ -10,6 +10,7 @@ import { TeacherRateComponent } from './components/teacher-rate/teacher-rate.com
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeModule } from '../home/home.module';
 import { TeacherCardComponent } from './components/teacher-card/teacher-card.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { TeacherCardComponent } from './components/teacher-card/teacher-card.com
     TeacherRateComponent,
     TeacherCardComponent,
   ],
-  imports: [CommonModule, TeacherRoutingModule, SharedModule, HomeModule],
+  imports: [CommonModule, TeacherRoutingModule, SharedModule, HomeModule, GoogleMapsModule],
   exports: [TeacherCardComponent],
 })
 export class TeacherModule {}

@@ -15,10 +15,7 @@ export class MapSectionComponent {
 
   zoom: number = 12;
   center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
-  myposition: google.maps.LatLng | any = new google.maps.LatLng(
-    40.41831,
-    -3.70275
-  );
+  myposition: google.maps.LatLng | any;
   markerOptionsUser = {
     animation: google.maps.Animation.BOUNCE,
     icon: {
@@ -42,16 +39,17 @@ export class MapSectionComponent {
   constructor(private teachersService: TeacherService) {}
 
   ngOnInit() {
-    this.getAllTeachers();
     this.initiateGeolocation();
   }
 
   initiateGeolocation(): void {
     navigator.geolocation.getCurrentPosition((position) => {
-      //console.log(position);
       const { latitude, longitude } = position.coords;
       this.myposition = new google.maps.LatLng(latitude, longitude);
       this.center = this.myposition;
+
+      // Once myposition is obtained, calculate distances and sort teachers
+      this.getAllTeachers();
     });
   }
 
@@ -62,8 +60,22 @@ export class MapSectionComponent {
   async getAllTeachers(): Promise<void> {
     try {
       this.teachers = await this.teachersService.getAllTeachers();
+      
+      // Calculate and assign distance to each teacher
+      if (this.myposition && this.teachers) {
+        this.teachers.forEach((teacher) => {
+          const teacherPosition = new google.maps.LatLng(teacher.latitude, teacher.longitude);
+          teacher.distance = google.maps.geometry.spherical.computeDistanceBetween(this.myposition, teacherPosition) / 1000;
+        });
+
+        // Sort teachers by distance
+        this.teachers.sort((teacherA, teacherB) => teacherA.distance! - teacherB.distance!);
+        console.log(this.teachers);
+        
+      }
     } catch (error) {
-      console.error('Error fetching teachers:', error);
+      console.error('Error fetching or sorting teachers:', error);
     }
-  }
+    console.log(this.teachers);
+  };
 }
