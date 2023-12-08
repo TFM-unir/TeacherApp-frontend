@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { Router } from '@angular/router';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 import { TeacherService } from 'src/app/core/services/teacher.service';
 
@@ -9,11 +10,15 @@ import { TeacherService } from 'src/app/core/services/teacher.service';
   styleUrls: ['./map-section.component.css'],
 })
 export class MapSectionComponent {
+
   teachers: TeacherProfile[] | undefined;
+  selectedTeacher: TeacherProfile | null = null;
+  miMarkers: any[] = [];
+  router = inject(Router);
 
   @ViewChild(MapInfoWindow) miInfoWindow: MapInfoWindow | any;
 
-  zoom: number = 12;
+  zoom: number = 10;
   center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
   myposition: google.maps.LatLng | any;
   markerOptionsUser = {
@@ -53,8 +58,28 @@ export class MapSectionComponent {
     });
   }
 
-  openInfoWindow(miMarker: MapMarker) {
-    this.miInfoWindow.open(miMarker);
+  openInfoWindow(teacher: TeacherProfile) {
+    // Set the currently selected teacher for the info window
+    this.selectedTeacher = teacher;
+    // TODO rating da undefined
+    console.log(this.selectedTeacher.rating);
+  }
+
+  selectTeacher(teacher: TeacherProfile): void {
+    this.selectedTeacher = teacher;
+    this.center = new google.maps.LatLng(this.selectedTeacher.latitude, this.selectedTeacher.longitude);
+    this.zoom = 13;
+  }
+  
+  eraseMarkedTeacher() {
+    this.selectedTeacher = null;
+    this.zoom = 10;
+    this.center = this.myposition;
+  }
+
+  navigateToTeacherProfile(id: any) {
+    this.router.navigate(['/teachers','profile',id]);
+
   }
 
   async getAllTeachers(): Promise<void> {
@@ -70,12 +95,9 @@ export class MapSectionComponent {
 
         // Sort teachers by distance
         this.teachers.sort((teacherA, teacherB) => teacherA.distance! - teacherB.distance!);
-        console.log(this.teachers);
-        
       }
     } catch (error) {
       console.error('Error fetching or sorting teachers:', error);
     }
-    console.log(this.teachers);
   };
 }

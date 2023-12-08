@@ -3,24 +3,17 @@
     <section class="col-md-7" id="teachers-map">
       <google-map *ngIf="teachers && teachers.length" height="30rem" width="auto" [center]="center" [zoom]="zoom">
         <map-marker
-          #miMarker="mapMarker" d
           [position]="myposition"
           [options]="markerOptionsUser"
-          (mapClick)="openInfoWindow(miMarker)"
           >
-          <map-info-window>
-            <h2>{{ myposition }}</h2>
-          </map-info-window>
         </map-marker>
         <ng-container *ngFor="let teacher of teachers">
           <map-marker
+            #miMarker="mapMarker"
             [position]="{ lat: teacher.latitude, lng: teacher.longitude }"
             [options]="markerOptionsTeachers"
-            (mapClick)="openInfoWindow(miMarker)"
+            (mapClick)="openInfoWindow(teacher)"
             >
-            <map-info-window>
-              <h2>{{ teacher.name }}</h2>
-            </map-info-window>
           </map-marker>
         </ng-container>
       </google-map>
@@ -28,19 +21,38 @@
     
     <section class="col-md-5" id="teachers-nearby">
       <h3>Profesores cerca de tí</h3>
-        <div class="overflow-auto scrollable-container">
-          <div *ngFor="let teacher of teachers">
+        <div class="overflow-auto scrollable-container" *ngIf="!selectedTeacher">
+          <div *ngFor="let teacher of teachers" (click)="selectTeacher(teacher)">
             <div class="row">
               <div class="col-md-2">
                 <img src="{{teacher.photo}}" alt="..." class="img-fluid rounded">
               </div>
-              <div class="col-md-10 row">
-                <p class="col-md-4">{{teacher.name}}</p>
-                <p class="col-md-5">{{teacher.subject}}</p>
-                <p class="col-md-3">{{teacher.price_hour}}€/h</p>
+              <div class="col-md-10 ">
+                <div class="row">
+                  <p class="col-md-4">{{teacher.name}}</p>
+                  <p class="col-md-4">{{teacher.subject}}</p>
+                  <p class="col-md-4">{{teacher.price_hour}}€/h</p>
+                </div>
+                <p class="col-md-12">A {{teacher.distance.toFixed(1)}} km de tí</p>
               </div>
             </div>
             <hr class="border border-1 opacity-75">
+          </div>
+        </div>
+        <div class="card" style="width: 18rem" *ngIf="selectedTeacher">
+          <img src="{{ selectedTeacher.photo }}" class="card-img-top rounded mx-auto d-block mt-3" alt="teacher's profile photo" style="height: 10rem; width: 10rem;">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ selectedTeacher.name }}</h5>
+            <div>
+              <img class="img-fluid"
+              src="https://t3.ftcdn.net/jpg/01/09/84/42/240_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg" alt="RatingStar"
+              style="max-width: 55px" />
+              <p>{{selectedTeacher.rating}}</p>
+            </div>
+            <p class="card-text">{{ selectedTeacher.experience }} años de experiencia</p>
+            <p class="card-text">{{ selectedTeacher.price_hour }}€/Hora</p>
+            <a class="btn btn-primary mx-1 mt-1" (click)="eraseMarkedTeacher()">Volver</a>
+            <a class="btn btn-primary mx-1 mt-1" (click)="navigateToTeacherProfile(selectedTeacher.id)">Ver perfil</a>
           </div>
         </div>
     </section>
