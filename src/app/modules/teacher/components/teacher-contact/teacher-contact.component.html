@@ -1,1 +1,12 @@
-<p>teacher-contact works!</p>
+<section>
+    <h1 class="m-4 text-center modal-title">Escribe un mensaje a {{teacher.name}}</h1>
+    <form>
+        <div class="form-floating m-4">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 40vh"></textarea>
+            <label for="floatingTextarea">{{teacher.name}} recibirá este mensaje:</label>
+        </div>
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-info " value="Contactar con: {{teacher.name}}">
+        </div>
+    </form>
+</section>
