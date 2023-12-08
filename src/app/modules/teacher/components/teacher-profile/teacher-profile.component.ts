@@ -47,6 +47,10 @@ export class TeacherProfileComponent {
   emptySlot: any;
   //Declaramos el array de enroll
   enrolStudent: any;
+  //Declaramos la variable hoverable
+  hoverable: boolean[] = [];
+  //Declaramos el boolean de rating
+  ratingBool: boolean = false;
 
   ngOnInit(): void {
     this.activatedRout.params.subscribe(async (params: any) => {
@@ -61,6 +65,14 @@ export class TeacherProfileComponent {
       try {
         this.rating = await this.teacherService.getAverageRatingByTeacherId(id);
         this.rating = parseFloat(this.rating.media_ratings).toFixed(1);
+        console.log(this.rating)
+        if (isNaN(this.rating) || !this.rating) {
+          this.ratingBool = false
+          console.log(this.ratingBool)
+        } else {
+          this.ratingBool = true
+          console.log(this.ratingBool);
+        }
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar el rating del teacher. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
@@ -124,6 +136,7 @@ export class TeacherProfileComponent {
           item.id_user5 === this.user.user_id
         );
       });
+      this.hoverable = Array(this.studentClass.length).fill(false);
 
 
     });
@@ -176,6 +189,14 @@ export class TeacherProfileComponent {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
+  };
+
+  toggleHover(index: number) {
+    this.hoverable[index] = !this.hoverable[index];
+  };
+
+  unenrollClass(slot: ClassHour) {
+
   }
 
 };
