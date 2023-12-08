@@ -1,4 +1,4 @@
-<div class="card-size_tp col-lg-6 col-sm-4 bg-white m-3 d-flex flex-column align-items-center">
+<div class="card-size_tp col-lg-6 col-sm-4 bg-white m-3 d-flex flex-column align-items-center rounded-4">
   <!-- Imagen del profesor -->
   <div class="row">
     <div class="col-12">
@@ -34,7 +34,7 @@
   </div>
   <div *ngIf="showButtonProfile">
     <!--Boton ver usuario-->
-    <button class="mx-2" [routerLink]="['/teacher/profile/', teacher.id]">
+    <button class="btn btn-warning mx-2 mb-3" [routerLink]="['/teacher/profile/', teacher.id]">
       Ver perfil
     </button>
   </div>
