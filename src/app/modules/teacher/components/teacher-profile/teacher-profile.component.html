@@ -1,14 +1,14 @@
 <section class="container col-12 d-flex justify-content-between p-5 pb-0">
     <!-- Bloque 1 -->
-    <div class="card-size_tp col-lg-6 col-sm-4 bg-white m-3 d-flex flex-column align-items-center ">
+    <div class="card-size_tp col-lg-6 col-sm-4 bg-white m-3 d-flex flex-column align-items-center rounded-4">
         <!-- Imagen del profesor -->
         <div class="row">
-            <div class="col-12">
+            <div class="col-sm-12">
                 <img class="img-fluid rounded-5 mx-auto p-3" src="{{teacher?.photo}}" alt="TeacherImg">
             </div>
         </div>
         <!-- Estrella y Rating -->
-        <div class="container d-flex justify-content-center align-items-center">
+        <div class="container d-flex justify-content-center align-items-center mt-3">
             <div class="col-sm-3">
                 <img class="img-fluid"
                     src="https://t3.ftcdn.net/jpg/01/09/84/42/240_F_109844239_A7MdQSDf4y1H80cfvHZuSa0zKBkZ68S7.jpg"
@@ -19,40 +19,35 @@
                 <p *ngIf="!ratingBool" class="align-content-center text-black custom-h3 font-weight-bold">Aún no hay
                     valoraciones</p>
             </div>
-
         </div>
         <!-- Información -->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <h4 class="text-secondary small mt-3"> Experiencia: {{teacher.experience}} años.</h4>
-                        <h4 class="text-secondary small mt-3">Ubicación: {{teacher.city}}.</h4>
-                        <h4 class="text-secondary small mt-3">Asignatura: {{teacher.subject}} </h4>
-                        <h4 class="text-secondary small mt-3">Precio: {{teacher.price_hour}} €/hora </h4>
+                        <h4 class="text-secondary small mt-3"> Experiencia: {{teacher?.experience}} años.</h4>
+                        <h4 class="text-secondary small mt-3">Ubicación: {{teacher?.city}}.</h4>
+                        <h4 class="text-secondary small mt-3">Asignatura: {{teacher?.subject}} </h4>
+                        <h4 class="text-secondary small mt-3">Precio: {{teacher?.price_hour}} €/hora </h4>
                     </div>
                 </div>
             </div>
         </div>>
     </div>
     <!-- Informacion del teacher Bloque 2-->
-    <div class="col-lg-6 card-size m-5">
+    <div class="col-lg-6 card-size">
         <div class="text-white">
             <div>
-                <h2>{{teacher.name}}</h2>
+                <h2>{{teacher?.name}}</h2>
             </div>
             <div class="mt-3">
-                <p class="text-white">{{teacher.about_me}}</p>
+                <p class="text-white">{{teacher?.about_me}}</p>
             </div>
             <!-- Aquí debes colocar el componente del mapa -->
         </div>
         <div class="mt-3">
             <google-map *ngIf="teacher" height="30rem" width="auto" [center]="center" [zoom]="zoom">
-                <map-marker
-                #miMarker="mapMarker"
-                [position]="myposition"
-                [options]="markerOptions"
-                >
+                <map-marker #miMarker="mapMarker" [position]="myposition" [options]="markerOptions">
                     <map-info-window>
                         <h2>{{ myposition }}</h2>
                     </map-info-window>
@@ -68,7 +63,7 @@
             *ngIf="!isLoggedIn || isLoggedIn && !hasClasses">
             <!-- Botón para usuarios no logueados -->
             <button class="btn btn-warning btn-personalizado" (click)="contactTeacher()">Contactar con:
-                {{teacher.name}}</button>
+                {{teacher?.name}}</button>
         </div>
         <div class="mb-2 card-size_tp row justify-content-center align-items-center" *ngIf="isLoggedIn && hasClasses">
             <!-- Botones para usuarios logueados con clases con el profesor -->
@@ -79,7 +74,7 @@
 </div>
 <!-- Ratings -->
 <div *ngIf="ratingBool">
-    <h2 class="text-center text-white mt-5 mb-4">Lo que dicen de {{ teacher.name }} </h2>
+    <h2 class="text-center text-white mt-5 mb-4">Lo que dicen de {{ teacher?.name }} </h2>
     <div class="container">
         <div class="row">
             <div class="col-8 mx-auto">
@@ -92,17 +87,17 @@
                                         alt="RatingStar" style="max-width: 20px">
                                 </div>
                                 <div>
-                                    <h3 class="mt-3 text-white ms-3 fs-5 ">{{ ratings.rating }}</h3>
+                                    <h3 class="mt-3 text-white ms-3 fs-5 ">{{ ratings?.rating }}</h3>
                                 </div>
                             </div>
-                            <p>{{ ratings.comment_student }}</p>
-                            <small>{{ ratings.creation_date | date:'dd/MM/yyyy' }}</small>
+                            <p>{{ ratings?.comment_student }}</p>
+                            <small>{{ ratings?.creation_date | date:'dd/MM/yyyy' }}</small>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mb-2 ">
                         <div class="card text-end text-white rounded-5 fondo-gris p-3 col-sm-7">
-                            <p>{{ ratings.comment_teacher }}</p>
-                            <small>{{ ratings.creation_date | date:'dd/MM/yyyy' }}</small>
+                            <p>{{ ratings?.comment_teacher }}</p>
+                            <small>{{ ratings?.creation_date | date:'dd/MM/yyyy' }}</small>
                         </div>
                     </div>
                 </div>
@@ -111,13 +106,12 @@
     </div>
 </div>
 <div *ngIf="!ratingBool">
-    <h2 class="text-center text-white mt-5 mb-5">Aún no hay valoraciones para {{ teacher.name }}</h2>
+    <h2 class="text-center text-white mt-5 mb-5">Aún no hay valoraciones para {{ teacher?.name }}</h2>
 </div>
-
+<!-- Clases disponibles -->
 <div>
     <h2 class="text-center text-white mt-3 mb-4">Clases Disponibles </h2>
 </div>
-
 <div class="container mt-3 mb-3">
     <div class="row justify-content-center">
         <div class="col-sm-8 bg-white rounded-4">
@@ -130,10 +124,10 @@
                     <th>Acción</th>
                 </tr>
                 <tr class="border-1 border-black bg-color_table mt-2" *ngFor="let slot of studentClass; let i = index">
-                    <td>{{ slot.day_of_week }}</td>
-                    <td>{{ slot.start_time }}</td>
-                    <td>{{ slot.end_time }}</td>
-                    <td>{{ slot.slot }}</td>
+                    <td>{{ slot?.day_of_week }}</td>
+                    <td>{{ slot?.start_time }}</td>
+                    <td>{{ slot?.end_time }}</td>
+                    <td>{{ slot?.slot }}</td>
                     <td>
                         <ng-container *ngIf="enrolStudent[i]">
                             <button class="m-1 btn btn-info btn-sm" [ngClass]="{'btn-warning': hoverable[i]}"

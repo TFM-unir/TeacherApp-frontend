@@ -55,11 +55,31 @@ export class TeacherProfileComponent {
   //delcaramos el unenrollreturn
   unenrollReturn: any;
 
+  //Variables del google maps
+
+  //Config para mapa
+  @ViewChild(MapInfoWindow) miInfoWindow: MapInfoWindow | any;
+
+  zoom: number = 12;
+  center: google.maps.LatLng | any;
+  myposition: google.maps.LatLng | any;
+  markerOptions = {
+    animation: google.maps.Animation.BOUNCE,
+    icon: {
+      url: '../../../../assets/userPosition.svg',
+      scaledSize: new google.maps.Size(40, 40),
+    },
+  };
+
   ngOnInit(): void {
     this.activatedRout.params.subscribe(async (params: any) => {
       let id = params.teacherId;
       try {
         this.teacher = await this.teacherService.getTeacherById(id);
+        this.myposition = new google.maps.LatLng(
+          this.teacher.latitude,
+          this.teacher.longitude);
+        this.center = new google.maps.LatLng(this.teacher.latitude, this.teacher.longitude);
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar al profesor. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
@@ -207,21 +227,6 @@ export class TeacherProfileComponent {
     } catch (error) {
       alert({ Error: error })
     }
-  }
+  };
 
-    //Config para mapa
-    @ViewChild(MapInfoWindow) miInfoWindow: MapInfoWindow | any;
-
-    zoom: number = 12;
-    center: google.maps.LatLng = new google.maps.LatLng(40.41831, -3.70275);
-    myposition: google.maps.LatLng | any = new google.maps.LatLng(
-      this.teacher.latitude,
-      this.teacher.longitude);
-    markerOptions = {
-      animation: google.maps.Animation.BOUNCE,
-      icon: {
-        url: '../../../../assets/userPosition.svg',
-        scaledSize: new google.maps.Size(40, 40),
-      },
-    };
 };
