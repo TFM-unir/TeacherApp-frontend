@@ -15,7 +15,8 @@ export class TeacherService {
   private httpClient = inject(HttpClient);
   private ratingPromBaseUrl: string = "http://localhost:3000/api/ratings/prom/teacher/";
   private classBaseUrl: string = "http://localhost:3000/api/class/teacher/";
-  private ratingBaseUrl: string = "http://localhost:3000/api/ratings/teacher/"
+  private ratingBaseUrl: string = "http://localhost:3000/api/ratings/teacher/";
+  private putClassBaseUrl: string = "http://localhost:3000/api/class/updateByStudentIdAndClassId/"
 
   getAllTeachers() {
     return lastValueFrom(this.httpClient.get<TeacherProfile[]>(this.baseUrl));
@@ -51,13 +52,27 @@ export class TeacherService {
     return lastValueFrom(
       this.httpClient.get<Ratings[]>(`${this.ratingBaseUrl}${id}`)
     )
-  }
-
-
-
+  };
 
   deleteUser(id: number) {
     throw new Error('Method not implemented.');
   }
+
+  UpdateClassByStudentIdAndClassId(id: number, slot: ClassHour, emptySlot: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        authorization: localStorage.getItem('auth_token')!
+      })
+    };
+    if (emptySlot) {
+      slot.empty_slot = emptySlot
+      console.log(slot);
+    };
+    return lastValueFrom(
+      this.httpClient.put<ClassHour>(`${this.putClassBaseUrl}${id}`, slot, httpOptions)
+    )
+  };
+
+
   constructor() { }
 }

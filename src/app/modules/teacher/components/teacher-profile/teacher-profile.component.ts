@@ -35,8 +35,18 @@ export class TeacherProfileComponent {
   user: User | any;
   //Declaramos la variable de toda la info de los ratings que se le han hecho a ese profesor
   allRatings: Ratings[] | any;
+  // declaramos la variable para pintar las 
   ultimos4Ratings: Ratings[] | any;
-
+  //declaramos la variable para traernos todas las clases qe el profesor dicta
+  allClases: ClassHour | any;
+  //Declaramos la variable que valida como boolean si el hay algún slot disponible
+  isSlotNotFull: any;
+  //Declaramos la variable de respuesta del put
+  updateReturn: any;
+  //Clave empty slot
+  emptySlot: any;
+  //Declaramos el array de enroll
+  enrolStudent: any;
 
   ngOnInit(): void {
     this.activatedRout.params.subscribe(async (params: any) => {
@@ -58,6 +68,7 @@ export class TeacherProfileComponent {
 
       try {
         this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
+        console.log(this.studentClass)
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
@@ -80,22 +91,41 @@ export class TeacherProfileComponent {
           item.id_user5 === this.user.user_id
         );
       });
+      // Con esto vemos si aún hay clases disponibles
+      this.isSlotNotFull = this.studentClass.map((item: ClassHour) => {
+        return (
+          item.id_user1 === null ||
+          item.id_user2 === null ||
+          item.id_user3 === null ||
+          item.id_user4 === null ||
+          item.id_user5 === null
+        );
+      });
 
       // nos traemos la información del rating relacionado con el usuario y el profesor
       try {
         this.allRatings = await this.teacherService.getRatingsByTeacherId(id);
-        console.log(this.rating);
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar los ratings del profesor. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
       }
-      if (this.allRatings.length > 4) {
-        this.ultimos4Ratings = this.allRatings.slice(-4);
-        console.log(this.ultimos4Ratings);
+      if (this.allRatings.length > 2) {
+        this.ultimos4Ratings = this.allRatings.slice(-2);
       } else {
         this.ultimos4Ratings = this.allRatings;
-        console.log(this.ultimos4Ratings);
       };
+
+      this.enrolStudent = this.studentClass.map((item: ClassHour) => {
+        return (
+          item.id_user1 === this.user.user_id ||
+          item.id_user2 === this.user.user_id ||
+          item.id_user3 === this.user.user_id ||
+          item.id_user4 === this.user.user_id ||
+          item.id_user5 === this.user.user_id
+        );
+      });
+
+
     });
   };
 
@@ -121,16 +151,31 @@ export class TeacherProfileComponent {
     });
   };
 
+  async enrollClass(slot: ClassHour) {
+    try {
+      console.log(slot)
+      const slotValue = (slot: any): string | null => {
+        for (const key in slot) {
+          if (slot.hasOwnProperty(key) && slot[key] === null) {
+            return key;
+          }
+        }
+        return null;
+      };
+      this.emptySlot = slotValue(slot); // Llamar a la función para obtener la clave
+      this.updateReturn = await this.teacherService.UpdateClassByStudentIdAndClassId(this.user.user_id, slot, this.emptySlot);
+      alert("Se ha inscrito correctamente en la asignatira");
+      this.reloadCurrentRoute()
+    } catch (error) {
+      console.log(error)
+    };
+  };
 
-  //   try {
-  //     const response = await this.teacherService.getAll();
-  //     console.log('response', response);
-  //   } catch (error: any) {
-
-  //   }
-
-  // }
-
-
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
 
 };

@@ -10,4 +10,5 @@ export interface ClassHour {
     id_user3?: number | null;
     id_user4?: number | null;
     id_user5?: number | null;
+    empty_slot?: any
 };

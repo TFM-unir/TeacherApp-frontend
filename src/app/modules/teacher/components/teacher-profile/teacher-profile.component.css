@@ -7,3 +7,11 @@
     background-color: rgba(211, 211, 211, 0.2);
     /* Gris claro con opacidad del 20% */
 }
+
+.btn-color_green {
+    background-color: #28a745;
+}
+
+.bg-color_table {
+    background-color: rgba(255, 175, 86, 0.3);
+}
