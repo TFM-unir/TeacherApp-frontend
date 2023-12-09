@@ -14,7 +14,7 @@ export class SearchEngineComponent {
 
   pagination: Pagination = {
     page: 0,
-    per_page: 10,
+    per_page: 3,
     currentPage: 1,
     total_pages: 0,
     arrPag: [],

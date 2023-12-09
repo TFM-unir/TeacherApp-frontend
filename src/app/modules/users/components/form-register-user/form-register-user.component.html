@@ -9,7 +9,7 @@
       formControlName="name"
       required
     />
-    <p *ngIf="nameControl?.invalid">Tu mensaje de error</p>
+    <p *ngIf="nameControl">*Campo requerido</p>
   </div>
   <div class="my-2">
     <label for="nickname" class="form-label">Nombre de usario</label>

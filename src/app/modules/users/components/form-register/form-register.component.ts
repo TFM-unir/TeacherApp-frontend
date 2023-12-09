@@ -12,6 +12,7 @@ import { UsersService } from '../../../../core/services/users.service';
 import { generateUserFormGroup } from '../form-register-user/form-register-user.component';
 import { generateTeacherFormGroup } from '../form-register-teacher/form-register-teacher.component';
 import { generateSubjectFormGroup } from '../form-register-subjects/form-register-subjects.component';
+import { generateLocationFormGroup } from '../form-register-location/form-register-location.component';
 
 @Component({
   selector: 'app-form-register',
@@ -43,8 +44,14 @@ export class FormRegisterComponent {
       userForm: generateUserFormGroup(),
       //inicializar el teacher form
       teacherForm: generateTeacherFormGroup(),
-
-      subjectForm: generateSubjectFormGroup(),
+      //inicializar materias
+      //subjectForm: generateSubjectFormGroup(),
+      subjectForm: this.formBuilder.group({
+        subject: ['', [Validators.required, Validators.minLength(3)]],
+        department_id: [0, [Validators.required, Validators.minLength(1)]],
+      }),
+      //inicializar location
+      locationForm: generateLocationFormGroup(),
     });
 
     // this.userForm = this.mainForm.value.userForm;
@@ -59,29 +66,21 @@ export class FormRegisterComponent {
       let userForm = this.mainForm.value.userForm;
       let teacherForm = this.mainForm.value.teacherForm;
       let subjectForm = this.mainForm.value.subjectForm;
+      let locationForm = this.mainForm.value.locationForm;
 
-      //userForm.date_of_birth = '1990-04-17';
       userForm.status = 2;
       userForm.role_id = this.mainForm.value.role_id;
 
-      console.log(userForm);
+      console.log(locationForm);
       let user: UserRegister = {
         userForm: userForm,
-        locationForm: {
-          id: 0,
-          latitude: 41.385063,
-          longitude: 2.987456,
-          address: 'calle de quintal 25',
-          city: 'Santiago',
-          province: 'A Coruña',
-        },
+        locationForm: locationForm,
         teacherForm: teacherForm,
         subjectForm: subjectForm,
       };
       const response = await this.usersService.register(user);
-      // console.log(response);
-      // si el id existe, se inserto correctamente
       console.log(response);
+      // si el id existe, se inserto correctamente
       if (response.userForm.id) {
         this.router.navigate(['']);
       } else {
