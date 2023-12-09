@@ -4,6 +4,7 @@ import { authGuard } from './core/guards/auth.guard';
 import { C404Component } from './pages/c404/c404.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
     loadChildren: () =>
