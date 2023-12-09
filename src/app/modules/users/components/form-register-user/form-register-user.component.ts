@@ -30,15 +30,16 @@ export class FormRegisterUserComponent {
 
   constructor(private cc: ControlContainer) {}
 
-  get userFormGroup() {
+  get formGroup() {
     return this.cc.control?.get(this.groupName);
   }
 
   get nameControl() {
-    return this.userFormGroup?.get('name');
-
-    // o directamente el FormControl del padre usando
-    // return this.cc.control?.get(`${this.groupName}.line1`);
+    let form = this.formGroup;
+    if (!form) {
+      return false;
+    }
+    return form.get('name')?.invalid;
   }
 }
 
@@ -46,10 +47,7 @@ export function generateUserFormGroup(): FormGroup {
   return new FormGroup({
     id: new FormControl(0, []),
     _id: new FormControl(0, []),
-    name: new FormControl('marilia tikk', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
 
     nickname: new FormControl('marilia', [
       Validators.required,

@@ -14,7 +14,7 @@ export class SearchEngineComponent {
 
   pagination: Pagination = {
     page: 0,
-    per_page: 10,
+    per_page: 3,
     currentPage: 1,
     total_pages: 0,
     arrPag: [],
@@ -24,7 +24,6 @@ export class SearchEngineComponent {
   myTeachers: TeacherProfile[] = [];
 
   ngOnInit(): void {
-    console.log('klahkla');
     // Obtenemos la lista de usuarios
     this.getPage(this.pagination.currentPage);
   }
