@@ -24,7 +24,6 @@ export class SearchEngineComponent {
   myTeachers: TeacherProfile[] = [];
 
   ngOnInit(): void {
-    console.log('klahkla');
     // Obtenemos la lista de usuarios
     this.getPage(this.pagination.currentPage);
   }
