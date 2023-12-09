@@ -5,12 +5,13 @@ import { TeacherProfileComponent } from './components/teacher-profile/teacher-pr
 import { TeacherRateComponent } from './components/teacher-rate/teacher-rate.component';
 import { TeacherChatComponent } from './components/teacher-chat/teacher-chat.component';
 import { TeacherContactComponent } from './components/teacher-contact/teacher-contact.component';
+import { authGuard } from 'src/app/core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'chat', component: TeacherChatComponent },
+  { path: 'chat', canActivate: [authGuard], component: TeacherChatComponent },
   { path: 'profile/:teacherId', component: TeacherProfileComponent },
   { path: 'contact/:teacherId', component: TeacherContactComponent },
-  { path: 'rate/:teacherId', component: TeacherRateComponent },
+  { path: 'rate/:teacherId', canActivate: [authGuard], component: TeacherRateComponent },
   { path: ':teacherId', component: TeacherControlPanelComponent },
 ];
 

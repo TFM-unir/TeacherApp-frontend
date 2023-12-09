@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeModule } from '../home/home.module';
 import { TeacherCardComponent } from './components/teacher-card/teacher-card.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     TeacherRateComponent,
     TeacherCardComponent,
   ],
-  imports: [CommonModule, TeacherRoutingModule, SharedModule, HomeModule, GoogleMapsModule],
+  imports: [CommonModule, TeacherRoutingModule, SharedModule, HomeModule, GoogleMapsModule, 
+    ReactiveFormsModule],
   exports: [TeacherCardComponent],
 })
 export class TeacherModule {}

@@ -1,8 +1,8 @@
 export interface Chats {
-    id: number;
+    id?: number;
     message: string;
-    creation_date: Date;
+    creation_date?: Date;
     boolean_teacher: boolean;
-    user_id: number;
-    teacher_id: number;
+    userId: number;
+    teacherId: number;
 };

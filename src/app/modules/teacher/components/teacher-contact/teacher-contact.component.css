@@ -1,14 +1,12 @@
-
-
-textarea::-webkit-input-placeholder {
-       color: orange;
-    }
-    :-moz-placeholder { /* Upto Firefox 18, Deprecated in Firefox 19  */
-       color: orange;  
-    }
-    ::-moz-placeholder {  /* Firefox 19+ */
-       color: orange;  
-    }
-    :-ms-input-placeholder {  
-       color: orange;  
-    }
+#floatingTextarea{
+   height: 40vh;
+}
+.false{
+   display: none;
+}
+.true{
+   display: block;
+}
+p{
+   color: black;
+}
