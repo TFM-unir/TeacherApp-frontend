@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { C404Component } from './pages/c404/c404.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     loadChildren: () =>
       import('./modules/home/home.module').then((m) => m.HomeModule),
   },
@@ -35,8 +36,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
-  // Hacer 404 en algun momento o redirigir a home?
-  // { path: '**', component: C404Component },
+  {path:"**", component: C404Component}
+
 ];
 
 @NgModule({

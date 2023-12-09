@@ -19,14 +19,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto">
-        <a class="nav-link text-white" [routerLink]="['']">Inicio</a>
-        <a class="nav-link text-white">Chat</a>
+        <a class="nav-link text-white" [routerLink]="['/home']">Inicio</a>
+        <a class="nav-link text-white" [routerLink]="['/'+this.authService.getUserRoleName()+'/chat/'+this.authService.getUserId()]">Chat</a>
         <a class="nav-link text-white pointer" (click)="onClickLogout()">Cerrar Sesión</a>
         <a class="nav-link text-white" [routerLink]="['/users', 'login']">Iniciar Sesión</a>
         <a class="nav-link text-white" [routerLink]="['/users', 'register']">Registrar</a>
         <!-- TODO ojo esto es solo mientras no hay guards: *ngIf="this.authService.getUserName() !== null -->
         <a class="nav-link text-white"
-          [routerLink]="['/'+ this.authService.getUserRoleName(), this.authService.getUserId()] "
+          [routerLink]="['/profile/', this.authService.getUserId()] "
           *ngIf="this.authService.getUserName() !== null">{{this.authService.getUserName()}}</a>
       </div>
     </div>
