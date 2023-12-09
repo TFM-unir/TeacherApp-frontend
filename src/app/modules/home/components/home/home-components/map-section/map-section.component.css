@@ -2,8 +2,12 @@
     min-height: 30rem;
   }
 
-  #teachers-nearby .scrollable-container {
-    /* Set a maximum height for the scrollable area */
-    max-height: 27.4rem; 
-    overflow-y: scroll;
-  }
+#teachers-nearby .scrollable-container {
+  /* Set a maximum height for the scrollable area */
+  max-height: 27.4rem; 
+  overflow-y: scroll;
+}
+
+map-info-window {
+  color: black;
+}
