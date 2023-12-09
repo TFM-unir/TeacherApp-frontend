@@ -62,7 +62,7 @@
         <div class="mb-2 ms-4 card-size_tp justify-content-center align-items-center"
             *ngIf="!isLoggedIn || isLoggedIn && !hasClasses">
             <!-- Botón para usuarios no logueados -->
-            <button class="btn btn-warning btn-personalizado" (click)="contactTeacher()">Contactar con:
+            <button class="btn btn-warning btn-personalizado mt-3 mt-md-0" (click)="contactTeacher()">Contactar con:
                 {{teacher?.name}}</button>
         </div>
         <div class="mb-2 card-size_tp row justify-content-center align-items-center" *ngIf="isLoggedIn && hasClasses">
