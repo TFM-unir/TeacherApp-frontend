@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Department } from 'src/app/core/models/department.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
@@ -28,32 +29,71 @@ export class SearchEngineComponent {
   // lista de usuarios
   myTeachers: TeacherProfile[] = [];
 
-  constructor(private departmentsServices: DepartmentsService) {}
+  filteredMyteachers: TeacherProfile[] = [];
 
-  ngOnInit(): void {
+  showMyteachers: TeacherProfile[] = [];
+
+  filterForm: FormGroup;
+
+  constructor(private departmentsServices: DepartmentsService) {
+    this.filterForm = new FormGroup({ selectedDepartment: new FormControl() });
     // Obtenemos la lista de usuarios
-    this.getPage(this.pagination.currentPage);
+    this.getAllTeachers();
 
     // obtenemos la lista de departments
     this.getAllDepartments();
   }
 
-  async getPage(page: number) {
+  ngOnInit(): void {
+    // Delay for 0.2 seconds
+    setTimeout(() => {
+      // Code to be executed after the delay
+      this.aplicarFiltro();
+    }, 200);
+  }
+
+  async getAllTeachers() {
     try {
-      const response = await this.teacherService.getAllTeachersPagination(
-        page,
-        this.pagination.per_page
-      );
-      this.pagination.currentPage = page;
-      this.pagination.total_pages = response.total_pages;
-      this.pagination.arrPag = new Array(this.pagination.total_pages).fill(0);
-      this.myTeachers = response.results;
+      const response = await this.teacherService.getAllTeachers();
+      this.myTeachers = response;
+      this.filteredMyteachers = this.myTeachers;
+      this.showMyteachers = this.myTeachers;
     } catch (err) {
       console.log(err);
     }
   }
 
-  async filtrar(option: string, value: number) {}
+  async getPage(page: number) {
+    try {
+      this.pagination.currentPage = page;
+
+      // Update the filtered teachers based on the current page and items per page
+      const startIndex =
+        (this.pagination.currentPage - 1) * this.pagination.per_page;
+      const endIndex = startIndex + this.pagination.per_page;
+      this.showMyteachers = this.filteredMyteachers.slice(startIndex, endIndex);
+
+      this.pagination.total_pages = Math.ceil(
+        this.filteredMyteachers.length / this.pagination.per_page
+      );
+      this.pagination.arrPag = new Array(this.pagination.total_pages).fill(0);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async aplicarFiltro() {
+    let selectedDepartment = this.filterForm.value.selectedDepartment;
+    if (!selectedDepartment) selectedDepartment = '';
+
+    this.filteredMyteachers = this.myTeachers.filter(
+      (teacher) =>
+        selectedDepartment === '' ||
+        teacher.department_name === selectedDepartment
+    );
+    this.pagination.currentPage = 1;
+    this.getPage(this.pagination.currentPage);
+  }
 
   async getAllDepartments(): Promise<void> {
     try {

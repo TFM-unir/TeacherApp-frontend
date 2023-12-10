@@ -11,7 +11,6 @@ import { TeacherModule } from './modules/teacher/teacher.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { C404Component } from './pages/c404/c404.component';
 
-
 @NgModule({
   declarations: [AppComponent, C404Component],
   imports: [
@@ -31,8 +30,10 @@ import { C404Component } from './pages/c404/c404.component';
       }),
     },
     {
-      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
-    }
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
