@@ -5,6 +5,8 @@ import { User } from '../models/user.interface';
 import { Subject } from '../models/subject.interface';
 import { Ratings } from '../models/ratings.interface';
 import { TeacherProfile } from '../models/teacher.interface';
+import { ClassHour } from '../models/class.interface';
+import { Student } from '../models/student.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,7 @@ export class StudentService {
   private baseUrlRanking: string = 'http://localhost:3000/api/ratings/user/';
   private baseUrlTeacher: string = 'http://localhost:3000/api/teachers/';
   private baseUrlRankingUpdate: string = 'http://localhost:3000/api/ratings/';
-
-
+  private baseUrlClassHour: string = 'http://localhost:3000/api/class/';
 
   getStudentById(id: number) {
     return lastValueFrom(
@@ -44,6 +45,18 @@ export class StudentService {
       this.httpClient.get<TeacherProfile>(`${this.baseUrlTeacher}${id}`)
     );
   };
+
+  getClassByStudentId(userId:number){
+    return lastValueFrom(
+      this.httpClient.get<ClassHour>(`${this.baseUrlClassHour}/student/${userId}`)
+    );
+  }
+
+  updateStudentbyId(studentId:number, obj:any){
+    return lastValueFrom(
+      this.httpClient.put<Student>(`${this.baseUrlStudent}${studentId}`,obj)
+    );
+  }
 
   updateRatingByRankingIdAndComment(rankingId: number, teacherComment: string) {
     const values = { id: rankingId, comment_teacher: teacherComment }

@@ -9,4 +9,5 @@ export interface User {
   status: number;
   role_id: number;
   photo: string;
+  address?: string;
 }

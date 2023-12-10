@@ -95,15 +95,15 @@ export class TeacherControlPanelComponent {
         this.teacher = await this.teacherService.getTeacherByIdAllData(id);
 
       } catch (error) {
-        this.sweetAlert('Error','error',`Ocurrió un error al intentar recuperar los datos de tu perfil. ${error}`);
+        this.sweetAlert('Error', 'error', `Ocurrió un error al intentar recuperar los datos de tu perfil. ${error}`);
 
       }
 
       try {
         this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
       } catch (error) {
-        this.sweetAlert('Error','error',`Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente. ${error}`);
-        
+        this.sweetAlert('Error', 'error', `Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente. ${error}`);
+
         this.router.navigate(['/home']);
       }
       this.fillingForm(this.teacher)
@@ -126,7 +126,7 @@ export class TeacherControlPanelComponent {
           }
         });
       } catch (error) {
-        this.sweetAlert('Error','error',`Ocurrió un error al intentar recuperar los alumnos. Por favor intentelo nuevamente. ${error}`);
+        this.sweetAlert('Error', 'error', `Ocurrió un error al intentar recuperar los alumnos. Por favor intentelo nuevamente. ${error}`);
         this.router.navigate(['/home'])
       }
 
@@ -158,9 +158,9 @@ export class TeacherControlPanelComponent {
         department_name: formValues.department_name,
       }
       const result = await this.teacherService.updateTeacher(obj, this.teacherId);
-      this.sweetAlert('Actualizar perfil','success','Su perfil ha sido actualizado');
+      this.sweetAlert('Actualizar perfil', 'success', 'Su perfil ha sido actualizado');
     } catch (error) {
-      this.sweetAlert('Error','error',`Ocurrió un error al intentar actualizar los datos. Por favor intentelo nuevamente. ${error}`);
+      this.sweetAlert('Error', 'error', `Ocurrió un error al intentar actualizar los datos. Por favor intentelo nuevamente. ${error}`);
     }
   }
 
@@ -181,6 +181,10 @@ export class TeacherControlPanelComponent {
   }
 
   newClass() {
+
+  }
+
+  valoraciones() {
 
   }
 
