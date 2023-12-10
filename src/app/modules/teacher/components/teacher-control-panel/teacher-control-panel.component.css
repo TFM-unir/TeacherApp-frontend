@@ -25,3 +25,9 @@ label{
 .bg-color_table {
     background-color: rgba(255, 175, 86, 0.3);
 }
+.btnMenu{
+    background-color: rgb(238, 219, 155);
+}
+.btnMenu:hover{
+    color: rgb(155, 5, 130);
+}

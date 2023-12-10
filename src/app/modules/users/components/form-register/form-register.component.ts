@@ -13,6 +13,7 @@ import { generateUserFormGroup } from '../form-register-user/form-register-user.
 import { generateTeacherFormGroup } from '../form-register-teacher/form-register-teacher.component';
 import { generateSubjectFormGroup } from '../form-register-subjects/form-register-subjects.component';
 import { generateLocationFormGroup } from '../form-register-location/form-register-location.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-form-register',
@@ -20,6 +21,8 @@ import { generateLocationFormGroup } from '../form-register-location/form-regist
   styleUrls: ['./form-register.component.css'],
 })
 export class FormRegisterComponent {
+  
+  authService = inject(AuthService);
   role_id: number = 1;
 
   // variable para manejar los formularios

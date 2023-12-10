@@ -1,18 +1,38 @@
-<section class="d-flex col-10 offset-2 col-xl-4 offset-xl-8 justify-content-end backgr py-2 px-3 rounded-4">
-    <div class="me-4">
-        <p class="m-0">Actualmente eres profesor</p>
+<section class="row mx-4 rounded-4 justify-content-between my-4 bg-color_table p-2">
+    <div class="col-3 text-center">
+        <a class="btn btnMenu" (click)="changeMenu('all')">All</a>
     </div>
-    <div class="form-switch d-block justify-content-center">
-        <input class="form-check-input m-0 p-0 d-block" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-        <label class="form-check-label p-0 d-block" for="flexSwitchCheckDefault">Cambiar a alumno</label>
+    <div class="col-3 text-center">
+        <a class="btn btnMenu" (click)="changeMenu('profile')">Perfil</a>
+    </div>
+    <div class="col-3 text-center">
+        <a class="btn btnMenu" (click)="changeMenu('class')">Clases</a>
+    </div>
+    <div class="col-3 text-center">
+        <a class="btn btnMenu" (click)="changeMenu('students')">Alumnos</a>
     </div>
 </section>
 
-<section class="mt-2">
+<section class="row mx-4">
+    <div class="d-flex col-4 justify-content-center ps-0">
+        <button class="btn btn-warning" (click)="cancelClass()">Valoraciones</button>
+    </div>
+    <div class="d-flex col-8 col-xl-4 offset-xl-4 justify-content-end backgr py-2 px-3 rounded-4">
+        <div class="me-4">
+            <p class="m-0">Actualmente eres profesor</p>
+        </div>
+        <div class="form-switch d-block justify-content-center">
+            <input class="form-check-input m-0 p-0 d-block" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label p-0 d-block" for="flexSwitchCheckDefault">Cambiar a alumno</label>
+        </div>
+    </div>
+</section>
+
+<section class="mt-2" *ngIf="disabled === 'all' || disabled === 'profile'">
     <div class="row align-content-center m-4 ">
         <form class="p-0" [formGroup]="formulario" (ngSubmit)="onSubmit()">
             <div class="row backgr2 m-0 p-0">
-                <p class="text-center black mt-3">Mis Datos</p>
+                <p class="text-center black mt-3 text-capitalize">Mis Datos</p>
                 <div class="col-6">
                     <div class="my-3">
                         <label for="name" class="form-label">Nombre</label>
@@ -41,19 +61,32 @@
                     </div>
                     <div class="my-4">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input class="form-control" type="password" id="password" formControlName="password" required
-                            placeholder="Ingrese una nueva password" />
+                        <button class="btn btn-info m-2" (click)="ChangePassword()">Cambiar password</button>
                     </div>
                     <div class="my-4">
                         <label for="photo" class="form-label">Imagen de perfil</label>
                         <input class="form-control" type="text" id="photo" placeholder="Ingresa tu url"
                             formControlName="photo" required />
                     </div>
-
+                    <div class="my-4">
+                        <img class="img-fluid rounded-5 mx-auto p-3" src="{{teacher?.photo}}" alt="TeacherImg">
+                    </div>
                 </div>
                 <div class="col-6">
                     <div class="my-4">
-                        <img class="img-fluid rounded-5 mx-auto p-3" src="{{teacher?.photo}}" alt="TeacherImg">
+                        <label for="address" class="form-label">Dirección</label>
+                        <input class="form-control" id="address" placeholder="Cambiar dirección"
+                            formControlName="address" required />
+                    </div>
+                    <div class="my-4">
+                        <label for="subject" class="form-label">Asignatura</label>
+                        <input class="form-control" id="subject" placeholder="Cambiar Asignatura"
+                            formControlName="subject" required />
+                    </div>
+                    <div class="my-4">
+                        <label for="department_name" class="form-label">Rama de conocimiento</label>
+                        <input class="form-control" id="department_name" placeholder="Cambiar dirección"
+                            formControlName="department_name" required />
                     </div>
                     <label for="mb-0 mt-4" class="form-label">Modo de clases</label>
                     <div class="checkbox-container mt-0">
@@ -80,6 +113,7 @@
                         <textarea class="form-control" id="about_me" placeholder="Una breve descripción"
                             formControlName="about_me" required></textarea>
                     </div>
+
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-2">
@@ -89,9 +123,9 @@
     </div>
 </section>
 
-<section>
+<section *ngIf="disabled === 'all' || disabled === 'class'">
     <div class="row align-content-center m-4 p-2 backgr2">
-        <p class="black">Mis clases</p>
+        <p class="black text-center text-capitalize">Mis clases</p>
         <table class="table table-striped text-black text-center">
             <tr>
                 <th>Día de la semana</th>
@@ -110,5 +144,35 @@
                 </td>
             </tr>
         </table>
+        <div class="px-5">
+            <button class="btn btn-warning w-100" (click)="newClass()">Nueva clase</button>
+        </div>
+    </div>
+</section>
+
+<section *ngIf="disabled === 'all' || disabled === 'students'">
+    <div class="row align-content-center m-4 p-2 backgr2">
+        <p class="black text-center text-capitalize">Mis Alumnos</p>
+        <table class="table table-striped text-black text-center">
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Clase</th>
+                <th>Inicio</th>
+                <th>Chat</th>
+            </tr>
+            <tr class="border-1 border-black bg-color_table mt-2" *ngFor="let student of students; let i = index">
+                <td><img class="img-fluid w-75 rounded-5" src="{{ student.image }}" alt="StudentImg"></td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.class }}</td>
+                <td>{{ student.start_class }}</td>
+                <td>
+                    <button class="btn btn-info m-2" id="{{student.id}}" (click)="chat()">Chat</button>
+                </td>
+            </tr>
+        </table>
+        <!-- <div class="px-5">
+            <button class="btn btn-warning w-100" (click)="newClass()">Ver todos los alumnos</button>
+        </div>  -->
     </div>
 </section>

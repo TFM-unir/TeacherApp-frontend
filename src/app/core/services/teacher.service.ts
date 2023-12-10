@@ -38,6 +38,12 @@ export class TeacherService {
     );
   }
 
+  getTeacherByIdAllData(id: number) {
+    return firstValueFrom(
+      this.httpClient.get<TeacherProfile>(`${this.baseUrl}all/${id}`)
+    );
+  }
+
   getAverageRatingByTeacherId(id: number) {
     return firstValueFrom(
       this.httpClient.get<number>(`${this.ratingPromBaseUrl}${id}`)
