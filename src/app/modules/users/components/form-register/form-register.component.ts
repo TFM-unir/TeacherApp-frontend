@@ -21,7 +21,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./form-register.component.css'],
 })
 export class FormRegisterComponent {
-  
   authService = inject(AuthService);
   role_id: number = 1;
 
@@ -60,7 +59,7 @@ export class FormRegisterComponent {
     // this.userForm = this.mainForm.value.userForm;
     // this.teacherForm = this.mainForm.value.teacherForm;
 
-    console.log(this.mainForm.value);
+    console.log(this.mainForm.controls['userForm']);
   }
 
   // insertamos los datos del formulario
@@ -71,8 +70,10 @@ export class FormRegisterComponent {
       let subjectForm = this.mainForm.value.subjectForm;
       let locationForm = this.mainForm.value.locationForm;
 
-      userForm.status = 2;
       userForm.role_id = this.mainForm.value.role_id;
+
+      userForm.status = 2;
+      if (userForm.role_id == 1) userForm.status = 1;
 
       console.log(this.mainForm);
       let user: UserRegister = {
@@ -101,5 +102,13 @@ export class FormRegisterComponent {
       this.mainForm.value.userForm.get(formcontrolName)?.hasError(valiador) &&
       this.mainForm.value.userForm.get(formcontrolName)?.touched
     );
+  }
+
+  checkDisable() {
+    if (this.mainForm.value.role_id === '2') {
+      return !this.mainForm.valid;
+    } else {
+      return !this.mainForm.controls['userForm'].valid;
+    }
   }
 }

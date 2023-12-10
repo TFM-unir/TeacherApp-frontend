@@ -17,6 +17,59 @@
         </option>
       </select>
     </div>
+    <div class="my-2">
+      <select
+        name="ordenarPor"
+        id="ordenarPor"
+        formControlName="ordenarPor"
+        (change)="aplicarFiltro()"
+      >
+        <option value="distancia">distancia</option>
+        <option value="precio">precio</option>
+        <option value="experiencia">experiencia</option>
+      </select>
+    </div>
+
+    <div class="filter-container">
+      <div class="filter-label">Filtrar</div>
+      <div class="filter-options">
+        <div class="filter">
+          <label for="filtroPuntuacion">Puntuación:</label>
+          <input
+            type="range"
+            id="filtroPuntuacion"
+            name="filtroPuntuacion"
+            formControlName="filtroPuntuacion"
+            min="0"
+            max="10"
+            value="0"
+            (change)="aplicarFiltro()"
+          />
+          <label for="filtroExperiencia">Experiencia:</label>
+          <input
+            type="range"
+            id="filtroExperiencia"
+            name="filtroExperiencia"
+            formControlName="filtroExperiencia"
+            min="0"
+            max="10"
+            value="0"
+            (change)="aplicarFiltro()"
+          />
+          <label for="filtroPrecio">Precio:</label>
+          <input
+            type="range"
+            id="filtroPrecio"
+            name="filtroPrecio"
+            formControlName="filtroPrecio"
+            min="0"
+            max="100"
+            value="0"
+            (change)="aplicarFiltro()"
+          />
+        </div>
+      </div>
+    </div>
   </form>
   <div class="row g-3">
     <article

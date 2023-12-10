@@ -31,7 +31,7 @@
         type="submit"
         value="Enviar"
         class="btn btn-danger mt-3"
-        [disabled]="!mainForm.valid"
+        [disabled]="checkDisable()"
       />
     </form>
   </section>

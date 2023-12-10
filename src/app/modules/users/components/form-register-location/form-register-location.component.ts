@@ -53,10 +53,23 @@ export class FormRegisterLocationComponent {
   public handleAddressChange(place: google.maps.places.PlaceResult) {
     const addressComponents = place.address_components;
 
-    const city = addressComponents![2].short_name;
-    const province = addressComponents![4].long_name;
-    const lat = place.geometry?.location!.lat();
-    const lng = place.geometry?.location!.lng();
+    let index = addressComponents?.length;
+    let city: string;
+    let province: string;
+    let lat: number | undefined;
+    let lng: number | undefined;
+
+    if (!index) {
+      city = 'Default';
+      province = 'Default';
+      lat = 0;
+      lng = 0;
+    } else {
+      province = addressComponents![--index].long_name;
+      city = addressComponents![--index].short_name;
+      lat = place.geometry?.location!.lat();
+      lng = place.geometry?.location!.lng();
+    }
 
     let form = this.formGroup;
     if (form) {
