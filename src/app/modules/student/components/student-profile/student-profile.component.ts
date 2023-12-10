@@ -84,13 +84,10 @@ export class StudentProfileComponent {
 
       try {
         this.rating = await this.studentService.getRatingByUserIdAndTeacherId(id, this.teacher.id);
-        console.log(this.rating)
         if (this.rating) {
           this.ratingBool = true
-          console.log(this.ratingBool)
         } else {
           this.ratingBool = false
-          console.log(this.ratingBool)
         }
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar el rating del teacher. Por favor intentelo nuevamente.");
