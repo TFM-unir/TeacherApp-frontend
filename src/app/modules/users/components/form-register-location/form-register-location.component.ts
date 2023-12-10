@@ -5,7 +5,12 @@ import {
   inject,
   ViewChild,
 } from '@angular/core';
-import { ControlContainer, FormControl, FormGroup } from '@angular/forms';
+import {
+  ControlContainer,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { NgxGpAutocompleteDirective } from '@angular-magic/ngx-gp-autocomplete';
 
 @Component({
@@ -25,13 +30,25 @@ import { NgxGpAutocompleteDirective } from '@angular-magic/ngx-gp-autocomplete';
 export class FormRegisterLocationComponent {
   @Input() groupName = '';
 
+  @ViewChild('ngxPlaces') placesRef!: NgxGpAutocompleteDirective;
+
   constructor(private cc: ControlContainer) {}
 
   get formGroup() {
     return this.cc.control?.get(this.groupName);
   }
 
-  @ViewChild('ngxPlaces') placesRef!: NgxGpAutocompleteDirective;
+  // funcion para validar los elementos del formulario
+  checkControl(formcontrolName: string, valiador: string): boolean | undefined {
+    let form = this.formGroup;
+    if (form) {
+      return (
+        form.get(formcontrolName)?.hasError(valiador) &&
+        form.get(formcontrolName)?.touched
+      );
+    }
+    return false;
+  }
 
   public handleAddressChange(place: google.maps.places.PlaceResult) {
     const addressComponents = place.address_components;
@@ -57,7 +74,7 @@ export function generateLocationFormGroup(): FormGroup {
   return new FormGroup({
     latitude: new FormControl('', []),
     longitude: new FormControl('', []),
-    address: new FormControl('', []),
+    address: new FormControl('', [Validators.required]),
     city: new FormControl('Valencia', []),
     province: new FormControl('', []),
   });

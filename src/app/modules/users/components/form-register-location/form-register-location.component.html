@@ -11,6 +11,9 @@
       formControlName="address"
       required
     />
-    <!--<p *ngIf="nameControl?.invalid">Tu mensaje de error</p>-->
+
+    <p class="error" *ngIf="checkControl('address', 'required')">
+      Campo es requerido
+    </p>
   </div>
 </fieldset>

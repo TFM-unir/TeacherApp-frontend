@@ -45,11 +45,11 @@ export class FormRegisterComponent {
       //inicializar el teacher form
       teacherForm: generateTeacherFormGroup(),
       //inicializar materias
-      //subjectForm: generateSubjectFormGroup(),
-      subjectForm: this.formBuilder.group({
+      subjectForm: generateSubjectFormGroup(),
+      /*subjectForm: this.formBuilder.group({
         subject: ['', [Validators.required, Validators.minLength(3)]],
         department_id: [0, [Validators.required, Validators.minLength(1)]],
-      }),
+      }),*/
       //inicializar location
       locationForm: generateLocationFormGroup(),
     });
@@ -71,7 +71,7 @@ export class FormRegisterComponent {
       userForm.status = 2;
       userForm.role_id = this.mainForm.value.role_id;
 
-      console.log(locationForm);
+      console.log(this.mainForm);
       let user: UserRegister = {
         userForm: userForm,
         locationForm: locationForm,
@@ -82,6 +82,7 @@ export class FormRegisterComponent {
       console.log(response);
       // si el id existe, se inserto correctamente
       if (response.userForm.id) {
+        alert('Usario registrado correctamente');
         this.router.navigate(['']);
       } else {
         alert('Usario no se ha podido registrar');

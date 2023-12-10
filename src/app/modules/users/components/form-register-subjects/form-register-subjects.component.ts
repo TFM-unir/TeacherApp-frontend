@@ -38,7 +38,10 @@ export class FormRegisterSubjectsComponent implements OnInit {
   // asincrono, peticiones a una API
   httpClient = inject(HttpClient);
 
-  constructor(private departmentsServices: DepartmentsService) {}
+  constructor(
+    private departmentsServices: DepartmentsService,
+    private cc: ControlContainer
+  ) {}
 
   ngOnInit(): void {
     this.getAllDepartments();
@@ -51,19 +54,36 @@ export class FormRegisterSubjectsComponent implements OnInit {
       console.log(error);
     }
   }
+
+  trackByDepartmentId(index: number, department: Department): number {
+    return department.id;
+  }
+
+  get formGroup() {
+    return this.cc.control?.get(this.groupName);
+  }
+
+  // funcion para validar los elementos del formulario
+  checkControl(formcontrolName: string, valiador: string): boolean | undefined {
+    let form = this.formGroup;
+    if (form) {
+      return (
+        form.get(formcontrolName)?.hasError(valiador) &&
+        form.get(formcontrolName)?.touched
+      );
+    }
+    return false;
+  }
 }
 
 export function generateSubjectFormGroup(): FormGroup {
   return new FormGroup(
     {
-      subject: new FormControl('tkkkgg', [
+      subject: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
       ]),
-      department_id: new FormControl(0, [
-        Validators.required,
-        Validators.minLength(1),
-      ]),
+      department_id: new FormControl(0, [Validators.required]),
     },
     []
   );

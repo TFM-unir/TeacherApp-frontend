@@ -34,12 +34,16 @@ export class FormRegisterUserComponent {
     return this.cc.control?.get(this.groupName);
   }
 
-  get nameControl() {
+  // funcion para validar los elementos del formulario
+  checkControl(formcontrolName: string, valiador: string): boolean | undefined {
     let form = this.formGroup;
-    if (!form) {
-      return false;
+    if (form) {
+      return (
+        form.get(formcontrolName)?.hasError(valiador) &&
+        form.get(formcontrolName)?.touched
+      );
     }
-    return form.get('name')?.invalid;
+    return false;
   }
 }
 
@@ -49,15 +53,15 @@ export function generateUserFormGroup(): FormGroup {
     _id: new FormControl(0, []),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
 
-    nickname: new FormControl('marilia', [
+    nickname: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
     ]),
-    password: new FormControl('1234', [Validators.required]),
-    phone: new FormControl('765432', []),
-    email: new FormControl('email', [Validators.required, Validators.email]),
-    photo: new FormControl('https://i.pravatar.cc/', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    photo: new FormControl('', [Validators.required]),
     role_id: new FormControl(1),
-    date_of_birth: new FormControl(Date),
+    date_of_birth: new FormControl(Date, [Validators.required]),
   });
 }
