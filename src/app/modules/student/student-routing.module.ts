@@ -6,8 +6,8 @@ import { StudentChatComponent } from './components/student-chat/student-chat.com
 
 const routes: Routes = [
   { path: 'profile/:studentId', component: StudentProfileComponent },  
-  { path: 'chat', component: StudentChatComponent },
-  { path: 'control/:studentId',component: StudentControlPanelComponent }
+  { path: 'chat/:studentId', component: StudentChatComponent },
+  { path: 'control/:studentId', component: StudentControlPanelComponent }
 ];
 
 @NgModule({
