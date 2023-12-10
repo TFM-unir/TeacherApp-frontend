@@ -1,5 +1,5 @@
 <div class="w-50">
-  <section class="container mt-3">
+  <section class="container mt-3" [ngClass]="authService.getUserRoleForStyles() + '-main-font-color'">
     <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
       <div class="my-2">
         <select name="role_id" id="role_id" formControlName="role_id">

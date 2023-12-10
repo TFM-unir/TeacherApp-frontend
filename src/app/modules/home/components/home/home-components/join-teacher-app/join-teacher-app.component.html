@@ -1,6 +1,6 @@
 <div class="px-4 py-5 my-5 text-center">
     <div class="col-lg-10 mx-auto my-5">
-      <p class="lead mb-4 fw-normal lh-lg fs-5 text">En TeacherApp, el aprendizaje está al alcance de tu mano. Regístrate y accede a una amplia variedad de profesores  capacitados en diferentes áreas de conocimiento. Independientemente de si quieres perfeccionar tus habilidades en una área específica o aprender algo completamente nuevo, tenemos al profesor perfecto para ti. ¡No hay excusas que puedan detenerte en tu camino hacia el conocimiento! Únete a nuestra comunidad de alumnos y profesores y comienza tu camino hacia el éxito hoy mismo.</p>
+      <p class="lead mb-4 fw-normal lh-lg fs-5 text" [ngClass]="authService.getUserRoleForStyles() + '-main-font-color'">En TeacherApp, el aprendizaje está al alcance de tu mano. Regístrate y accede a una amplia variedad de profesores  capacitados en diferentes áreas de conocimiento. Independientemente de si quieres perfeccionar tus habilidades en una área específica o aprender algo completamente nuevo, tenemos al profesor perfecto para ti. ¡No hay excusas que puedan detenerte en tu camino hacia el conocimiento! Únete a nuestra comunidad de alumnos y profesores y comienza tu camino hacia el éxito hoy mismo.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <button type="button" class="btn btn-light btn-lg px-5 py-4 gap-3 my-5" [routerLink]="['/users', 'register']">Comienza ahora</button>
       </div>

@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from 'src/app/core/services/auth.service';
+
+
 @Component({
   selector: 'app-join-teacher-app',
   templateUrl: './join-teacher-app.component.html',
@@ -8,4 +11,5 @@ import { Router } from '@angular/router';
 })
 export class JoinTeacherAppComponent {
   router = inject(Router);
+  authService = inject(AuthService)
 }

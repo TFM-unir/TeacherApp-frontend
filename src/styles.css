@@ -1,21 +1,103 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* body {
-    background: linear-gradient(180deg, rgba(39,24,126,1) 0%, rgba(100,119,214,1) 100%);
-    color: whitesmoke;
+.student-background {
+    background-color: linear-gradient(180deg, #27187e, #6477d6);
 }
 
-.student {
-    background-color: blue;
+.teacher-background {
+    background-color: rgba(241, 242, 246, 1);
 }
 
-.teacher {
-    background-color: darkgoldenrod;
+.admmin-background {
+    background-color: rgba(255, 175, 86, 1);
 }
 
-.admin {
-    background-color: darkgrey;
-} */
+.student-main-font-color {
+    color: rgba(241, 242, 246, 1);
+}
 
-/* student-background-color: #F1F2F6; */
-/* student-font-color: #27187E; */
+.teacher-main-font-color, .admin-main-font-color {
+    color: rgba(39, 24, 126, 1)
+}
+
+.student-main-font-color-opposite {
+    color: rgba(39, 24, 126, 1);
+}
+
+.teacher-main-font-color-opposite, .admin-main-font-color-opposite {
+    color: rgba(241, 242, 246, 1)
+}
+
+.student-nav-font-color > a {
+    color: rgba(241, 242, 246, 1);
+} 
+
+.teacher-nav-font-color > a, .admin-nav-font-color > a {
+    color: rgba(39, 24, 126, 1);
+}
+
+/* BUTTONS */
+
+.btn-darkblue {
+    background-color: rgba(39, 24, 126, 1);
+}
+
+.btn-midblue {
+    background-color: rgba(174, 184, 254, 0.4);
+    margin-left: 0.5rem;
+}
+
+.btn-midblue:hover {
+    background-color: rgba(140, 149, 210, 1);
+}
+
+.btn-lightblue {
+    background-color: rgba(174, 184, 254, 1);
+}
+
+.btn-orangeyellow {
+    background-color: rgba(255, 175, 86, 1);
+    margin-left: 0.5rem;
+    color:#27187e
+}
+
+
+
+
+
+
+/* PARA QUE FUNCIONEN LOS ESTILOS SEGUN EL ROL:
+
+1. Comprobar que el ts donde querais usar alguna clase dinámica tenga el inject del authService. Os dejo copiapega del import
+
+import { AuthService } from 'src/app/core/services/auth.service';
+authService = inject(AuthService);
+
+2. Copiar y pegar el ngClass en el elemento que necesiteis. Es un array de estilos (por si necesitais aplicar más de una clase dinámica)
+
+Aquí dejo copiados los que hay de momento:
+
+[ngClass]="authService.getUserRoleForStyles() + '-background'"
+[ngClass]="authService.getUserRoleForStyles() + '-main-font-color'"
+[ngClass]="authService.getUserRoleForStyles() + '-main-font-color-opposite'" 
+[ngClass]="authService.getUserRoleForStyles() + '-nav-color-links'"
+[ngClass]="authService.getUserRoleForStyles() + '-btn-font-color-white'"
+
+*/
+
+
+/* COLORES DEL TEMA (aplicar opacidad según casos):
+
+AZULES
+    rgba(39, 24, 126, 1) (Azul oscuro ppal)
+    rgba(140, 149, 210, 1) (Azul medio claro y aplicarle opacidad)
+    rgba(174, 184, 254, 1) (Azul más claro y liloso)
+NARANJA-AMARILLO-ROJO
+    rgba(255, 175, 86, 1) (Naranjamarillo ppal del tema) Tema de admin y botones que sobresalten.
+    rgba(248, 233, 101, 1) (Amarillo de botones de puntuar, etc)
+    rgba(249, 173, 160, 1) (Rojo claro para botones de dar de baja, etc...)
+VERDE
+    rgba(161, 219, 178, 1) (Verde claro para botones de inscribirse, etc.)
+BLANCO
+    rgba(241, 242, 246, 1) Blanco del tema
+*/

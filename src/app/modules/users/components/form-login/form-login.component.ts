@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { UsersService } from '../../../../core/services/users.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-form-login',
@@ -11,6 +12,7 @@ import { UsersService } from '../../../../core/services/users.service';
 })
 export class FormLoginComponent {
   formLogin: FormGroup;
+  authService = inject(AuthService);
   usersService = inject(UsersService);
   router = inject(Router);
   errorAlert = false;
@@ -40,7 +42,7 @@ export class FormLoginComponent {
       } else {
         // Almacenamiento del token en el localStorage
         localStorage.setItem('auth_token', response.token);
-        this.router.navigate(['']);
+        this.router.navigate(['home']);
       }
     } catch (error) {
       console.error('Login error:', error);

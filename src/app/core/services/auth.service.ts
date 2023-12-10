@@ -18,7 +18,6 @@ export class AuthService {
   // Descodificar el token
   getDecodedToken(): tokenPayload | null {
     const token = this.getToken();
-
     if (token) {
       try {
         const decodedToken = jwtDecode(token);
@@ -43,6 +42,14 @@ export class AuthService {
     if (decodedUserRole === 2) return 'teacher';
     if (decodedUserRole === 3) return 'admin';
     return null;
+  };
+
+  getUserRoleForStyles(): string {
+    const decodedUserRole = this.getUserRole();
+    if (decodedUserRole === 1) return 'student';
+    if (decodedUserRole === 2) return 'teacher';
+    if (decodedUserRole === 3) return 'admin';
+    return 'student';
   };
 
   // Obtener el id del token
