@@ -6,6 +6,7 @@ import { StudentControlPanelComponent } from './components/student-control-panel
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { StudentChatComponent } from './components/student-chat/student-chat.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
   imports: [
     CommonModule,
     StudentRoutingModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    ReactiveFormsModule
   ]
 })
 export class StudentModule { }

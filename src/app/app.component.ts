@@ -10,10 +10,15 @@ import { AuthService } from './core/services/auth.service';
 export class AppComponent {
   title = 'TeacherApp-frontend';
 
-  //Inyectamos auth service
+  //Inyectamos el servicio del core
   authService = inject(AuthService);
+  //Declaramos la variable users que contendra todos los datos del usuario
+  user: User | any;
+  //Decalramos booleana variable que permita que se pinte de color si esteacher o student
+  booleanPaint: boolean = false
 
   ngOnInit() {
-    console.log(this.authService.getUserRoleName());
+    console.log(this.authService.getUserRoleForStyles());
+    
   }
 }
