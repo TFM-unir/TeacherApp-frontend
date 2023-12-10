@@ -53,11 +53,11 @@ export function generateTeacherFormGroup(): FormGroup {
     {
       class_mode_online: new FormControl(false),
       class_mode_in_person: new FormControl(false),
-      experience: new FormControl(6, [
+      experience: new FormControl('', [
         Validators.required,
         Validators.maxLength(1),
       ]),
-      price_hour: new FormControl(15, [Validators.required]),
+      price_hour: new FormControl('', [Validators.required]),
       about_me: new FormControl('', [
         Validators.required,
         Validators.maxLength(1000),

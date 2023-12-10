@@ -11,6 +11,7 @@ import { FormRegisterLocationComponent } from './components/form-register-locati
 import { FormRegisterSubjectsComponent } from './components/form-register-subjects/form-register-subjects.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
+import { FormRegisterClassHoursComponent } from './components/form-register-class-hours/form-register-class-hours.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
     FormRegisterLocationComponent,
     FormRegisterSubjectsComponent,
     FormLoginComponent,
+    FormRegisterClassHoursComponent,
   ],
   imports: [
     CommonModule,

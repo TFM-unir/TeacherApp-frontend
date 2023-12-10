@@ -1,4 +1,21 @@
 <section class="container mt-3">
+  <h2>! Encuentra a tu profe ideal !</h2>
+  <div class="my-2">
+    <select
+      name="department_id"
+      id="department_id"
+      formControlName="department_id"
+    >
+      <option value="0">Filtra por materia</option>
+      <option
+        *ngFor="let department of departments; trackBy: trackByDepartmentId"
+        [value]="department.id"
+        (click)="filtrar('department', department.id)"
+      >
+        {{ department.department_name }}
+      </option>
+    </select>
+  </div>
   <div class="row g-3">
     <article class="col-12 col-md-6 col-lg-4" *ngFor="let teach of myTeachers">
       <app-teacher-card

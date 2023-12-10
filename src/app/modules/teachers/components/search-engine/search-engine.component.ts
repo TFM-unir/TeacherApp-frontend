@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
+import { Department } from 'src/app/core/models/department.interface';
 import { Pagination } from 'src/app/core/models/pagination.interface';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
+import { DepartmentsService } from 'src/app/core/services/departments.service';
 import { TeacherService } from 'src/app/core/services/teacher.service';
 
 @Component({
@@ -9,6 +11,9 @@ import { TeacherService } from 'src/app/core/services/teacher.service';
   styleUrls: ['./search-engine.component.css'],
 })
 export class SearchEngineComponent {
+  // lista de departments
+  departments: Department[] | undefined;
+
   //inyectamos el servicio
   teacherService = inject(TeacherService);
 
@@ -23,9 +28,14 @@ export class SearchEngineComponent {
   // lista de usuarios
   myTeachers: TeacherProfile[] = [];
 
+  constructor(private departmentsServices: DepartmentsService) {}
+
   ngOnInit(): void {
     // Obtenemos la lista de usuarios
     this.getPage(this.pagination.currentPage);
+
+    // obtenemos la lista de departments
+    this.getAllDepartments();
   }
 
   async getPage(page: number) {
@@ -41,5 +51,19 @@ export class SearchEngineComponent {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async filtrar(option: string, value: number) {}
+
+  async getAllDepartments(): Promise<void> {
+    try {
+      this.departments = await this.departmentsServices.getAll();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  trackByDepartmentId(index: number, department: Department): number {
+    return department.id;
   }
 }
