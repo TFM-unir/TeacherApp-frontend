@@ -8,7 +8,7 @@
     background-color: rgba(241, 242, 246, 1);
 }
 
-.admmin-background {
+.admin-background {
     background-color: rgba(255, 175, 86, 1);
 }
 
@@ -61,7 +61,11 @@
     color:#27187e
 }
 
-
+.btn-orangeyellow:hover {
+    background-color: rgb(230, 156, 71);
+    margin-left: 0.5rem;
+    font-weight: bold;
+}
 
 
 

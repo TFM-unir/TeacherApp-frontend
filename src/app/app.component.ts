@@ -14,6 +14,5 @@ export class AppComponent {
   authService = inject(AuthService);
 
   ngOnInit() {
-    console.log(this.authService.getUserRoleName());
   }
 }
