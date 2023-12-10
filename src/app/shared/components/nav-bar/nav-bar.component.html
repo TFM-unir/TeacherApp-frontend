@@ -21,7 +21,7 @@
         <div class="navbar-nav ms-auto">
           <a class="nav-link text-white" [routerLink]="['']">Inicio</a>
           <a class="nav-link text-white">Chat</a>
-          <a class="nav-link text-white pointer" (click)="onClickLogout()">Cerrar Sesión</a>
+          <a *ngIf="user" class="nav-link text-white pointer" (click)="onClickLogout()">Cerrar Sesión</a>
           <a class="nav-link text-white" [routerLink]="['/users', 'login']">Iniciar Sesión</a>
           <a class="nav-link text-white" [routerLink]="['/users', 'register']">Registrar</a>
           <!-- TODO ojo esto es solo mientras no hay guards: *ngIf="this.authService.getUserName() !== null -->
