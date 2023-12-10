@@ -25,3 +25,7 @@
     width: 280px;
     height: 60px;
 }
+
+.width_m {
+    max-width: fit-content;
+}

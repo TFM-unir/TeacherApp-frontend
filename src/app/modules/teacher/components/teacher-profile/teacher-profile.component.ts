@@ -98,14 +98,16 @@ export class TeacherProfileComponent {
         this.router.navigate(["/teachers"]);
       };
 
+      this.user = this.coreService.getDecodedToken();
+
       try {
-        this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
+        if (this.user) {
+          this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
+        }
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
       };
-
-      this.user = this.coreService.getDecodedToken();
 
       if (localStorage.getItem('auth_token')) {
         this.isLoggedIn = true;

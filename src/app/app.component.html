@@ -1,9 +1,22 @@
-<div class="bg-color_basic min-vh-100 d-flex flex-column">
-  <div class="container d-flex flex-column flex-grow-1">
-    <app-nav-bar class="mt-4"></app-nav-bar>
-    <div>
-      <router-outlet class="flex-grow-1"></router-outlet>
+<div *ngIf="!booleanPaint">
+  <div class="bg-color_basic min-vh-100 d-flex flex-column">
+    <div class="container d-flex flex-column flex-grow-1">
+      <app-nav-bar class="mt-4"></app-nav-bar>
+      <div>
+        <router-outlet class="flex-grow-1"></router-outlet>
+      </div>
     </div>
+    <app-footer class="mt-auto"></app-footer>
   </div>
-  <app-footer class="mt-auto"></app-footer>
+</div>
+<div *ngIf="booleanPaint">
+  <div class="bg-color_teacher min-vh-100 d-flex flex-column">
+    <div class="container d-flex flex-column flex-grow-1">
+      <app-nav-bar class="mt-4"></app-nav-bar>
+      <div>
+        <router-outlet class="flex-grow-1"></router-outlet>
+      </div>
+    </div>
+    <app-footer class="mt-auto"></app-footer>
+  </div>
 </div>
