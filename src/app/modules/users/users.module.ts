@@ -10,8 +10,8 @@ import { FormRegisterTeacherComponent } from './components/form-register-teacher
 import { FormRegisterLocationComponent } from './components/form-register-location/form-register-location.component';
 import { FormRegisterSubjectsComponent } from './components/form-register-subjects/form-register-subjects.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
-import { MapaComponent } from './components/mapa/mapa.component';
 import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
+import { FormRegisterClassHoursComponent } from './components/form-register-class-hours/form-register-class-hours.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
     FormRegisterLocationComponent,
     FormRegisterSubjectsComponent,
     FormLoginComponent,
-    MapaComponent,
+    FormRegisterClassHoursComponent,
   ],
   imports: [
     CommonModule,
@@ -29,7 +29,7 @@ import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
     ReactiveFormsModule,
     UsersRoutingModule,
     GoogleMapsModule,
-    NgxGpAutocompleteModule
+    NgxGpAutocompleteModule,
   ],
 })
 export class UsersModule {}

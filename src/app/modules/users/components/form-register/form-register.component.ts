@@ -13,6 +13,7 @@ import { generateUserFormGroup } from '../form-register-user/form-register-user.
 import { generateTeacherFormGroup } from '../form-register-teacher/form-register-teacher.component';
 import { generateSubjectFormGroup } from '../form-register-subjects/form-register-subjects.component';
 import { generateLocationFormGroup } from '../form-register-location/form-register-location.component';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-form-register',
@@ -20,6 +21,8 @@ import { generateLocationFormGroup } from '../form-register-location/form-regist
   styleUrls: ['./form-register.component.css'],
 })
 export class FormRegisterComponent {
+  
+  authService = inject(AuthService);
   role_id: number = 1;
 
   // variable para manejar los formularios
@@ -45,11 +48,11 @@ export class FormRegisterComponent {
       //inicializar el teacher form
       teacherForm: generateTeacherFormGroup(),
       //inicializar materias
-      //subjectForm: generateSubjectFormGroup(),
-      subjectForm: this.formBuilder.group({
+      subjectForm: generateSubjectFormGroup(),
+      /*subjectForm: this.formBuilder.group({
         subject: ['', [Validators.required, Validators.minLength(3)]],
         department_id: [0, [Validators.required, Validators.minLength(1)]],
-      }),
+      }),*/
       //inicializar location
       locationForm: generateLocationFormGroup(),
     });
@@ -71,7 +74,7 @@ export class FormRegisterComponent {
       userForm.status = 2;
       userForm.role_id = this.mainForm.value.role_id;
 
-      console.log(locationForm);
+      console.log(this.mainForm);
       let user: UserRegister = {
         userForm: userForm,
         locationForm: locationForm,
@@ -82,6 +85,7 @@ export class FormRegisterComponent {
       console.log(response);
       // si el id existe, se inserto correctamente
       if (response.userForm.id) {
+        alert('Usario registrado correctamente');
         this.router.navigate(['']);
       } else {
         alert('Usario no se ha podido registrar');

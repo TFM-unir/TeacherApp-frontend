@@ -13,6 +13,8 @@ export interface TeacherProfile {
   id: number;
   name: string;
   nickname: string;
+  email?:string;
+  phone?:number;
   date_of_birth: Date;
   status: number;
   photo: string;
@@ -23,11 +25,13 @@ export interface TeacherProfile {
   city: string;
   province: string;
   experience: number;
-  class_online: boolean;
-  class_in_person: boolean;
+  class_online?: boolean;
+  class_in_person?: boolean;
   price_hour: number;
   about_me: string;
   subject: string;
   department_name: string;
   rating: number | null;
+  class_mode_online: boolean;
+  class_mode_in_person: boolean;
 }

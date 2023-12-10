@@ -28,25 +28,44 @@
       formControlName="experience"
       required
     />
+    <p class="error" *ngIf="checkControl('experience', 'required')">
+      Campo es requerido
+    </p>
+    <p class="error" *ngIf="checkControl('experience', 'maxlength')">
+      Debe ser un número entre el 1 al 9, donde 1 es sin experiencia previa.
+    </p>
   </div>
 
-  <label for="price_hour" class="form-label">Precio</label>
-  <input
-    class="form-control"
-    type="text"
-    id="price_hour"
-    placeholder="10.50"
-    formControlName="price_hour"
-    required
-  />
+  <div>
+    <label for="price_hour" class="form-label">Precio</label>
+    <input
+      class="form-control"
+      type="text"
+      id="price_hour"
+      placeholder="Precio por una clase"
+      formControlName="price_hour"
+      required
+    />
+    <p class="error" *ngIf="checkControl('price_hour', 'required')">
+      Campo es requerido
+    </p>
+  </div>
 
-  <label for="about_me" class="form-label">Sobre mi</label>
-  <textarea
-    class="form-control"
-    id="about_me"
-    placeholder="Una breve descripció"
-    formControlName="about_me"
-    required
-  >
-  </textarea>
+  <div>
+    <label for="about_me" class="form-label">Sobre mi</label>
+    <textarea
+      class="form-control"
+      id="about_me"
+      placeholder="Una breve descripció"
+      formControlName="about_me"
+      required
+    >
+    </textarea>
+    <p class="error" *ngIf="checkControl('about_me', 'required')">
+      Campo es requerido
+    </p>
+    <p class="error" *ngIf="checkControl('about_me', 'maxlength')">
+      El tamaño máximo es de 1000 caracteres.
+    </p>
+  </div>
 </fieldset>

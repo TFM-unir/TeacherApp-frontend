@@ -1,11 +1,3 @@
-.pointer {
-    cursor: pointer
-}
-
-.blue-text {
-    color: #27187e;
-}
-
 a:hover {
     font-weight: bold;
 }

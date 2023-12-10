@@ -11,6 +11,7 @@ import { TeacherService } from 'src/app/core/services/teacher.service';
 export class TeacherCardComponent {
   @Input() teacher!: TeacherProfile;
   @Input() showButtonProfile: boolean = true;
+  @Input() showRating: boolean = true;
 
   router = inject(Router);
 

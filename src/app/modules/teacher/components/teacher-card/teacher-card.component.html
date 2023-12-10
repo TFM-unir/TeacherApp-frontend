@@ -1,8 +1,14 @@
-<div class="card-size_tp col-lg-6 col-sm-4 bg-white m-3 d-flex flex-column align-items-center rounded-4">
+<div
+  class="card-size_tp col-lg-6 col-sm-4 bg-white m-3 d-flex flex-column align-items-center rounded-4"
+>
   <!-- Imagen del profesor -->
   <div class="row">
     <div class="col-12">
-      <img class="img-fluid rounded-5 mx-auto p-3" src="{{ teacher.photo }}" alt="TeacherImg" />
+      <img
+        class="img-fluid rounded-5 mx-auto p-3"
+        src="{{ teacher.photo }}"
+        alt="TeacherImg"
+      />
     </div>
   </div>
   <!-- Estrella y Rating -->
@@ -10,10 +16,13 @@
     <div class="text-black">
       <h2>{{ teacher.name }}</h2>
     </div>
-    <div class="col-6" *ngIf="teacher.rating">
-      <img class="img-fluid"
-        src="https://tmpfiles.nohat.cc/full-m2H7H7A0m2m2i8i8.png" alt="RatingStar"
-        style="max-width: 55px" />
+    <div class="col-6" *ngIf="teacher.rating && showRating">
+      <img
+        class="img-fluid"
+        src="https://tmpfiles.nohat.cc/full-m2H7H7A0m2m2i8i8.png"
+        alt="RatingStar"
+        style="max-width: 55px"
+      />
       <h3 class="text-black">{{ teacher.rating }}</h3>
     </div>
   </div>
@@ -34,7 +43,10 @@
   </div>
   <div *ngIf="showButtonProfile">
     <!--Boton ver usuario-->
-    <button class="btn btn-warning mx-2 mb-3" [routerLink]="['/teacher/profile/', teacher.id]">
+    <button
+      class="btn btn-warning mx-2 mb-3"
+      [routerLink]="['/teacher/profile/', teacher.id]"
+    >
       Ver perfil
     </button>
   </div>

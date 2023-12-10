@@ -38,6 +38,12 @@ export class TeacherService {
     );
   }
 
+  getTeacherByIdAllData(id: number) {
+    return firstValueFrom(
+      this.httpClient.get<TeacherProfile>(`${this.baseUrl}all/${id}`)
+    );
+  }
+
   getAverageRatingByTeacherId(id: number) {
     return firstValueFrom(
       this.httpClient.get<number>(`${this.ratingPromBaseUrl}${id}`)
@@ -66,6 +72,12 @@ export class TeacherService {
 
   deleteUser(id: number) {
     throw new Error('Method not implemented.');
+  }
+
+  updateTeacher(obj:any, teacherId:number){
+    return lastValueFrom(
+      this.httpClient.put<TeacherProfile>(`${this.baseUrl}${teacherId}`,obj)
+    );
   }
 
   UpdateClassByStudentIdAndClassId(id: number, slot: ClassHour, emptySlot: string) {

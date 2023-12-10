@@ -3,6 +3,7 @@ import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Router } from '@angular/router';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 import { TeacherService } from 'src/app/core/services/teacher.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-map-section',
@@ -10,11 +11,12 @@ import { TeacherService } from 'src/app/core/services/teacher.service';
   styleUrls: ['./map-section.component.css'],
 })
 export class MapSectionComponent {
-
+  
   teachers: TeacherProfile[] | undefined;
   selectedTeacher: TeacherProfile | null = null;
   miMarkers: any[] = [];
   router = inject(Router);
+  authService = inject(AuthService);
 
   @ViewChild(MapInfoWindow) miInfoWindow: MapInfoWindow | any;
 

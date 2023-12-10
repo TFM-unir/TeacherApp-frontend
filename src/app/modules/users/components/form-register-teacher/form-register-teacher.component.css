@@ -3,3 +3,19 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+.error {
+    color: tomato;
+    font-size: 12px;
+}
+input.ng-invalid.ng-touched {
+    border-bottom: 3px solid tomato;
+}
+textarea.ng-invalid.ng-touched {
+    border-bottom: 3px solid tomato;
+}
+input.ng-valid.ng-touched {
+    border-bottom: 3px solid lightgreen
+}
+textarea.ng-valid.ng-touched {
+    border-bottom: 3px solid lightgreen
+}
