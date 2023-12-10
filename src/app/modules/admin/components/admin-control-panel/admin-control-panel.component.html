@@ -1,1 +1,31 @@
-<p>admin-control-panel works!</p>
+<div class="container text-center my-3">
+    <h1>Perfil de Administrador</h1>
+</div>
+
+<table class="table my-5" *ngIf="teachers !== [] && showTeachers">
+    <tbody *ngFor="let teacher of teachers">
+      <tr>
+        <th scope="row">{{teacher.name}}</th>
+        <td><button class="btn btn-light" [routerLink]="['/teacher','profile',teacher.id]">Ver Perfil</button></td>
+        <td><button class="btn btn-success">Validar</button></td>
+        <td><button class="btn btn-danger">Dar de baja</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table my-5" *ngIf="students !== [] && showStudents">
+    <tbody *ngFor="let student of students">
+      <tr>
+        <th scope="row">{{student.name}}</th>
+        <td><button class="btn btn-light" [routerLink]="['/student','profile',student.id]">Ver Perfil</button></td>
+        <td><button class="btn btn-success">Validar</button></td>
+        <td><button class="btn btn-danger">Dar de baja</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="container text-center my-5">
+    <button class="btn btn-secondary btn-lg mx-2 py-4 px-5" (click)="showTeachersOrStudents()">
+        {{ showTeachers ? 'Listado de alumnos' : 'Listado de profesores' }}
+    </button>
+</div>

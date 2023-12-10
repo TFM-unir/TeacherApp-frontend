@@ -4,8 +4,16 @@
     background: linear-gradient(180deg, #27187e, #6477d6);
 }
 
+.student-background-inverse {
+    background-color: rgba(241, 242, 246, 1);
+}
+
 .teacher-background {
     background-color: rgba(241, 242, 246, 1);
+}
+
+.teacher-background-inverse {
+    background-color: rgba(39, 24, 126, 1);
 }
 
 .admin-background {
@@ -16,8 +24,16 @@
     color: rgba(241, 242, 246, 1);
 }
 
+.student-main-font-color-inverse {
+    color: rgba(39, 24, 126, 1)
+}
+
 .teacher-main-font-color, .admin-main-font-color {
     color: rgba(39, 24, 126, 1)
+}
+
+.teacher-main-font-color-inverse, .admin-main-font-color-inverse {
+    color: rgba(241, 242, 246, 1);
 }
 
 .student-main-font-color-opposite {

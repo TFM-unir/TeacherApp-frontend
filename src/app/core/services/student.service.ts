@@ -5,6 +5,7 @@ import { User } from '../models/user.interface';
 import { Subject } from '../models/subject.interface';
 import { Ratings } from '../models/ratings.interface';
 import { TeacherProfile } from '../models/teacher.interface';
+import { Student } from '../models/student.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,11 @@ export class StudentService {
   private baseUrlTeacher: string = 'http://localhost:3000/api/teachers/';
   private baseUrlRankingUpdate: string = 'http://localhost:3000/api/ratings/';
 
-
+  getAllStudents() {
+    return lastValueFrom(
+      this.httpClient.get<Student[]>(`${this.baseUrlStudent}`)
+    );
+  }
 
   getStudentById(id: number) {
     return lastValueFrom(

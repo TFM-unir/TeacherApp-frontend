@@ -23,9 +23,10 @@
 
     <!-- seccion con los teachers del mapa ordenados por puntuación y los sin puntuar por distancia-->
     <section class="col-sm-5 d-flex flex-column" id="teachers-nearby">
+      
       <h3 class="mt-3 mt-sm-0" [ngClass]="authService.getUserRoleForStyles() + '-main-font-color'">Mejor puntuados</h3>
-        <div class="overflow-auto scrollable-container flex-fill student-background student-font rounded" *ngIf="!selectedTeacher">
-          <div *ngFor="let teacher of teachers" (click)="selectTeacher(teacher)" class="m-2">
+        <div class="overflow-auto scrollable-container flex-fill student-font rounded" *ngIf="!selectedTeacher" [ngClass]="authService.getUserRoleForStyles() + '-background-inverse'">
+          <div *ngFor="let teacher of teachers" (click)="selectTeacher(teacher)" class="m-2" [ngClass]="authService.getUserRoleForStyles() + '-main-font-color-inverse'">
             <div class="pointer">
               <div class="row">
                 <div class="col-4 d-flex flex-column">
@@ -67,8 +68,7 @@
             </div>
           </div>
         </div>
-        
-    </section>
+      </section>
 </div>
 
 <div class="row custom-row" *ngIf="!myposition">

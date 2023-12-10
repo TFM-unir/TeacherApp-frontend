@@ -24,8 +24,10 @@ export class TeacherService {
   private deleteClassBaseUrl: string = 'http://localhost:3000/api/class/withdrawClassSlot/';
 
   getAllTeachers() {
-    return lastValueFrom(this.httpClient.get<TeacherProfile[]>(this.baseUrl));
+    return lastValueFrom(
+      this.httpClient.get<TeacherProfile[]>(this.baseUrl));
   }
+  
   getAllTeachersPagination(page: number, per_page: number) {
     return lastValueFrom(
       this.httpClient.get<any>(`${this.basePaginationUrl}${page}/${per_page}`)
