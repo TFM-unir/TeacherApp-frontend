@@ -1,6 +1,6 @@
 .bg-color_basic {
     /* Establece el degradado lineal como fondo de la página */
-
+    background: linear-gradient(180deg, #27187e, #6477d6);
     /* Ajusta otros estilos del cuerpo de la página según sea necesario */
     margin: 0;
     padding: 0;
@@ -11,25 +11,3 @@
 .bg-color_teacher {
     background-color: #f1f2f6;
 }
-
-.student-background {
-    background: linear-gradient(180deg, #27187e, #6477d6);
-}
-
-.teacher-background {
-    background: #F1F2F6;
-}
-
-.admmin-background {
-    background: #FFAF56;
-}
-
-.student-main-font-color {
-    color: #27187e
-}
-
-.teacher-main-font-color, .admin-main-font-color {
-    color: #27187e
-}
-
-
