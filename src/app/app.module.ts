@@ -9,9 +9,11 @@ import { SharedModule } from './shared/shared.module';
 import { Loader } from '@googlemaps/js-api-loader';
 import { TeacherModule } from './modules/teacher/teacher.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { C404Component } from './pages/c404/c404.component';
+
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, C404Component],
   imports: [
     BrowserModule,
     AppRoutingModule,

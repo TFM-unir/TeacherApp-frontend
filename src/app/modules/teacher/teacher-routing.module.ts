@@ -6,13 +6,15 @@ import { TeacherRateComponent } from './components/teacher-rate/teacher-rate.com
 import { TeacherChatComponent } from './components/teacher-chat/teacher-chat.component';
 import { TeacherContactComponent } from './components/teacher-contact/teacher-contact.component';
 import { authGuard } from 'src/app/core/guards/auth.guard';
+import { studentGuard } from 'src/app/core/guards/student.guard';
+import { teacherGuard } from 'src/app/core/guards/teacher.guard';
 
 const routes: Routes = [
-  { path: 'chat', canActivate: [authGuard], component: TeacherChatComponent },
+  { path: 'chat/:teacherId', canActivate: [authGuard, teacherGuard], component: TeacherChatComponent },
   { path: 'profile/:teacherId', component: TeacherProfileComponent },
-  { path: 'contact/:teacherId', component: TeacherContactComponent },
-  { path: 'rate/:teacherId', canActivate: [authGuard], component: TeacherRateComponent },
-  { path: ':teacherId', component: TeacherControlPanelComponent },
+  { path: 'contact/:teacherId', canActivate: [authGuard, studentGuard], component: TeacherContactComponent },
+  { path: 'rate/:teacherId', canActivate: [authGuard, studentGuard], component: TeacherRateComponent },
+  { path: 'control/:teacherId', canActivate: [authGuard, teacherGuard], component: TeacherControlPanelComponent },
 ];
 
 @NgModule({

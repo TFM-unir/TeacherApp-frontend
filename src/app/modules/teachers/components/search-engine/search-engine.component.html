@@ -1,8 +1,8 @@
 <section class="container mt-3">
   <div class="row g-3">
-    <article class="col-12 col-md-6 col-lg-4" *ngFor="let user of myTeachers">
+    <article class="col-12 col-md-6 col-lg-4" *ngFor="let teach of myTeachers">
       <app-teacher-card
-        [teacher]="user"
+        [teacher]="teach"
         [showButtonProfile]="true"
       ></app-teacher-card>
     </article>

@@ -1,12 +1,15 @@
-import { CanActivateChildFn, CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 
 export const authGuard: CanActivateFn = (route, state) => {
 
-  if(localStorage.getItem('auth_token')){
+  const router = inject(Router);
 
+  if(localStorage.getItem('auth_token')){
     //comprobar que el token es válido
     return true;
   } 
-
+  //No está loguedo redirigimos al login
+  router.navigate(['/users', 'login'])
   return false;
 };

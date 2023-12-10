@@ -53,16 +53,14 @@ export class MapSectionComponent {
       this.myposition = new google.maps.LatLng(latitude, longitude);
       this.center = this.myposition;
 
-      // Once myposition is obtained, calculate distances and sort teachers
+      // Obtener profes y calcular sus distancias sólo cuando tengamos nuestra posición asignada.
       this.getAllTeachers();
     });
   }
 
   openInfoWindow(teacher: TeacherProfile) {
-    // Set the currently selected teacher for the info window
+    // Asignar el profe que se ha clickado el marcador a la card de profe
     this.selectedTeacher = teacher;
-    // TODO rating da undefined
-    console.log(this.selectedTeacher.rating);
   }
 
   selectTeacher(teacher: TeacherProfile): void {
@@ -85,19 +83,31 @@ export class MapSectionComponent {
   async getAllTeachers(): Promise<void> {
     try {
       this.teachers = await this.teachersService.getAllTeachers();
-      
-      // Calculate and assign distance to each teacher
+
+      // Calcular distancia a posición usuario y asignarla a cada profesor. Después ordenar por puntuación y por distancia los que no tienen puntuación
       if (this.myposition && this.teachers) {
         this.teachers.forEach((teacher) => {
           const teacherPosition = new google.maps.LatLng(teacher.latitude, teacher.longitude);
           teacher.distance = google.maps.geometry.spherical.computeDistanceBetween(this.myposition, teacherPosition) / 1000;
         });
 
-        // Sort teachers by distance
-        this.teachers.sort((teacherA, teacherB) => teacherA.distance! - teacherB.distance!);
+        // Separar los que tienen rating de los que no
+        const teachersWithRating = this.teachers.filter(teacher => teacher.rating);
+        const teachersWithoutRating = this.teachers.filter(teacher => !teacher.rating);
+  
+        // Ordenar por puntuación más alta los teachers con rating
+        teachersWithRating.sort((teacherA, teacherB) => teacherB.rating! - teacherA.rating!);
+                
+        // Ordenar por distancia más cercana los que no tienen rating
+        teachersWithoutRating.sort((teacherA, teacherB) => teacherA.distance - teacherB.distance);
+  
+        // Concatenar los dos arrays
+        this.teachers = teachersWithRating.concat(teachersWithoutRating);
       }
     } catch (error) {
       console.error('Error fetching or sorting teachers:', error);
     }
   };
+  
+  
 }
