@@ -30,31 +30,5 @@
           *ngIf="this.authService.getUserName() !== null">{{this.authService.getUserName()}}</a>
       </div>
     </div>
-  </nav>
-</div>
-<div *ngIf="booleanPaint">
-  <nav class="navbar navbar-expand-md mt-4 mb-4">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="../../../../assets/logo_TeacherAdmin.png" alt="teacher app logo" width="200" height="40">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link blue-text" [routerLink]="['']">Inicio</a>
-          <a class="nav-link blue-text">Chat</a>
-          <a class="nav-link blue-text pointer" (click)="onClickLogout()">Cerrar Sesión</a>
-          <a *ngIf="!user" class="nav-link blue-text" [routerLink]="['/users', 'login']">Iniciar Sesión</a>
-          <a *ngIf="!user" class="nav-link blue-text" [routerLink]="['/users', 'register']">Registrar</a>
-          <!-- TODO ojo esto es solo mientras no hay guards: *ngIf="this.authService.getUserName() !== null -->
-          <a class="nav-link blue-text"
-            [routerLink]="['/'+ this.authService.getUserRoleName(), this.authService.getUserId()] "
-            *ngIf="this.authService.getUserName() !== null">{{this.authService.getUserName()}}</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-</div>
+  </div>
+</nav>
