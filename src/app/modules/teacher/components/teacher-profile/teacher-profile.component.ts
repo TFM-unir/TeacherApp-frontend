@@ -110,7 +110,9 @@ export class TeacherProfileComponent {
 
       try {
         if (this.user) {
-          this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
+          this.studentClass = await this.teacherService.getAllClassByTeacherId(
+            id
+          );
         }
       } catch (error) {
         alert(
@@ -125,26 +127,45 @@ export class TeacherProfileComponent {
         this.isLoggedIn = false;
       }
 
-      this.hasClasses = this.studentClass.some((item: ClassHour) => {
-        return (
-          item.id_user1 === this.user.user_id ||
-          item.id_user2 === this.user.user_id ||
-          item.id_user3 === this.user.user_id ||
-          item.id_user4 === this.user.user_id ||
-          item.id_user5 === this.user.user_id
-        );
-      });
+      if (this.studentClass) {
+        this.hasClasses = this.studentClass.some((item: ClassHour) => {
+          return (
+            item.id_user1 === this.user.user_id ||
+            item.id_user2 === this.user.user_id ||
+            item.id_user3 === this.user.user_id ||
+            item.id_user4 === this.user.user_id ||
+            item.id_user5 === this.user.user_id
+          );
+        });
 
-      // Con esto vemos si aún hay clases disponibles
-      this.isSlotNotFull = this.studentClass.map((item: ClassHour) => {
-        return (
-          item.id_user1 === null ||
-          item.id_user2 === null ||
-          item.id_user3 === null ||
-          item.id_user4 === null ||
-          item.id_user5 === null
-        );
-      });
+        // Con esto vemos si aún hay clases disponibles
+        this.isSlotNotFull = this.studentClass.map((item: ClassHour) => {
+          return (
+            item.id_user1 === null ||
+            item.id_user2 === null ||
+            item.id_user3 === null ||
+            item.id_user4 === null ||
+            item.id_user5 === null
+          );
+        });
+
+        // TODO : Verificar este que parece mismo que this.hasClasses
+        this.enrolStudent = this.studentClass.map((item: ClassHour) => {
+          return (
+            item.id_user1 === this.user.user_id ||
+            item.id_user2 === this.user.user_id ||
+            item.id_user3 === this.user.user_id ||
+            item.id_user4 === this.user.user_id ||
+            item.id_user5 === this.user.user_id
+          );
+        });
+        this.hoverable = Array(this.studentClass.length).fill(false);
+      } else {
+        this.isSlotNotFull = false;
+        this.hasClasses = false;
+        this.enrolStudent = false;
+        this.hoverable = Array(0).fill(false);
+      }
 
       // nos traemos la información del rating relacionado con el usuario y el profesor
       try {
@@ -160,17 +181,6 @@ export class TeacherProfileComponent {
       } else {
         this.ultimos4Ratings = this.allRatings;
       }
-
-      this.enrolStudent = this.studentClass.map((item: ClassHour) => {
-        return (
-          item.id_user1 === this.user.user_id ||
-          item.id_user2 === this.user.user_id ||
-          item.id_user3 === this.user.user_id ||
-          item.id_user4 === this.user.user_id ||
-          item.id_user5 === this.user.user_id
-        );
-      });
-      this.hoverable = Array(this.studentClass.length).fill(false);
     });
   }
 
@@ -220,7 +230,7 @@ export class TeacherProfileComponent {
         window.alert('Se ha inscrito correctamente en la asignatura');
         this.reloadCurrentRoute();
       }
-    } catch (error) { }
+    } catch (error) {}
   }
 
   reloadCurrentRoute() {
