@@ -18,19 +18,25 @@ export class NavBarComponent {
   //Declaramos la variable users que contendra todos los datos del usuario
   user: User | any;
   //Decalramos booleana variable que permita que se pinte de color si esteacher o student
-  booleanPaint: boolean = false
+  booleanPaint: boolean = false;
 
   ngOnInit() {
-    this.user = this.coreService.getDecodedToken();
-    if (this.user.user_role === 2) {
-      this.booleanPaint = true;
-    }
-
-  }
-
+  };
 
   onClickLogout() {
     localStorage.removeItem('auth_token');
     this.router.navigate(['/users', 'login']);
+  };
+
+  isLogged() {
+    if (localStorage.getItem('auth_token')) return true;
+    return false;
+  };
+
+  userTypeLogo(): string {
+    if (this.authService.getUserRoleForStyles() === 'admin' || this.authService.getUserRoleForStyles() === 'teacher') {
+    return '../../../../assets/logo_TeacherAdmin.png'
+    };
+    return '../../../../assets/logo_student.png'
   };
 }

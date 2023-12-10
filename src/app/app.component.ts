@@ -11,12 +11,14 @@ export class AppComponent {
   title = 'TeacherApp-frontend';
 
   //Inyectamos el servicio del core
-  private coreService = inject(AuthService);
+  authService = inject(AuthService);
   //Declaramos la variable users que contendra todos los datos del usuario
   user: User | any;
   //Decalramos booleana variable que permita que se pinte de color si esteacher o student
   booleanPaint: boolean = false
 
   ngOnInit() {
+    console.log(this.authService.getUserRoleForStyles());
+    
   }
 }

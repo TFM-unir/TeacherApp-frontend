@@ -46,7 +46,6 @@ export class AuthService {
 
   getUserRoleForStyles(): string {
     const decodedUserRole = this.getUserRole();
-    if (decodedUserRole === 1) return 'student';
     if (decodedUserRole === 2) return 'teacher';
     if (decodedUserRole === 3) return 'admin';
     return 'student';

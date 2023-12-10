@@ -17,6 +17,7 @@ import { StudentService } from 'src/app/core/services/student.service';
 })
 
 export class StudentProfileComponent {
+  authService = inject(AuthService);
   //Inyectamos el servicio se usuario
   private studentService = inject(StudentService);
   //Inyectamos el servicio del core
