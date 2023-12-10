@@ -3,11 +3,18 @@
   }
 
 #teachers-nearby .scrollable-container {
-  /* Set a maximum height for the scrollable area */
   max-height: 27.4rem; 
   overflow-y: scroll;
 }
 
-map-info-window {
-  color: black;
+.pointer:hover {
+  cursor: pointer;
+}
+
+.student-background {
+  background-color: #F1F2F6;
+}
+
+.student-font {
+  color: #27187E; 
 }
