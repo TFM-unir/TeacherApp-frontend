@@ -1,4 +1,5 @@
 import { Component, ViewChild, inject } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MapInfoWindow } from '@angular/google-maps';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ratings } from 'src/app/core/models/ratings.interface';
@@ -14,6 +15,7 @@ import { StudentService } from 'src/app/core/services/student.service';
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.css']
 })
+
 export class StudentProfileComponent {
   //Inyectamos el servicio se usuario
   private studentService = inject(StudentService);
@@ -35,6 +37,42 @@ export class StudentProfileComponent {
   user: User | any;
   //Declaramos el rating booleadno para poder mostrar dependiendo de ello
   ratingBool: boolean = false;
+  // Declaramos la existencia como booleano del comentario de teacher
+  teacherComment: boolean = true
+  // Declaramos el formulario
+  formulario: FormGroup;
+
+  // lo del formulario completo
+  selectedRating = 0;
+  ratingForm: number = 0;
+  stars: any[] = [
+    {
+      id: 1,
+      icon: 'star',
+      class: 'grey star-hover star'
+    },
+    {
+      id: 2,
+      icon: 'star',
+      class: 'grey star-hover star'
+    },
+    {
+      id: 3,
+      icon: 'star',
+      class: 'grey star-hover star'
+    },
+    {
+      id: 4,
+      icon: 'star',
+      class: 'grey star-hover star'
+    },
+    {
+      id: 5,
+      icon: 'star',
+      class: 'grey star-hover star'
+    }
+
+  ];
 
 
   //Variables del google maps
@@ -86,9 +124,14 @@ export class StudentProfileComponent {
         this.rating = await this.studentService.getRatingByUserIdAndTeacherId(id, this.teacher.id);
         if (this.rating) {
           this.ratingBool = true
+          if (this.rating.comment_student && !this.rating.comment_teacher) {
+            this.teacherComment = false
+          } else {
+            this.teacherComment = true
+          };
         } else {
           this.ratingBool = false
-        }
+        };
       } catch (error) {
         alert("Ocurrió un error al intentar recuperar el rating del teacher. Por favor intentelo nuevamente.");
         this.router.navigate(["/teachers"]);
@@ -96,6 +139,12 @@ export class StudentProfileComponent {
 
     });
   };
+
+  constructor() {
+    this.formulario = new FormGroup({
+      textarea: new FormControl()
+    })
+  }
 
   startChat() {
     this.router.navigate(["teacher", "chat"])
@@ -108,4 +157,35 @@ export class StudentProfileComponent {
     });
   };
 
+  onSubmit() {
+    const text: string = this.formulario.value.textarea;
+    try {
+      const result = this.studentService.updateRatingByRankingIdAndComment(this.rating.id, text);
+      alert("Se ha incluido su comentario exitosamente.");
+      this.reloadCurrentRoute();
+    } catch (error) {
+
+    }
+    // const result = alert(title, icon, textAlert, values);
+  }
+
+  selectStar(value: any): void {
+    this.ratingForm = value;
+    this.stars.filter((star) => {
+      if (star.id <= value) {
+        star.class = 'star-gold star';
+      } else {
+        star.class = 'star-gray star';
+      }
+      return star;
+    });
+
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
 };
