@@ -74,6 +74,12 @@ export class TeacherService {
     throw new Error('Method not implemented.');
   }
 
+  updateTeacher(obj:any, teacherId:number){
+    return lastValueFrom(
+      this.httpClient.put<TeacherProfile>(`${this.baseUrl}${teacherId}`,obj)
+    );
+  }
+
   UpdateClassByStudentIdAndClassId(id: number, slot: ClassHour, emptySlot: string) {
     const httpOptions = {
       headers: new HttpHeaders({

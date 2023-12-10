@@ -1,4 +1,4 @@
-<section class="row mx-4 rounded-4 justify-content-between my-4 bg-color_table p-2">
+<section class="row mx-4 rounded-4 justify-content-between my-4 menu p-2">
     <div class="col-3 text-center">
         <a class="btn btnMenu" (click)="changeMenu('all')">All</a>
     </div>
@@ -167,7 +167,7 @@
                 <td>{{ student.class }}</td>
                 <td>{{ student.start_class }}</td>
                 <td>
-                    <button class="btn btn-info m-2" id="{{student.id}}" (click)="chat()">Chat</button>
+                    <button class="btn btn-info m-2" id="{{student.id}}" (click)="perfil(student.id)">Perfil</button>
                 </td>
             </tr>
         </table>

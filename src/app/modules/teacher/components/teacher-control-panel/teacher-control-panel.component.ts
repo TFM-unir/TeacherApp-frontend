@@ -9,6 +9,7 @@ import * as dayjs from 'dayjs';
 import { User } from 'src/app/core/models/user.interface';
 import { ClasshoursService } from 'src/app/core/services/classhours.service';
 import { StudentService } from 'src/app/core/services/student.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-teacher-control-panel',
@@ -81,6 +82,7 @@ export class TeacherControlPanelComponent {
   async ngOnInit() {
     this.activatedRout.params.subscribe(async (params: any) => {
       let id = Number(params.teacherId);
+      this.teacherId = params.teacherId
       try {
         this.userId = Number(await this.coreService.getUserId());
 
@@ -93,15 +95,15 @@ export class TeacherControlPanelComponent {
         this.teacher = await this.teacherService.getTeacherByIdAllData(id);
 
       } catch (error) {
-        console.log("ERROR: " + error);
+        this.sweetAlert('Error','error',`Ocurrió un error al intentar recuperar los datos de tu perfil. ${error}`);
+
       }
 
       try {
         this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
       } catch (error) {
-        alert(
-          'Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente.'
-        );
+        this.sweetAlert('Error','error',`Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente. ${error}`);
+        
         this.router.navigate(['/home']);
       }
       this.fillingForm(this.teacher)
@@ -124,17 +126,50 @@ export class TeacherControlPanelComponent {
           }
         });
       } catch (error) {
-        alert(
-          'Ocurrió un error al intentar recuperar los alumnos. Por favor intentelo nuevamente.'
-        );
+        this.sweetAlert('Error','error',`Ocurrió un error al intentar recuperar los alumnos. Por favor intentelo nuevamente. ${error}`);
         this.router.navigate(['/home'])
       }
 
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
+    try {
+      const formValues = this.formulario.value;
+      const obj = {
+        name: formValues.name,
+        nickname: formValues.nickname,
+        email: formValues.email,
+        phone: formValues.phone,
+        update_date: dayjs().format('YYYY-MM-DD HH-mm-ss'),
+        date_of_birth: formValues.date_of_birth,
+        photo: formValues.photo,
+        latitude: this.teacher.latitude,
+        longitude: this.teacher.longitud,
+        address: formValues.address,
+        city: this.teacher.city,
+        province: this.teacher.province,
+        experience: formValues.experience,
+        class_mode_online: formValues.class_mode_online,
+        class_mode_in_person: formValues.class_mode_in_person,
+        price_hour: formValues.price_hour,
+        about_me: formValues.about_me,
+        subject: formValues.subject,
+        department_name: formValues.department_name,
+      }
+      const result = await this.teacherService.updateTeacher(obj, this.teacherId);
+      this.sweetAlert('Actualizar perfil','success','Su perfil ha sido actualizado');
+    } catch (error) {
+      this.sweetAlert('Error','error',`Ocurrió un error al intentar actualizar los datos. Por favor intentelo nuevamente. ${error}`);
+    }
+  }
 
+  sweetAlert(title: string, icon: string | any, text: string): void {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon
+    });
   }
 
   cancelClass() {
@@ -149,11 +184,11 @@ export class TeacherControlPanelComponent {
 
   }
 
-  chat() {
-
+  perfil(id: number) {
+    this.router.navigate(['/student', 'profile', id]);
   }
 
-  changeMenu(param:string) {
+  changeMenu(param: string) {
     this.disabled = param;
   }
 
@@ -164,7 +199,7 @@ export class TeacherControlPanelComponent {
       email: new FormControl(teacher.email),
       phone: new FormControl(teacher.phone),
       date_of_birth: new FormControl(dayjs(teacher.date_of_birth).format('YYYY-MM-DD')),
-      password: new FormControl(""),
+      //password: new FormControl(""),
       photo: new FormControl(teacher.photo),
       class_mode_online: new FormControl(teacher.class_mode_online),
       class_mode_in_person: new FormControl(teacher.class_mode_in_person),
