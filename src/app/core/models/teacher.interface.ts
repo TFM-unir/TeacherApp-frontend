@@ -31,5 +31,5 @@ export interface TeacherProfile {
   about_me: string;
   subject: string;
   department_name: string;
-  rating: number;
+  rating: number | null;
 }

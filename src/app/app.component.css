@@ -7,3 +7,7 @@
     /* Establece otros estilos, como color de texto, etc. */
     color: #fff;
 }
+
+.bg-color_teacher {
+    background-color: #f1f2f6;
+}

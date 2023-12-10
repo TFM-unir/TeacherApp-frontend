@@ -5,17 +5,19 @@ import { StudentRoutingModule } from './student-routing.module';
 import { StudentControlPanelComponent } from './components/student-control-panel/student-control-panel.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { StudentChatComponent } from './components/student-chat/student-chat.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
   declarations: [
     StudentControlPanelComponent,
     StudentProfileComponent,
-    StudentChatComponent
+    StudentChatComponent,
   ],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    GoogleMapsModule
   ]
 })
 export class StudentModule { }
