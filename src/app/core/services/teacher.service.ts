@@ -22,6 +22,7 @@ export class TeacherService {
   private putClassBaseUrl: string =
     'http://localhost:3000/api/class/updateByStudentIdAndClassId/';
   private deleteClassBaseUrl: string = 'http://localhost:3000/api/class/withdrawClassSlot/';
+  private baseGetTeacherByUserId:string = 'http://localhost:3000/api/teachers/user/'
 
   getAllTeachers() {
     return lastValueFrom(
@@ -49,6 +50,12 @@ export class TeacherService {
   getAverageRatingByTeacherId(id: number) {
     return firstValueFrom(
       this.httpClient.get<number>(`${this.ratingPromBaseUrl}${id}`)
+    );
+  }
+
+  getTeacherByUserId(userId:number){
+    return firstValueFrom(
+      this.httpClient.get<TeacherProfile>(`${this.baseGetTeacherByUserId}${userId}`)
     );
   }
 
