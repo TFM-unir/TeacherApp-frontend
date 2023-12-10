@@ -18,10 +18,11 @@ export class AppComponent {
   booleanPaint: boolean = false
 
   ngOnInit() {
-    this.user = this.coreService.getDecodedToken();
-    if (this.user.user_role === 2) {
-      this.booleanPaint = true;
+    if (localStorage.getItem('auth_token')) {
+      this.user = this.coreService.getUserRole();  
+      if (this.user.user_role === 2) {
+        this.booleanPaint = true;
+      }
     }
-
   }
 }
