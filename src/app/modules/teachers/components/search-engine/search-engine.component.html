@@ -1,12 +1,26 @@
 <section class="container mt-3">
   <h2>! Encuentra a tu profe ideal !</h2>
   <form [formGroup]="filterForm">
-    <div class="my-2">
+    <div class="my-2 mt-5 mb-4">
+      <label for="ordenarPor"><h4>Ordenar por:</h4></label>
+      <select
+        name="ordenarPor"
+        id="ordenarPor"
+        formControlName="ordenarPor"
+        (change)="aplicarFiltro()"
+        class="distancia-button"
+      >
+        <option value="distancia">Distancia</option>
+        <option value="precio">Precio</option>
+        <option value="experiencia">Experiencia</option>
+      </select>
+
       <select
         name="selectedDepartment"
         id="selectedDepartment"
         formControlName="selectedDepartment"
         (change)="aplicarFiltro()"
+        class="distancia-button"
       >
         <option value="">Filtrar por materia</option>
         <option
@@ -16,25 +30,11 @@
           {{ department.department_name }}
         </option>
       </select>
-    </div>
-    <div class="my-2">
-      <select
-        name="ordenarPor"
-        id="ordenarPor"
-        formControlName="ordenarPor"
-        (change)="aplicarFiltro()"
-      >
-        <option value="distancia">distancia</option>
-        <option value="precio">precio</option>
-        <option value="experiencia">experiencia</option>
-      </select>
-    </div>
 
-    <div class="filter-container">
-      <div class="filter-label">Filtrar</div>
-      <div class="filter-options">
+      <div class="dropdown">
+        <button class="dropbtn">Filtrar</button>
         <div class="filter">
-          <label for="filtroPuntuacion">Puntuación:</label>
+          <label for="filtroPuntuacion">Puntuación (entre 0 y 10):</label>
           <input
             type="range"
             id="filtroPuntuacion"
@@ -44,8 +44,10 @@
             max="10"
             value="0"
             (change)="aplicarFiltro()"
+            oninput="this.nextElementSibling.value = this.value"
           />
-          <label for="filtroExperiencia">Experiencia:</label>
+          <output></output>
+          <label for="filtroExperiencia">Experiencia (entre 0 y 10):</label>
           <input
             type="range"
             id="filtroExperiencia"
@@ -55,8 +57,10 @@
             max="10"
             value="0"
             (change)="aplicarFiltro()"
+            oninput="this.nextElementSibling.value = this.value"
           />
-          <label for="filtroPrecio">Precio:</label>
+          <output></output>
+          <label for="filtroPrecio">Precio (entre 0 y 100):</label>
           <input
             type="range"
             id="filtroPrecio"
@@ -66,7 +70,9 @@
             max="100"
             value="0"
             (change)="aplicarFiltro()"
+            oninput="this.nextElementSibling.value = this.value"
           />
+          <output></output>
         </div>
       </div>
     </div>

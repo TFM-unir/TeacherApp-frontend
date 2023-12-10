@@ -37,8 +37,8 @@ export class SearchEngineComponent {
 
   constructor(private departmentsServices: DepartmentsService) {
     this.filterForm = new FormGroup({
-      selectedDepartment: new FormControl(),
-      ordenarPor: new FormControl(),
+      selectedDepartment: new FormControl(''),
+      ordenarPor: new FormControl('distancia'),
       filtroPuntuacion: new FormControl(),
       filtroPrecio: new FormControl(),
       filtroExperiencia: new FormControl(),
