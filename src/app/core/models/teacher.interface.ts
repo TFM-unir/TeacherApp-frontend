@@ -13,6 +13,8 @@ export interface TeacherProfile {
   id: number;
   name: string;
   nickname: string;
+  email?:string;
+  phone?:number;
   date_of_birth: Date;
   status: number;
   photo: string;

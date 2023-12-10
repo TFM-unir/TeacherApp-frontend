@@ -26,7 +26,7 @@
         <a class="nav-link text-white" [routerLink]="['/users', 'register']">Registrar</a>
         <!-- TODO ojo esto es solo mientras no hay guards: *ngIf="this.authService.getUserName() !== null -->
         <a class="nav-link text-white"
-          [routerLink]="['/profile/', this.authService.getUserId()] "
+          [routerLink]="[this.authService.getUserRoleName()+'/control/', this.authService.getUserId()] "
           *ngIf="this.authService.getUserName() !== null">{{this.authService.getUserName()}}</a>
       </div>
     </div>

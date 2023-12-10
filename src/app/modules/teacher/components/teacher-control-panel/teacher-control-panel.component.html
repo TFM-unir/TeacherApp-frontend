@@ -1,1 +1,114 @@
-<p>teacher-control-panel works!</p>
+<section class="d-flex col-10 offset-2 col-xl-4 offset-xl-8 justify-content-end backgr py-2 px-3 rounded-4">
+    <div class="me-4">
+        <p class="m-0">Actualmente eres profesor</p>
+    </div>
+    <div class="form-switch d-block justify-content-center">
+        <input class="form-check-input m-0 p-0 d-block" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label p-0 d-block" for="flexSwitchCheckDefault">Cambiar a alumno</label>
+    </div>
+</section>
+
+<section class="mt-2">
+    <div class="row align-content-center m-4 ">
+        <form class="p-0" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+            <div class="row backgr2 m-0 p-0">
+                <p class="text-center black mt-3">Mis Datos</p>
+                <div class="col-6">
+                    <div class="my-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input class="form-control" type="text" id="name" placeholder="Ingresa tu nombre y apellido"
+                            formControlName="name" required [readonly]="false" />
+                    </div>
+                    <div class="my-4">
+                        <label for="nickname" class="form-label">Nombre de usario</label>
+                        <input class="form-control" type="text" id="nickname" placeholder="Ingresa tu nombre de usario"
+                            formControlName="nickname" required />
+                    </div>
+                    <div class="my-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" type="text" id="email" placeholder="Ingresa tu email"
+                            formControlName="email" required />
+                    </div>
+                    <div class="my-4">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <input class="form-control" type="text" id="phone" placeholder="Ingresa tu número de telèfono"
+                            formControlName="phone" required />
+                    </div>
+                    <div class="my-4">
+                        <label for="date_of_birth" class="form-label">Fecha de nacimiento</label>
+                        <input class="form-control" type="date" id="date_of_birth"
+                            placeholder="ingresa tu fecha de nacimiento" formControlName="date_of_birth" required />
+                    </div>
+                    <div class="my-4">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input class="form-control" type="password" id="password" formControlName="password" required
+                            placeholder="Ingrese una nueva password" />
+                    </div>
+                    <div class="my-4">
+                        <label for="photo" class="form-label">Imagen de perfil</label>
+                        <input class="form-control" type="text" id="photo" placeholder="Ingresa tu url"
+                            formControlName="photo" required />
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <div class="my-4">
+                        <img class="img-fluid rounded-5 mx-auto p-3" src="{{teacher?.photo}}" alt="TeacherImg">
+                    </div>
+                    <label for="mb-0 mt-4" class="form-label">Modo de clases</label>
+                    <div class="checkbox-container mt-0">
+                        <label for="class_mode_online" class="form-label me-1">Online</label>
+                        <input class="checkbox-container me-3" type="checkbox" id="class_mode_online"
+                            formControlName="class_mode_online" value="online" />
+                        <label for="class_mode_in_person" class="form-label me-1">Presencial</label>
+                        <input class="checkbox-container" type="checkbox" id="class_mode_in_person"
+                            formControlName="class_mode_in_person" value="presencial" />
+                    </div>
+                    <div class="my-4">
+                        <label for="experience" class="form-label">Experiencia</label>
+                        <input class="form-control" type="text" id="experience" placeholder="Los años de experiencia"
+                            formControlName="experience" required />
+                    </div>
+
+                    <div class="my-4">
+                        <label for="price_hour" class="form-label">Precio</label>
+                        <input class="form-control" type="text" id="price_hour" placeholder="10.50"
+                            formControlName="price_hour" required />
+                    </div>
+                    <div class="my-4">
+                        <label for="about_me" class="form-label">Sobre mi</label>
+                        <textarea class="form-control" id="about_me" placeholder="Una breve descripción"
+                            formControlName="about_me" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+                <input type="submit" class="btn btn-info" value="Guardar datos">
+            </div>
+        </form>
+    </div>
+</section>
+
+<section>
+    <div class="row align-content-center m-4 p-2 backgr2">
+        <p class="black">Mis clases</p>
+        <table class="table table-striped text-black text-center">
+            <tr>
+                <th>Día de la semana</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Bloque</th>
+                <th>Acción</th>
+            </tr>
+            <tr class="border-1 border-black bg-color_table mt-2" *ngFor="let slot of studentClass; let i = index">
+                <td>{{ slot.day_of_week }}</td>
+                <td>{{ slot.start_time }}</td>
+                <td>{{ slot.end_time }}</td>
+                <td>{{ slot.slot }}</td>
+                <td>
+                    <button class="btn btn-info m-2" (click)="cancelClass()">Cancelar</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
