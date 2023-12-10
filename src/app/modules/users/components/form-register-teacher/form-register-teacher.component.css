@@ -3,3 +3,7 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+.error {
+    color: tomato;
+    font-size: 12px;
+}
