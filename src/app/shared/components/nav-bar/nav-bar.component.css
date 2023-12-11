@@ -9,3 +9,7 @@
 a:hover {
     font-weight: bold;
 }
+
+btn:hover{
+    color: rgba(241, 242, 246, 1);
+}

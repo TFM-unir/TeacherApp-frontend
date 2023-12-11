@@ -71,14 +71,27 @@
     background-color: rgba(174, 184, 254, 1);
 }
 
-.btn-orangeyellow {
+.student-btn-controlpanel, .teacher-btn-controlpanel {
     background-color: rgba(255, 175, 86, 1);
     margin-left: 0.5rem;
     color:#27187e
 }
 
-.btn-orangeyellow:hover {
+.student-btn-controlpanel:hover, .student-btn-controlpanel:hover {
     background-color: rgb(230, 156, 71);
+    margin-left: 0.5rem;
+    font-weight: bold;
+}
+
+.admin-btn-controlpanel {
+    background-color: rgba(39, 24, 126, 1);
+    margin-left: 0.5rem;
+    color:rgb(230, 156, 71)
+}
+
+.admin-btn-controlpanel:hover {
+    background-color: rgb(20, 11, 69);
+    color: rgb(230, 156, 71);
     margin-left: 0.5rem;
     font-weight: bold;
 }

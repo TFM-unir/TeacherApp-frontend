@@ -15,10 +15,12 @@
         <a class="btn btn-midblue" (click)="onClickLogout()" *ngIf="isLogged()">Cerrar Sesión</a>
         <a class="btn btn-midblue" [routerLink]="['/users', 'login']" *ngIf="!isLogged()">Iniciar Sesión</a>
         <a class="btn btn-midblue" [routerLink]="['/users', 'register']" *ngIf="!isLogged()">Registrar</a>
-        <button class="btn btn-orangeyellow"
+        <button class="btn"
+          [ngClass]="authService.getUserRoleForStyles() + '-btn-controlpanel'"
           [routerLink]="[this.authService.getUserRoleName()+'/control/', this.authService.getUserId()] "
           *ngIf="isLogged()">{{this.authService.getUserName()}}</button>
       </div>
     </div>
   </div>
 </nav>
+
