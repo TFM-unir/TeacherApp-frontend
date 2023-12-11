@@ -73,20 +73,21 @@ export class TeacherRateComponent {
       if (!localStorage.getItem('auth_token')) {
         this.router.navigate(["/teachers"]);
       }
+      let result:any = '';
       this.user = this.coreService.getDecodedToken();
       this.userId = Number(this.user.user_id);
       this.teacherId = Number(params.teacherId);
+      console.log(this.userId, this.teacherId)
       try {
         this.teacher = await this.teacherService.getTeacherById(this.teacherId);
-        const [result] = await this.ratingsService.getRatingsByUserAndTeacher(this.userId, this.teacherId);
-        if(result.length > 0){
-          console.log(result[0].rating)
+        result = await this.ratingsService.getRatingsByUserAndTeacher(this.teacherId, this.userId);
+        if(result !== ''){
           this.displaySection = false;
-          this.prevRating = result[0].rating;
-          this.prevComment = result[0].comment_student;
+          this.prevRating = result.rating;
+          this.prevComment = result.comment_student!;
         }
       } catch (error) {
-        alert("Ocurrió un error al intentar recuperar al profesor. Por favor intentelo nuevamente.");
+        this.sweetAlert2("Error","Ocurrió un error al intentar recuperar al profesor. Por favor intentelo nuevamente.", "warning");
         this.router.navigate(["/teachers"]);
       };
     });
@@ -114,6 +115,14 @@ export class TeacherRateComponent {
     const result = this.sweetAlert(title, icon, textAlert, values);
   }
 
+  sweetAlert2(title:string, text:string, icon:string|any){
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon
+    });
+    this.router.navigate(["/teachers"]);
+  }
 
   sweetAlert(title: string, icon: string | any, text: string, values: any): void {
     Swal.fire({
@@ -146,7 +155,7 @@ export class TeacherRateComponent {
   }
 
   returnHome(){
-    this.router.navigate(["/teacher/profile/"+this.teacherId]);
+    this.router.navigate(["/teacher/control/"+this.teacherId]);
   }
 
 }
