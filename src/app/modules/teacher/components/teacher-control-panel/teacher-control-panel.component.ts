@@ -255,5 +255,7 @@ export class TeacherControlPanelComponent {
     });
   }
 
-  ChangePassword() {}
+  ChangePassword() {
+    this.router.navigate(['/underConstruction']);
+  }
 }

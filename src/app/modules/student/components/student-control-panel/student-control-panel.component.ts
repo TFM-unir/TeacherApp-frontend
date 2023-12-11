@@ -144,7 +144,7 @@ export class StudentControlPanelComponent {
   }
 
   ChangePassword() {
-    
+    this.router.navigate(['/underConstruction']);
   }
 
   fillingForm(student: Student) {

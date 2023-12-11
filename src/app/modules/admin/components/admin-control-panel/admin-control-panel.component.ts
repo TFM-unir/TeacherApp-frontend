@@ -30,7 +30,6 @@ export class AdminControlPanelComponent {
       this.teachers = response.teachers;
       this.students = response.students;
 
-      console.log(response);
     } catch (error) {
       console.error('Error fetching teachers:', error);
     }

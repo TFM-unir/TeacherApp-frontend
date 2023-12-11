@@ -18,7 +18,6 @@ export class AppComponent {
   booleanPaint: boolean = false
 
   ngOnInit() {
-    console.log(this.authService.getUserRoleForStyles());
     
   }
 }

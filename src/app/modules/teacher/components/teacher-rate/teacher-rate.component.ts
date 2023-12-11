@@ -77,7 +77,6 @@ export class TeacherRateComponent {
       this.user = this.coreService.getDecodedToken();
       this.userId = Number(this.user.user_id);
       this.teacherId = Number(params.teacherId);
-      console.log(this.userId, this.teacherId)
       try {
         this.teacher = await this.teacherService.getTeacherById(this.teacherId);
         result = await this.ratingsService.getRatingsByUserAndTeacher(this.teacherId, this.userId);
