@@ -174,11 +174,10 @@ export class TeacherControlPanelComponent {
 
   checkValue($event: Event) {
     this.router.navigate(['/underConstruction']);
-    console.log($event);
   }
 
   cancelClass() {
-
+    this.router.navigate(['/underConstruction']);
   }
 
   ChangePassword() {
@@ -186,11 +185,11 @@ export class TeacherControlPanelComponent {
   }
 
   newClass() {
-
+    this.router.navigate(['/underConstruction']);
   }
 
   valoraciones() {
-
+    this.router.navigate(['/underConstruction']);
   }
 
   perfil(id: number) {
