@@ -154,7 +154,7 @@ export class StudentProfileComponent {
   finish() {
     this.activatedRout.params.subscribe(async (params: any) => {
       let id = params.studentId;
-      this.router.navigate(["teacher", `${id}`])
+      this.router.navigate(["/underConstruction"]);
     });
   };
 
