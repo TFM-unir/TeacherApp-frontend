@@ -29,7 +29,7 @@
       required
     />
     <p class="error" *ngIf="checkControl('experience', 'required')">
-      Campo es requerido
+      Campo requerido
     </p>
     <p class="error" *ngIf="checkControl('experience', 'maxlength')">
       Debe ser un número entre el 1 al 9, donde 1 es sin experiencia previa.
@@ -47,12 +47,12 @@
       required
     />
     <p class="error" *ngIf="checkControl('price_hour', 'required')">
-      Campo es requerido
+      Campo requerido
     </p>
   </div>
 
   <div>
-    <label for="about_me" class="form-label">Sobre mi</label>
+    <label for="about_me" class="form-label">Sobre mí</label>
     <textarea
       class="form-control"
       id="about_me"
@@ -62,7 +62,7 @@
     >
     </textarea>
     <p class="error" *ngIf="checkControl('about_me', 'required')">
-      Campo es requerido
+      Campo requerido
     </p>
     <p class="error" *ngIf="checkControl('about_me', 'maxlength')">
       El tamaño máximo es de 1000 caracteres.

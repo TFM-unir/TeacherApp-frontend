@@ -89,7 +89,7 @@ export class FormRegisterComponent {
         alert('Usario registrado correctamente');
         this.router.navigate(['']);
       } else {
-        alert('Usario no se ha podido registrar');
+        alert('El usario no se ha podido registrar');
       }
     } catch (error: any) {
       console.log(error.message);

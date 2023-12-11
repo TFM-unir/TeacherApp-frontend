@@ -1,37 +1,38 @@
-<div class="w-50">
+<div class="w-50 mx-auto my-5">
   <section
     class="container mt-3"
     [ngClass]="authService.getUserRoleForStyles() + '-main-font-color'"
-  >
+    >
     <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+
       <div class="my-2">
         <select name="role_id" id="role_id" formControlName="role_id">
           <option value="1">Estudiante</option>
           <option value="2">Profesor</option>
         </select>
       </div>
-
+      
       <app-form-register-user groupName="userForm"></app-form-register-user>
 
       <app-form-register-location
-        groupName="locationForm"
+      groupName="locationForm"
       ></app-form-register-location>
-
+      
       <div *ngIf="this.mainForm.value.role_id === '2'">
         <app-form-register-teacher
-          groupName="teacherForm"
+        groupName="teacherForm"
         ></app-form-register-teacher>
         <app-form-register-subjects
-          groupName="subjectForm"
+        groupName="subjectForm"
         ></app-form-register-subjects>
       </div>
-
+      
       <!--[disabled]="!mainForm.valid"-->
       <input
-        type="submit"
-        value="Enviar"
-        class="btn btn-danger mt-3"
-        [disabled]="checkDisable()"
+      type="submit"
+      value="Enviar"
+      class="btn btn-danger mt-3"
+      [disabled]="checkDisable()"
       />
     </form>
   </section>
