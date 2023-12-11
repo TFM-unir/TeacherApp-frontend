@@ -254,4 +254,6 @@ export class TeacherControlPanelComponent {
       department_name: new FormControl(teacher.department_name),
     });
   }
+
+  ChangePassword() {}
 }
