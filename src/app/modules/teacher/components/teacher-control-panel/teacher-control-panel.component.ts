@@ -209,13 +209,21 @@ export class TeacherControlPanelComponent {
     });
   }
 
-  cancelClass() {}
+  checkValue($event: Event) {
+    this.router.navigate(['/underConstruction']);
+  }
 
-  ChangePassword() {}
+  cancelClass() {
+    this.router.navigate(['/underConstruction']);
+  }
 
-  newClass() {}
+  newClass() {
+    this.router.navigate(['/underConstruction']);
+  }
 
-  valoraciones() {}
+  valoraciones() {
+    this.router.navigate(['/underConstruction']);
+  }
 
   perfil(id: number) {
     this.router.navigate(['/student', 'profile', id]);
