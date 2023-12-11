@@ -22,7 +22,7 @@
             <p class="m-0">Actualmente eres profesor</p>
         </div>
         <div class="form-switch d-block justify-content-center">
-            <input class="form-check-input m-0 p-0 d-block" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <input class="form-check-input m-0 p-0 d-block" type="checkbox" role="switch" id="flexSwitchCheckDefault" (change)="checkValue($event)">
             <label class="form-check-label p-0 d-block" for="flexSwitchCheckDefault">Cambiar a alumno</label>
         </div>
     </div>
