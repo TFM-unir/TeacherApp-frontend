@@ -73,7 +73,7 @@ export class FormRegisterComponent {
       userForm.role_id = this.mainForm.value.role_id;
 
       userForm.status = 2;
-      if (userForm.role_id == 1) userForm.status = 1;
+      if (userForm.role_id == 2) userForm.status = 1;
 
       console.log(this.mainForm);
       let user: UserRegister = {
