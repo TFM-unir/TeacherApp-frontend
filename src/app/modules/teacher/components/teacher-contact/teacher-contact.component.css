@@ -1,0 +1,16 @@
+#floatingTextarea{
+   height: 40vh;
+}
+.false{
+   display: none;
+}
+.true{
+   display: block;
+}
+p{
+   color: black;
+}
+#backgr{
+   height: 40vh;
+   background-color: white;
+}

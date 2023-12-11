@@ -1,0 +1,105 @@
+<div class="row custom-row" *ngIf="myposition">
+
+    <section class="col-sm-7" id="teachers-map">
+      <google-map *ngIf="teachers && teachers.length" height="30rem" width="auto" [center]="center" [zoom]="zoom">
+        <!-- Añadir marcador de la localización del usuario -->
+        <map-marker
+          [position]="myposition"
+          [options]="markerOptionsUser"
+          >
+        </map-marker>
+        <!-- Añadir marcadores de todos los profesores -->
+        <ng-container *ngFor="let teacher of teachers">
+          <map-marker
+            #miMarker="mapMarker"
+            [position]="{ lat: teacher.latitude, lng: teacher.longitude }"
+            [options]="markerOptionsTeachers"
+            (mapClick)="openInfoWindow(teacher)"
+            >
+          </map-marker>
+        </ng-container>
+      </google-map>
+    </section>
+
+    <!-- seccion con los teachers del mapa ordenados por puntuación y los sin puntuar por distancia-->
+    <section class="col-sm-5 d-flex flex-column" id="teachers-nearby">
+      
+      <h3 class="mt-3 mt-sm-0" [ngClass]="authService.getUserRoleForStyles() + '-main-font-color'">Mejor puntuados</h3>
+        <div class="overflow-auto scrollable-container flex-fill student-font rounded" *ngIf="!selectedTeacher" [ngClass]="authService.getUserRoleForStyles() + '-background-inverse'">
+          <div *ngFor="let teacher of teachers" (click)="selectTeacher(teacher)" class="m-2" [ngClass]="authService.getUserRoleForStyles() + '-main-font-color-inverse'">
+            <div class="pointer">
+              <div class="row">
+                <div class="col-4 d-flex flex-column">
+                  <img src="{{teacher.photo}}" alt="..." class="img-fluid rounded">
+                  <div class="col-3 d-flex" *ngIf="teacher.rating">
+                    <img src="https://tmpfiles.nohat.cc/full-m2H7H7A0m2m2i8i8.png" alt="..." class="rounded" style="height: 20px">
+                    <p>{{teacher.rating}}</p>
+                  </div>
+                  <div class="col-3 d-flex" *ngIf="!teacher.rating">
+                    <p>Sin puntuar</p>
+                  </div>
+                </div>
+                <div class="col-8">
+                  <h5 class="pb-1">{{teacher.name}}</h5>
+                  <p>{{teacher.price_hour}}€/h</p>
+                  <p>{{teacher.subject}}</p>
+                  <p>A {{teacher.distance.toFixed(1)}} km de tí</p>
+                </div>
+              </div>
+            </div>
+            <hr class="border-3">
+          </div>
+        </div>
+
+        <!-- card que aparece cuando clicas marker del mapa y desaparece el listado de teachers ordenados-->
+        <div class="overflow-auto scrollable-container flex-fill student-background student-font rounded" *ngIf="selectedTeacher">
+          <img src="{{ selectedTeacher.photo }}" class="card-img-top rounded mx-auto d-block mt-4" alt="teacher's profile photo" style="height: 10rem; width: 10rem;">
+          <div class="card-body text-center d-flex flex-column align-items-center">
+            <h5 class="card-title">{{ selectedTeacher.name }}</h5>
+            <div class="d-flex align-items-center">
+              <img class="img-fluid" src="https://tmpfiles.nohat.cc/full-m2H7H7A0m2m2i8i8.png" alt="..." style="width: 20px" />
+              <p class="ml-2 mb-0">{{selectedTeacher.rating}}</p>
+            </div>
+            <p class="card-text">{{ selectedTeacher.experience }} años de experiencia</p>
+            <p class="card-text">{{ selectedTeacher.price_hour }}€/Hora</p>
+            <div class="d-flex justify-content-center align-items-center mb-2">
+              <a class="btn btn-primary mx-1 mt-1" (click)="eraseMarkedTeacher()">Volver</a>
+              <a class="btn btn-primary mx-1 mt-1" (click)="navigateToTeacherProfile(selectedTeacher.id)">Ver perfil</a>
+            </div>
+          </div>
+        </div>
+      </section>
+</div>
+
+<div class="row custom-row" *ngIf="!myposition">
+  <div class="col-md-12 d-flex justify-content-center align-items-center">
+    <div class="spinner-border text-light" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
+
+<!-- TODO -->
+<!-- Un spinner para teacher y admin view -->
+<!-- <div class="spinner-border text-dark" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div> -->
+
+<!-- <div class="row">
+  <div class="col-sm-4 d-flex flex-column">
+    <img src="{{teacher.photo}}" alt="..." class="img-fluid rounded">
+    <div class="col-md-3 d-flex" *ngIf="teacher.rating">
+      <img src="https://tmpfiles.nohat.cc/full-m2H7H7A0m2m2i8i8.png" alt="..." class="rounded" style="height: 20px">
+      <p>{{teacher.rating}}</p>
+    </div>
+    <div class="col-md-3 d-flex" *ngIf="!teacher.rating">
+      <p>Sin puntuar</p>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <h5 class="pb-1">{{teacher.name}}</h5>
+    <p>{{teacher.price_hour}}€/h</p>
+    <p>{{teacher.subject}}</p>
+    <p>A {{teacher.distance.toFixed(1)}} km de tí</p>
+  </div>
+</div> -->

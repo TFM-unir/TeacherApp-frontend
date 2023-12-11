@@ -1,0 +1,24 @@
+
+<nav class="navbar navbar-expand-md mt-4 mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand">
+      <img [src]="userTypeLogo()" alt="teacher app logo" width="200" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-auto" [ngClass]="authService.getUserRoleForStyles() + '-nav-font-color'">
+        <a class="btn btn-midblue" [routerLink]="['/home']" *ngIf="authService.getUserRoleForStyles() === 'student'">Inicio</a>
+        <a class="btn btn-midblue" [routerLink]="['/'+this.authService.getUserRoleName()+'/chat/'+this.authService.getUserId()]" *ngIf="isLogged() && authService.getUserRoleForStyles() !== 'admin' ">Chat</a>
+        <a class="btn btn-midblue" (click)="onClickLogout()" *ngIf="isLogged()">Cerrar Sesión</a>
+        <a class="btn btn-midblue" [routerLink]="['/users', 'login']" *ngIf="!isLogged()">Iniciar Sesión</a>
+        <a class="btn btn-midblue" [routerLink]="['/users', 'register']" *ngIf="!isLogged()">Registrar</a>
+        <button class="btn btn-orangeyellow"
+          [routerLink]="[this.authService.getUserRoleName()+'/control/', this.authService.getUserId()] "
+          *ngIf="isLogged()">{{this.authService.getUserName()}}</button>
+      </div>
+    </div>
+  </div>
+</nav>

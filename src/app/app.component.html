@@ -1,0 +1,10 @@
+<div class="min-vh-100 d-flex flex-column" [ngClass]="[authService.getUserRoleForStyles() + '-background', authService.getUserRoleForStyles() + '-main-font-color']"
+>
+  <div class="container d-flex flex-column flex-grow-1">
+    <app-nav-bar class="mt-4 background-test"></app-nav-bar>
+    <div>
+      <router-outlet class="flex-grow-1"></router-outlet>
+    </div>
+  </div>
+  <app-footer class="mt-auto"></app-footer>
+</div>

@@ -1,0 +1,104 @@
+<section class="container mt-3">
+  <h2>! Encuentra a tu profe ideal !</h2>
+  <form [formGroup]="filterForm">
+    <div class="my-2 mt-5 mb-4">
+      <label for="ordenarPor"><h4>Ordenar por:</h4></label>
+      <select
+        name="ordenarPor"
+        id="ordenarPor"
+        formControlName="ordenarPor"
+        (change)="aplicarFiltro()"
+        class="distancia-button"
+      >
+        <option value="distancia">Distancia</option>
+        <option value="precio">Precio</option>
+        <option value="experiencia">Experiencia</option>
+      </select>
+
+      <select
+        name="selectedDepartment"
+        id="selectedDepartment"
+        formControlName="selectedDepartment"
+        (change)="aplicarFiltro()"
+        class="distancia-button"
+      >
+        <option value="">Filtrar por materia</option>
+        <option
+          *ngFor="let department of departments; trackBy: trackByDepartmentId"
+          [value]="department.department_name"
+        >
+          {{ department.department_name }}
+        </option>
+      </select>
+
+      <div class="dropdown">
+        <button class="dropbtn">Filtrar</button>
+        <div class="filter">
+          <label for="filtroPuntuacion">Puntuación (entre 0 y 10):</label>
+          <input
+            type="range"
+            id="filtroPuntuacion"
+            name="filtroPuntuacion"
+            formControlName="filtroPuntuacion"
+            min="0"
+            max="10"
+            value="0"
+            (change)="aplicarFiltro()"
+            oninput="this.nextElementSibling.value = this.value"
+          />
+          <output></output>
+          <label for="filtroExperiencia">Experiencia (entre 0 y 10):</label>
+          <input
+            type="range"
+            id="filtroExperiencia"
+            name="filtroExperiencia"
+            formControlName="filtroExperiencia"
+            min="0"
+            max="10"
+            value="0"
+            (change)="aplicarFiltro()"
+            oninput="this.nextElementSibling.value = this.value"
+          />
+          <output></output>
+          <label for="filtroPrecio">Precio (entre 0 y 100):</label>
+          <input
+            type="range"
+            id="filtroPrecio"
+            name="filtroPrecio"
+            formControlName="filtroPrecio"
+            min="0"
+            max="100"
+            value="0"
+            (change)="aplicarFiltro()"
+            oninput="this.nextElementSibling.value = this.value"
+          />
+          <output></output>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row g-3">
+    <article
+      class="col-12 col-md-6 col-lg-4"
+      *ngFor="let teach of showMyteachers"
+    >
+      <app-teacher-card
+        [teacher]="teach"
+        [showButtonProfile]="true"
+        [showRating]="false"
+      ></app-teacher-card>
+    </article>
+  </div>
+  <nav aria-label="...">
+    <ul class="pagination pagination-lg">
+      <li
+        (click)="getPage(i + 1)"
+        class="page-item"
+        *ngFor="let pag of this.pagination.arrPag; let i = index"
+        [ngClass]="{ active: i + 1 === this.pagination.currentPage }"
+      >
+        <span class="page-link">{{ i + 1 }}</span>
+      </li>
+    </ul>
+  </nav>
+</section>

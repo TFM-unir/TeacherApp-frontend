@@ -1,0 +1,71 @@
+<fieldset [formGroupName]="groupName">
+  <label for="" class="form-label">Modalidad:</label>
+  <div class="checkbox-container">
+    <label for="class_mode_online" class="form-label">Online</label>
+    <input
+      class="checkbox-container"
+      type="checkbox"
+      id="class_mode_online"
+      formControlName="class_mode_online"
+      value="online"
+    />
+    <label for="class_mode_in_person" class="form-label">Presencial</label>
+    <input
+      class="checkbox-container"
+      type="checkbox"
+      id="class_mode_in_person"
+      formControlName="class_mode_in_person"
+      value="presencial"
+    />
+  </div>
+  <div>
+    <label for="experience" class="form-label">Experiencia</label>
+    <input
+      class="form-control"
+      type="text"
+      id="experience"
+      placeholder="Los años de experiencia"
+      formControlName="experience"
+      required
+    />
+    <p class="error" *ngIf="checkControl('experience', 'required')">
+      Campo es requerido
+    </p>
+    <p class="error" *ngIf="checkControl('experience', 'maxlength')">
+      Debe ser un número entre el 1 al 9, donde 1 es sin experiencia previa.
+    </p>
+  </div>
+
+  <div>
+    <label for="price_hour" class="form-label">Precio</label>
+    <input
+      class="form-control"
+      type="text"
+      id="price_hour"
+      placeholder="Precio por una clase"
+      formControlName="price_hour"
+      required
+    />
+    <p class="error" *ngIf="checkControl('price_hour', 'required')">
+      Campo es requerido
+    </p>
+  </div>
+
+  <div>
+    <label for="about_me" class="form-label">Sobre mi</label>
+    <textarea
+      class="form-control"
+      id="about_me"
+      placeholder="Una breve descripció"
+      formControlName="about_me"
+      required
+    >
+    </textarea>
+    <p class="error" *ngIf="checkControl('about_me', 'required')">
+      Campo es requerido
+    </p>
+    <p class="error" *ngIf="checkControl('about_me', 'maxlength')">
+      El tamaño máximo es de 1000 caracteres.
+    </p>
+  </div>
+</fieldset>

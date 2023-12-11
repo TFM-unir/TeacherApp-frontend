@@ -1,0 +1,16 @@
+.custom-row {
+    min-height: 30rem;
+  }
+
+#teachers-nearby .scrollable-container {
+  max-height: 27.4rem; 
+  overflow-y: scroll;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.student-font {
+  color: #F1F2F6;
+}

@@ -1,0 +1,19 @@
+<fieldset [formGroupName]="groupName">
+  <div class="my-2">
+    <label for="address" class="form-label">Dirección</label>
+    <input
+      class="form-control"
+      id="address"
+      #placesRef="ngx-places"
+      ngx-gp-autocomplete
+      (onAddressChange)="handleAddressChange($event)"
+      placeholder="Busca tu dirección completa"
+      formControlName="address"
+      required
+    />
+
+    <p class="error" *ngIf="checkControl('address', 'required')">
+      Campo es requerido
+    </p>
+  </div>
+</fieldset>

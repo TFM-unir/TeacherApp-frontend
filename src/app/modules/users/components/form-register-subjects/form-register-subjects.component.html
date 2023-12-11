@@ -1,0 +1,33 @@
+<fieldset [formGroupName]="groupName">
+  <div class="my-2">
+    <label for="department_id" class="form-label">Materias</label>
+    <select
+      name="department_id"
+      id="department_id"
+      formControlName="department_id"
+    >
+      <option
+        *ngFor="let department of departments; trackBy: trackByDepartmentId"
+        [value]="department.id"
+      >
+        {{ department.department_name }}
+      </option>
+    </select>
+  </div>
+  <div class="my-2">
+    <label for="subject" class="form-label">Asignatura</label>
+    <input
+      class="form-control"
+      type="text"
+      id="subject"
+      placeholder="Ingresa el nombre de la asignatura"
+      formControlName="subject"
+    />
+    <p class="error" *ngIf="checkControl('subject', 'required')">
+      Campo es requerido
+    </p>
+    <p class="error" *ngIf="checkControl('subject', 'minlength')">
+      La longitud minima es de 3 caracteres
+    </p>
+  </div>
+</fieldset>
