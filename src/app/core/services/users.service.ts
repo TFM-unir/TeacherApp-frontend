@@ -25,4 +25,9 @@ export class UsersService {
       this.httpClient.post<UserLogin>(`${this.baseUrl}/login`, values)
     );
   };
+
+  updateUserStatus(id: number, status: number) {
+    const obj = { id, status };
+    return lastValueFrom(this.httpClient.put<User>(`${this.baseUrl}status`, obj));
+  }
 };

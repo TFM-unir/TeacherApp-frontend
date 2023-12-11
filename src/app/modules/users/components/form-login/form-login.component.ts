@@ -42,7 +42,11 @@ export class FormLoginComponent {
       } else {
         // Almacenamiento del token en el localStorage
         localStorage.setItem('auth_token', response.token);
-        this.router.navigate(['home']);
+        if (this.authService.getUserRoleName() === 'student') {
+          this.router.navigate(['home']);
+        } else {
+          this.router.navigate([this.authService.getUserRoleName()+'/control/', this.authService.getUserId()]);
+        }
       }
     } catch (error) {
       console.error('Login error:', error);

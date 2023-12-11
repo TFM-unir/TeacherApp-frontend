@@ -6,9 +6,19 @@
     <tbody *ngFor="let teacher of teachers">
       <tr>
         <th scope="row">{{teacher.name}}</th>
-        <td><button class="btn btn-light" [routerLink]="['/teacher','profile',teacher.id]">Ver Perfil</button></td>
-        <td><button class="btn btn-success">Validar</button></td>
-        <td><button class="btn btn-danger">Dar de baja</button></td>
+        <td><button class="btn btn-outline-secondary" [routerLink]="['/teacher','profile',teacher.id]">Ver Perfil</button></td>
+        <td>
+          <button class="btn btn-light" (click)="updateUserStatus(teacher.user_id, 2)"*ngIf="teacher.status===1 || teacher.status===3">Activar</button>
+          <button class="btn btn-success" *ngIf="teacher.status===2">Activado</button>
+        </td>
+        <td>
+          <button class="btn btn-light" (click)="updateUserStatus(teacher.user_id, 1)"*ngIf="teacher.status===2">Desactivar</button>
+          <p class="btn btn-danger" *ngIf="teacher.status===1">Desactivado</p>
+        </td>
+        <td>
+          <button class="btn btn-outline-dark" *ngIf="teacher.status=== 3">Usuario de baja</button>
+          <button class="btn btn-dark" (click)="updateUserStatus(teacher.user_id, 3)"*ngIf="teacher.status!== 3">Dar de baja</button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -17,9 +27,15 @@
     <tbody *ngFor="let student of students">
       <tr>
         <th scope="row">{{student.name}}</th>
-        <td><button class="btn btn-light" [routerLink]="['/student','profile',student.id]">Ver Perfil</button></td>
-        <td><button class="btn btn-success">Validar</button></td>
-        <td><button class="btn btn-danger">Dar de baja</button></td>
+        <td><button class="btn btn-outline-secondary" [routerLink]="['/student','profile',student.id]">Ver Perfil</button></td>
+        <td>
+          <p *ngIf="student.status===3">Actualmente el usuario está dado de baja</p>
+          <p *ngIf="student.status===2 || student.status===1">Actualmente el usuario está activo</p>
+        </td>
+        <td>
+          <button class="btn btn-outline-dark" (click)="updateUserStatus(student.id, 2)" *ngIf="student.status===3" >Dar de alta</button>
+          <button class="btn btn-dark" (click)="updateUserStatus(student.id, 3)"*ngIf="student.status!== 3">Dar de baja</button>
+        </td>
       </tr>
     </tbody>
   </table>

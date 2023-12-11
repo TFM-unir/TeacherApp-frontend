@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto" [ngClass]="authService.getUserRoleForStyles() + '-nav-font-color'">
         <a class="btn btn-midblue" [routerLink]="['/home']" *ngIf="authService.getUserRoleForStyles() === 'student'">Inicio</a>
-        <a class="btn btn-midblue" [routerLink]="['/'+this.authService.getUserRoleName()+'/chat/'+this.authService.getUserId()]" *ngIf="isLogged() && authService.getUserRoleForStyles() !== 'admin' ">Chat</a>
+        <a class="btn btn-midblue" [routerLink]="['/'+this.authService.getUserRoleName()+'/chat/'+this.authService.getUserId()]" *ngIf="isLogged() && authService.getUserRoleForStyles() !== 'admin'">Chat</a>
         <a class="btn btn-midblue" (click)="onClickLogout()" *ngIf="isLogged()">Cerrar Sesión</a>
         <a class="btn btn-midblue" [routerLink]="['/users', 'login']" *ngIf="!isLogged()">Iniciar Sesión</a>
         <a class="btn btn-midblue" [routerLink]="['/users', 'register']" *ngIf="!isLogged()">Registrar</a>

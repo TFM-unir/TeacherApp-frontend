@@ -5,7 +5,7 @@ export interface Student {
     email: string;
     phone: string;
     date_of_birth: string;
-    status: string;
+    status: number;
     photo: string;
     role_id: number;
     location_id: number;
@@ -16,3 +16,5 @@ export interface Student {
     city: string;
     province: string;
 };
+
+// TODO: OJO HE CAMBIADO STATUS DE STRING A NUMBER, por si da problemas

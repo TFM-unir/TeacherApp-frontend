@@ -34,4 +34,5 @@ export interface TeacherProfile {
   rating: number | null;
   class_mode_online: boolean;
   class_mode_in_person: boolean;
+  user_id: number;
 }
