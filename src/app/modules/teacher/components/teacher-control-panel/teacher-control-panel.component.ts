@@ -172,6 +172,11 @@ export class TeacherControlPanelComponent {
     });
   }
 
+  checkValue($event: Event) {
+    this.router.navigate(['/underConstruction']);
+    console.log($event);
+  }
+
   cancelClass() {
 
   }
