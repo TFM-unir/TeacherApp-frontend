@@ -1,5 +1,5 @@
 import { Component, ViewChild, inject } from '@angular/core';
-import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { MapInfoWindow } from '@angular/google-maps';
 import { Router } from '@angular/router';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
 import { TeacherService } from 'src/app/core/services/teacher.service';
@@ -13,6 +13,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class MapSectionComponent {
   
   teachers: TeacherProfile[] | undefined;
+  teachersIsFilled!: boolean;
+
   selectedTeacher: TeacherProfile | null = null;
   miMarkers: any[] = [];
   router = inject(Router);
@@ -43,7 +45,8 @@ export class MapSectionComponent {
     streetViewControl: false, // Deshabilitar control de street view
   };
 
-  constructor(private teachersService: TeacherService) {}
+  constructor(private teachersService: TeacherService) {
+  }
 
   ngOnInit() {
     this.initiateGeolocation();
@@ -88,6 +91,9 @@ export class MapSectionComponent {
 
       // Calcular distancia a posición usuario y asignarla a cada profesor. Después ordenar por puntuación y por distancia los que no tienen puntuación
       if (this.myposition && this.teachers) {
+
+        this.teachers = this.teachers.filter(teacher => teacher.status === 2);
+
         this.teachers.forEach((teacher) => {
           const teacherPosition = new google.maps.LatLng(teacher.latitude, teacher.longitude);
           teacher.distance = google.maps.geometry.spherical.computeDistanceBetween(this.myposition, teacherPosition) / 1000;
@@ -105,6 +111,12 @@ export class MapSectionComponent {
   
         // Concatenar los dos arrays
         this.teachers = teachersWithRating.concat(teachersWithoutRating);
+        
+        if (this.teachers.length > 0) {
+          this.teachersIsFilled = true
+        } else {
+          this.teachersIsFilled = false;
+        }
       }
     } catch (error) {
       console.error('Error fetching or sorting teachers:', error);
