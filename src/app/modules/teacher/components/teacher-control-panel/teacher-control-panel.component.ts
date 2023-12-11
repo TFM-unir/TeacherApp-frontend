@@ -1,5 +1,17 @@
-import { ChangeDetectionStrategy, Component, Input, ViewChild, inject } from '@angular/core';
-import { ControlContainer, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewChild,
+  inject,
+} from '@angular/core';
+import {
+  ControlContainer,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClassHour } from 'src/app/core/models/class.interface';
 import { TeacherProfile } from 'src/app/core/models/teacher.interface';
@@ -17,7 +29,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./teacher-control-panel.component.css'],
 })
 export class TeacherControlPanelComponent {
-
   private coreService = inject(AuthService);
   private teacherService = inject(TeacherService);
   private classHoursService = inject(ClasshoursService);
@@ -35,44 +46,40 @@ export class TeacherControlPanelComponent {
   role_id!: number;
 
   constructor() {
-
     this.formulario = new FormGroup({
-      name: new FormControl("", [
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      nickname: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
       ]),
-      nickname: new FormControl("", [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      email: new FormControl("", [Validators.required, Validators.email]),
-      phone: new FormControl("", [Validators.required]),
-      date_of_birth: new FormControl("", [Validators.required]),
-      password: new FormControl("", [Validators.required]),
-      photo: new FormControl("", [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', [Validators.required]),
+      date_of_birth: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      photo: new FormControl('', [Validators.required]),
       class_mode_online: new FormControl(),
       class_mode_in_person: new FormControl(),
-      experience: new FormControl("", [
+      experience: new FormControl('', [
         Validators.required,
-        Validators.maxLength(2)
+        Validators.maxLength(2),
       ]),
-      price_hour: new FormControl("", [
+      price_hour: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
       ]),
-      about_me: new FormControl("", [
+      about_me: new FormControl('', [
         Validators.required,
         Validators.maxLength(1000),
       ]),
-      address: new FormControl("", [
+      address: new FormControl('', [
         Validators.required,
         Validators.maxLength(1000),
       ]),
-      subject: new FormControl("", [
+      subject: new FormControl('', [
         Validators.required,
         Validators.maxLength(20),
       ]),
-      department_name: new FormControl("", [
+      department_name: new FormControl('', [
         Validators.required,
         Validators.maxLength(40),
       ]),
@@ -82,36 +89,52 @@ export class TeacherControlPanelComponent {
   async ngOnInit() {
     this.activatedRout.params.subscribe(async (params: any) => {
       let id = Number(params.teacherId);
-      this.teacherId = params.teacherId
+      this.teacherId = params.teacherId;
       try {
         this.userId = Number(await this.coreService.getUserId());
 
         if (id !== this.userId) {
           //comprobamos que no se mete en otro perfil y si lo hace redirigimos al suyo
-          this.router.navigate(['/teacher', 'control', this.userId])
+          this.router.navigate(['/teacher', 'control', this.userId]);
           return;
         }
 
-        this.teacher = await this.teacherService.getTeacherByIdAllData(id);
-
+        this.teacher = await this.teacherService.getTeacherByIdUserAllData(id);
       } catch (error) {
-        this.sweetAlert('Error', 'error', `Ocurrió un error al intentar recuperar los datos de tu perfil. ${error}`);
-
+        this.sweetAlert(
+          'Error',
+          'error',
+          `Ocurrió un error al intentar recuperar los datos de tu perfil. ${error}`
+        );
       }
 
       try {
-        this.studentClass = await this.teacherService.getAllClassByTeacherId(id);
+        this.studentClass = await this.teacherService.getAllClassByTeacherId(
+          id
+        );
       } catch (error) {
-        this.sweetAlert('Error', 'error', `Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente. ${error}`);
+        this.sweetAlert(
+          'Error',
+          'error',
+          `Ocurrió un error al intentar recuperar las clases y bloques horarios. Por favor intentelo nuevamente. ${error}`
+        );
 
         this.router.navigate(['/home']);
       }
-      this.fillingForm(this.teacher)
+      this.fillingForm(this.teacher);
 
       try {
-        const classhours = await this.classHoursService.getAllUsersByTeacherId(id);
+        const classhours = await this.classHoursService.getAllUsersByTeacherId(
+          id
+        );
         classhours.forEach(async (item: any) => {
-          const variab = [item.id_user1, item.id_user2, item.id_user3, item.id_user4, item.id_user5];
+          const variab = [
+            item.id_user1,
+            item.id_user2,
+            item.id_user3,
+            item.id_user4,
+            item.id_user5,
+          ];
           for (let i = 0; i < variab.length; i++) {
             if (variab[i] !== null) {
               this.user = await this.studentsService.getStudentById(variab[i]);
@@ -126,10 +149,13 @@ export class TeacherControlPanelComponent {
           }
         });
       } catch (error) {
-        this.sweetAlert('Error', 'error', `Ocurrió un error al intentar recuperar los alumnos. Por favor intentelo nuevamente. ${error}`);
-        this.router.navigate(['/home'])
+        this.sweetAlert(
+          'Error',
+          'error',
+          `Ocurrió un error al intentar recuperar los alumnos. Por favor intentelo nuevamente. ${error}`
+        );
+        this.router.navigate(['/home']);
       }
-
     });
   }
 
@@ -156,11 +182,22 @@ export class TeacherControlPanelComponent {
         about_me: formValues.about_me,
         subject: formValues.subject,
         department_name: formValues.department_name,
-      }
-      const result = await this.teacherService.updateTeacher(obj, this.teacherId);
-      this.sweetAlert('Actualizar perfil', 'success', 'Su perfil ha sido actualizado');
+      };
+      const result = await this.teacherService.updateTeacher(
+        obj,
+        this.teacherId
+      );
+      this.sweetAlert(
+        'Actualizar perfil',
+        'success',
+        'Su perfil ha sido actualizado'
+      );
     } catch (error) {
-      this.sweetAlert('Error', 'error', `Ocurrió un error al intentar actualizar los datos. Por favor intentelo nuevamente. ${error}`);
+      this.sweetAlert(
+        'Error',
+        'error',
+        `Ocurrió un error al intentar actualizar los datos. Por favor intentelo nuevamente. ${error}`
+      );
     }
   }
 
@@ -168,24 +205,24 @@ export class TeacherControlPanelComponent {
     Swal.fire({
       title: title,
       text: text,
-      icon: icon
+      icon: icon,
     });
   }
 
-  cancelClass() {
-
+  checkValue($event: Event) {
+    this.router.navigate(['/underConstruction']);
   }
 
-  ChangePassword() {
-
+  cancelClass() {
+    this.router.navigate(['/underConstruction']);
   }
 
   newClass() {
-
+    this.router.navigate(['/underConstruction']);
   }
 
   valoraciones() {
-
+    this.router.navigate(['/underConstruction']);
   }
 
   perfil(id: number) {
@@ -202,7 +239,9 @@ export class TeacherControlPanelComponent {
       nickname: new FormControl(teacher.nickname),
       email: new FormControl(teacher.email),
       phone: new FormControl(teacher.phone),
-      date_of_birth: new FormControl(dayjs(teacher.date_of_birth).format('YYYY-MM-DD')),
+      date_of_birth: new FormControl(
+        dayjs(teacher.date_of_birth).format('YYYY-MM-DD')
+      ),
       //password: new FormControl(""),
       photo: new FormControl(teacher.photo),
       class_mode_online: new FormControl(teacher.class_mode_online),
@@ -216,4 +255,7 @@ export class TeacherControlPanelComponent {
     });
   }
 
+  ChangePassword() {
+    this.router.navigate(['/underConstruction']);
+  }
 }

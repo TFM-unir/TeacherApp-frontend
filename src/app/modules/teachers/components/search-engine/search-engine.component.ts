@@ -71,7 +71,7 @@ export class SearchEngineComponent {
       this.filteredMyteachers = this.myTeachers;
       this.showMyteachers = this.myTeachers;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -97,7 +97,7 @@ export class SearchEngineComponent {
       );
       this.pagination.arrPag = new Array(this.pagination.total_pages).fill(0);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -105,7 +105,6 @@ export class SearchEngineComponent {
    * Asynchronously applies the selected department filter to the filteredMyteachers array and updates the pagination.
    */
   async aplicarFiltro() {
-    console.log(this.filterForm.value);
 
     let selectedDepartment = this.filterForm.value.selectedDepartment;
     if (!selectedDepartment) selectedDepartment = '';
@@ -119,7 +118,6 @@ export class SearchEngineComponent {
     let filtroExperiencia = this.filterForm.value.filtroExperiencia;
     if (!filtroExperiencia) filtroExperiencia = '';
 
-    console.log(filtroPrecio);
     this.filteredMyteachers = this.myTeachers.filter(
       (teacher) =>
         (selectedDepartment === '' ||
@@ -150,7 +148,7 @@ export class SearchEngineComponent {
     try {
       this.departments = await this.departmentsServices.getAll();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

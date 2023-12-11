@@ -59,7 +59,7 @@ export class FormRegisterComponent {
     // this.userForm = this.mainForm.value.userForm;
     // this.teacherForm = this.mainForm.value.teacherForm;
 
-    console.log(this.mainForm.controls['userForm']);
+    //console.log(this.mainForm.controls['userForm']);
   }
 
   // insertamos los datos del formulario
@@ -73,9 +73,8 @@ export class FormRegisterComponent {
       userForm.role_id = this.mainForm.value.role_id;
 
       userForm.status = 2;
-      if (userForm.role_id == 1) userForm.status = 1;
+      if (userForm.role_id == 2) userForm.status = 1;
 
-      console.log(this.mainForm);
       let user: UserRegister = {
         userForm: userForm,
         locationForm: locationForm,
@@ -83,16 +82,15 @@ export class FormRegisterComponent {
         subjectForm: subjectForm,
       };
       const response = await this.usersService.register(user);
-      console.log(response);
       // si el id existe, se inserto correctamente
       if (response.userForm.id) {
         alert('Usario registrado correctamente');
         this.router.navigate(['']);
       } else {
-        alert('Usario no se ha podido registrar');
+        alert('El usario no se ha podido registrar');
       }
     } catch (error: any) {
-      console.log(error.message);
+      console.error(error.message);
     }
   }
 

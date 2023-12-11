@@ -139,8 +139,12 @@ export class StudentControlPanelComponent {
     this.disabled = str;
   }
 
+  checkValue($event:any){
+    this.router.navigate(['/underConstruction']);
+  }
+
   ChangePassword() {
-    
+    this.router.navigate(['/underConstruction']);
   }
 
   fillingForm(student: Student) {

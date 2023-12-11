@@ -93,11 +93,15 @@ export class TeacherProfileComponent {
 
       try {
         this.rating = await this.teacherService.getAverageRatingByTeacherId(id);
-        if (isNaN(this.rating.media_ratings)) {
+        if (!this.rating) {
           this.ratingBool = false;
         } else {
-          this.rating = parseFloat(this.rating.media_ratings).toFixed(1);
-          this.ratingBool = true;
+          if (!this.rating.media_ratings) {
+            this.ratingBool = false;
+          } else {
+            this.rating = parseFloat(this.rating.media_ratings).toFixed(1);
+            this.ratingBool = true;
+          }
         }
       } catch (error) {
         alert(

@@ -21,14 +21,15 @@ export class TeacherService {
   private ratingBaseUrl: string = 'http://localhost:3000/api/ratings/teacher/';
   private putClassBaseUrl: string =
     'http://localhost:3000/api/class/updateByStudentIdAndClassId/';
-  private deleteClassBaseUrl: string = 'http://localhost:3000/api/class/withdrawClassSlot/';
-  private baseGetTeacherByUserId:string = 'http://localhost:3000/api/teachers/user/'
+  private deleteClassBaseUrl: string =
+    'http://localhost:3000/api/class/withdrawClassSlot/';
+  private baseGetTeacherByUserId: string =
+    'http://localhost:3000/api/teachers/user/';
 
   getAllTeachers() {
-    return lastValueFrom(
-      this.httpClient.get<TeacherProfile[]>(this.baseUrl));
+    return lastValueFrom(this.httpClient.get<TeacherProfile[]>(this.baseUrl));
   }
-  
+
   getAllTeachersPagination(page: number, per_page: number) {
     return lastValueFrom(
       this.httpClient.get<any>(`${this.basePaginationUrl}${page}/${per_page}`)
@@ -41,7 +42,7 @@ export class TeacherService {
     );
   }
 
-  getTeacherByIdAllData(id: number) {
+  getTeacherByIdUserAllData(id: number) {
     return firstValueFrom(
       this.httpClient.get<TeacherProfile>(`${this.baseUrl}all/${id}`)
     );
@@ -53,9 +54,11 @@ export class TeacherService {
     );
   }
 
-  getTeacherByUserId(userId:number){
+  getTeacherByUserId(userId: number) {
     return firstValueFrom(
-      this.httpClient.get<TeacherProfile>(`${this.baseGetTeacherByUserId}${userId}`)
+      this.httpClient.get<TeacherProfile>(
+        `${this.baseGetTeacherByUserId}${userId}`
+      )
     );
   }
 
@@ -83,34 +86,46 @@ export class TeacherService {
     throw new Error('Method not implemented.');
   }
 
-  updateTeacher(obj:any, teacherId:number){
+  updateTeacher(obj: any, teacherId: number) {
     return lastValueFrom(
-      this.httpClient.put<TeacherProfile>(`${this.baseUrl}${teacherId}`,obj)
+      this.httpClient.put<TeacherProfile>(`${this.baseUrl}${teacherId}`, obj)
     );
   }
 
-  UpdateClassByStudentIdAndClassId(id: number, slot: ClassHour, emptySlot: string) {
+  UpdateClassByStudentIdAndClassId(
+    id: number,
+    slot: ClassHour,
+    emptySlot: string
+  ) {
     const httpOptions = {
       headers: new HttpHeaders({
         authorization: localStorage.getItem('auth_token')!,
-      })
+      }),
     };
     if (emptySlot) {
       slot.empty_slot = emptySlot;
     }
     return lastValueFrom(
-      this.httpClient.put<ClassHour>(`${this.putClassBaseUrl}${id}`, slot, httpOptions)
+      this.httpClient.put<ClassHour>(
+        `${this.putClassBaseUrl}${id}`,
+        slot,
+        httpOptions
+      )
     );
-  };
+  }
 
   unenrollClass(id: number, slot: ClassHour) {
     const httpOptions = {
       headers: new HttpHeaders({
         authorization: localStorage.getItem('auth_token')!,
-      })
+      }),
     };
     return lastValueFrom(
-      this.httpClient.put<any>(`${this.deleteClassBaseUrl}${id}/${slot.id}`, slot, httpOptions)
+      this.httpClient.put<any>(
+        `${this.deleteClassBaseUrl}${id}/${slot.id}`,
+        slot,
+        httpOptions
+      )
     );
   }
-};
+}

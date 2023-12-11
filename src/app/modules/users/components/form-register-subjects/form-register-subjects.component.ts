@@ -51,7 +51,7 @@ export class FormRegisterSubjectsComponent implements OnInit {
     try {
       this.departments = await this.departmentsServices.getAll();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

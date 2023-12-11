@@ -19,7 +19,7 @@ export class RatingsService {
     );
   }
 
-  getRatingsByUserAndTeacher(userId:number, teacherId:number): any {
+  getRatingsByUserAndTeacher(teacherId:number, userId:number): any {
     const secondaryRoute = "/user/"+userId+"/teacher/"+teacherId;
     return lastValueFrom(
       this.httpClient.get<Ratings>(`${this.baseUrlRatings}`+secondaryRoute)

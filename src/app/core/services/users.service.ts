@@ -9,20 +9,30 @@ import { User } from '../models/user.interface';
   providedIn: 'root',
 })
 export class UsersService {
-
   private baseUrl: string = 'http://localhost:3000/api/users/';
 
   private httpClient = inject(HttpClient);
+
+  getAllUsers() {
+    return lastValueFrom(this.httpClient.get<any>(this.baseUrl));
+  }
 
   register(user: UserRegister) {
     return lastValueFrom(
       this.httpClient.post<UserRegister>(`${this.baseUrl}/register`, user)
     );
-  };
+  }
 
   login(values: UserLogin) {
     return lastValueFrom(
       this.httpClient.post<UserLogin>(`${this.baseUrl}/login`, values)
     );
-  };
-};
+  }
+
+  updateUserStatus(id: number, status: number) {
+    const obj = { id, status };
+    return lastValueFrom(
+      this.httpClient.put<User>(`${this.baseUrl}status`, obj)
+    );
+  }
+}
