@@ -10,5 +10,8 @@ input.ng-valid.ng-touched {
     color: rgb(182, 38, 62);
     font-size: 0.8rem;
     margin-left: 0.9rem;
-}
-  
+};
+
+.custom-width-form {
+    width: 400px;
+};
