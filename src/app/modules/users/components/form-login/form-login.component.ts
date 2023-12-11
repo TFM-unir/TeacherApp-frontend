@@ -45,7 +45,10 @@ export class FormLoginComponent {
         if (this.authService.getUserRoleName() === 'student') {
           this.router.navigate(['home']);
         } else {
-          this.router.navigate([this.authService.getUserRoleName()+'/control/', this.authService.getUserId()]);
+          this.router.navigate([
+            this.authService.getUserRoleName() + '/control/',
+            this.authService.getUserId(),
+          ]);
         }
       }
     } catch (error) {
