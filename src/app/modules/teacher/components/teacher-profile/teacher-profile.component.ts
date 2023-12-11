@@ -93,7 +93,7 @@ export class TeacherProfileComponent {
 
       try {
         this.rating = await this.teacherService.getAverageRatingByTeacherId(id);
-        if (isNaN(this.rating.media_ratings) || isNaN(this.rating)) {
+        if (isNaN(this.rating.media_ratings)) {
           this.ratingBool = false;
         } else {
           this.rating = parseFloat(this.rating.media_ratings).toFixed(1);
