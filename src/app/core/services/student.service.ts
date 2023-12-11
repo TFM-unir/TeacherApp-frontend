@@ -22,6 +22,12 @@ export class StudentService {
   private baseUrlRankingUpdate: string = 'http://localhost:3000/api/ratings/';
   private baseUrlClassHour: string = 'http://localhost:3000/api/class/';
 
+  getAllStudents() {
+    return lastValueFrom(
+      this.httpClient.get<Student[]>(`${this.baseUrlStudent}`)
+    );
+  }
+
   getStudentById(id: number) {
     return lastValueFrom(
       this.httpClient.get<User>(`${this.baseUrlStudent}${id}`)

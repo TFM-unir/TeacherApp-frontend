@@ -25,8 +25,10 @@ export class TeacherService {
   private baseGetTeacherByUserId:string = 'http://localhost:3000/api/teachers/user/'
 
   getAllTeachers() {
-    return lastValueFrom(this.httpClient.get<TeacherProfile[]>(this.baseUrl));
+    return lastValueFrom(
+      this.httpClient.get<TeacherProfile[]>(this.baseUrl));
   }
+  
   getAllTeachersPagination(page: number, per_page: number) {
     return lastValueFrom(
       this.httpClient.get<any>(`${this.basePaginationUrl}${page}/${per_page}`)
