@@ -40,7 +40,6 @@ export class MapSectionComponent {
     },
   };
 
-  // revisar xk no funciona?
   mapOptions: google.maps.MapOptions = {
     streetViewControl: false, // Deshabilitar control de street view
   };
